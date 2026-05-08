@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPZ Viewer Spike — test.spz</title>
+<style>
+  html, body { margin: 0; padding: 0; overflow: hidden; background: #0a0a10; font-family: system-ui, sans-serif; }
+  #info {
+    position: fixed; top: 12px; left: 12px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #eee;
+    border-radius: 6px;
+    font-size: 13px;
+    pointer-events: none;
+    max-width: 360px;
+    line-height: 1.5;
+    z-index: 10;
+  }
+  #info b { color: #6cf; }
+  #info kbd {
+    background: #222;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid #444;
+    font-size: 11px;
+    font-family: ui-monospace, monospace;
+  }
+  #error {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(180, 30, 30, 0.95);
+    color: #fff;
+    padding: 18px 24px;
+    border-radius: 8px;
+    display: none;
+    max-width: 600px;
+    font-size: 14px;
+    line-height: 1.5;
+    z-index: 100;
+  }
+  canvas { cursor: grab; }
+  canvas.dragging { cursor: grabbing; }
+</style>
+</head>
+<body>
+
+<div id="info">
+  <b>SPZ Viewer Spike</b> <span style="opacity:0.5;font-size:11px">v5-fps</span><br>
+  파일: test.spz (~78MB)<br>
+  상태: <span id="status">초기화 중...</span><br>
+  <span style="color:#fa6;font-size:11px">debug → fit:<span id="dbgFit">false</span> · speed:<span id="dbgSpeed">0</span> · key:<span id="dbgKey">없음</span></span><br>
+  <small>
+    <kbd>마우스 드래그</kbd> 시점 회전 (1인칭) · <kbd>휠</kbd> 속도 조절<br>
+    <kbd>W A S D</kbd> 또는 <kbd>↑←↓→</kbd> 이동 · <kbd>Q</kbd>/<kbd>E</kbd> 상하<br>
+    <kbd>Shift</kbd> 가속(3x) · <kbd>[</kbd>/<kbd>]</kbd> 속도 · <kbd>R</kbd> 리셋 · <kbd>F</kbd> 회전 토글
+  </small>
+</div>
+
+<div id="error"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.sh/three@0.180.0",
+    "three/addons/": "https://esm.sh/three@0.180.0/examples/jsm/",
+    "@sparkjsdev/spark": "https://esm.sh/@sparkjsdev/spark?deps=three@0.180.0"
+  }
+}
+</script>
+<link rel="icon" href="data:,">
+
+<script type="module">
+import * as THREE from 'three';
+import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark';
+
+console.log('[spike] script v5-fps loaded at', new Date().toISOString());
+
+const $status = document.getElementById('status');
+const $error = document.getElementById('error');
+const $dbgFit = document.getElementById('dbgFit');
+const $dbgSpeed = document.getElementById('dbgSpeed');
+const $dbgKey = document.getElementById('dbgKey');
+const setStatus = (s) => { $status.textContent = s; };
+const showError = (msg) => {
+  $error.style.display = 'block';
+  $error.innerHTML = '<b>오류</b><br>' + msg + '<br><small>F12 → 콘솔에서 상세 확인.</small>';
+};
+
+window.addEventListener('error', (e) => showError(e.message || String(e)));
+window.addEventListener('unhandledrejection', (e) => showError(e.reason?.message || String(e.reason)));
+
+try {
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a0a10);
+
+  const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.01, 1000);
+  camera.position.set(0, 0, 5);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: false });
+  renderer.setPixelRatio(devicePixelRatio);
+  renderer.setSize(innerWidth, innerHeight);
+  document.body.appendChild(renderer.domElement);
+  const canvas = renderer.domElement;
+
+  // ── 1인칭 카메라 회전 (yaw/pitch, 카메라 자기 위치에서 회전) ──
+  let yaw = 0;    // Y축 (좌우)
+  let pitch = 0;  // X축 (위아래)
+  const _eulerForCamera = new THREE.Euler(0, 0, 0, 'YXZ');
+  const applyEulerToCamera = () => {
+    _eulerForCamera.set(pitch, yaw, 0, 'YXZ');
+    camera.quaternion.setFromEuler(_eulerForCamera);
+  };
+  // target을 보도록 yaw/pitch 계산 (camera.lookAt + Euler 역추출)
+  const setLookAt = (target) => {
+    camera.lookAt(target);
+    const e = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ');
+    yaw = e.y;
+    pitch = e.x;
+  };
+  applyEulerToCamera();
+
+  // 마우스 드래그로 시점 회전
+  let isDragging = false;
+  let lastMX = 0, lastMY = 0;
+  const mouseSensitivity = 0.003;
+  canvas.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    lastMX = e.clientX;
+    lastMY = e.clientY;
+    canvas.classList.add('dragging');
+    e.preventDefault();
+  });
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    canvas.classList.remove('dragging');
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - lastMX;
+    const dy = e.clientY - lastMY;
+    lastMX = e.clientX;
+    lastMY = e.clientY;
+    yaw -= dx * mouseSensitivity;
+    pitch -= dy * mouseSensitivity;
+    pitch = Math.max(-Math.PI / 2 + 0.01, Math.min(Math.PI / 2 - 0.01, pitch));
+    applyEulerToCamera();
+  });
+  // 우클릭 컨텍스트 메뉴 차단 (방해됨)
+  canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  // 휠로 기본 이동 속도 조절
+  canvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+    baseMoveSpeed *= factor;
+    $dbgSpeed.textContent = baseMoveSpeed.toFixed(2);
+  }, { passive: false });
+
+  const spark = new SparkRenderer({ renderer });
+  scene.add(spark);
+
+  setStatus('test.spz 로드 중 (~78MB)...');
+
+  const splat = new SplatMesh({ url: 'test.spz' });
+  // Niantic SPZ는 Y-down/카메라 좌표계로 저장되는 경우가 많아 X축 180° 회전.
+  splat.rotation.x = Math.PI;
+  scene.add(splat);
+
+  let cameraFitted = false;
+  let initialCameraState = null;
+  // 기본 5.0 units/sec. fit 성공하면 씬 크기 비례로 갱신. fit 실패해도 즉시 동작.
+  let baseMoveSpeed = 5.0;
+  $dbgSpeed.textContent = baseMoveSpeed.toFixed(2);
+
+  // F: 좌표계 회전 토글
+  let flipped = true;
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyF') {
+      flipped = !flipped;
+      splat.rotation.x = flipped ? Math.PI : 0;
+      cameraFitted = false;
+    }
+  });
+
+  // [/]: 속도 1.5배 감/증
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'BracketRight' || e.code === 'Equal') {
+      baseMoveSpeed *= 1.5;
+      $dbgSpeed.textContent = baseMoveSpeed.toFixed(2);
+    } else if (e.code === 'BracketLeft' || e.code === 'Minus') {
+      baseMoveSpeed /= 1.5;
+      $dbgSpeed.textContent = baseMoveSpeed.toFixed(2);
+    }
+  });
+
+  const fitCameraToSplat = () => {
+    const box = new THREE.Box3().setFromObject(splat);
+    const size = box.getSize(new THREE.Vector3()).length();
+    if (!Number.isFinite(size) || size < 0.01) return false;
+    const center = box.getCenter(new THREE.Vector3());
+    camera.position.copy(center).add(new THREE.Vector3(size * 0.6, size * 0.4, size * 1.1));
+    setLookAt(center);
+    initialCameraState = {
+      position: camera.position.clone(),
+      yaw, pitch,
+    };
+    baseMoveSpeed = size * 0.2;
+    $dbgFit.textContent = 'true';
+    $dbgSpeed.textContent = baseMoveSpeed.toFixed(2);
+    console.log('[fit] sceneSize=', size, 'baseMoveSpeed=', baseMoveSpeed);
+    return true;
+  };
+
+  // 키 상태 추적: e.code (IME 영향 없음)
+  const keys = {};
+  const onKeyDown = (e) => {
+    keys[e.code] = true;
+    $dbgKey.textContent = e.code + ' / ' + e.key;
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'PageUp', 'PageDown', 'Space'].includes(e.code)) {
+      e.preventDefault();
+    }
+  };
+  const onKeyUp = (e) => { keys[e.code] = false; };
+  window.addEventListener('keydown', onKeyDown);
+  document.addEventListener('keydown', onKeyDown);
+  window.addEventListener('keyup', onKeyUp);
+  document.addEventListener('keyup', onKeyUp);
+  window.addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
+
+  // R: 카메라 리셋
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyR' && initialCameraState) {
+      camera.position.copy(initialCameraState.position);
+      yaw = initialCameraState.yaw;
+      pitch = initialCameraState.pitch;
+      applyEulerToCamera();
+    }
+  });
+
+  // 매 프레임 — 카메라 forward 기준 이동
+  const _forward = new THREE.Vector3();
+  const _right = new THREE.Vector3();
+  const _move = new THREE.Vector3();
+  const _up = new THREE.Vector3(0, 1, 0);
+  const updateMovement = (dt) => {
+    const isShift = keys['ShiftLeft'] || keys['ShiftRight'];
+    const speed = baseMoveSpeed * (isShift ? 3 : 1) * dt;
+
+    camera.getWorldDirection(_forward);
+    _right.crossVectors(_forward, _up).normalize();
+
+    _move.set(0, 0, 0);
+    if (keys['KeyW'] || keys['ArrowUp'])    _move.addScaledVector(_forward, speed);
+    if (keys['KeyS'] || keys['ArrowDown'])  _move.addScaledVector(_forward, -speed);
+    if (keys['KeyD'] || keys['ArrowRight']) _move.addScaledVector(_right, speed);
+    if (keys['KeyA'] || keys['ArrowLeft'])  _move.addScaledVector(_right, -speed);
+    if (keys['KeyE'] || keys['PageUp'])     _move.addScaledVector(_up, speed);
+    if (keys['KeyQ'] || keys['PageDown'])   _move.addScaledVector(_up, -speed);
+
+    if (_move.lengthSq() > 0) {
+      camera.position.add(_move);
+    }
+  };
+  const movementClock = new THREE.Clock();
+
+  addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  });
+
+  let lastFpsUpdate = performance.now();
+  let framesSinceLastUpdate = 0;
+
+  renderer.setAnimationLoop(() => {
+    const dt = movementClock.getDelta();
+    updateMovement(dt);
+    renderer.render(scene, camera);
+    framesSinceLastUpdate++;
+
+    if (!cameraFitted) {
+      if (fitCameraToSplat()) {
+        cameraFitted = true;
+        setStatus('렌더링 중 — 자유 탐색 가능');
+      }
+    }
+
+    const now = performance.now();
+    if (now - lastFpsUpdate > 1000) {
+      const fps = Math.round(framesSinceLastUpdate * 1000 / (now - lastFpsUpdate));
+      if (cameraFitted) setStatus(`렌더링 중 — ${fps} FPS`);
+      framesSinceLastUpdate = 0;
+      lastFpsUpdate = now;
+    }
+  });
+} catch (e) {
+  console.error(e);
+  showError(e.message);
+}
+</script>
+</body>
+</html>
