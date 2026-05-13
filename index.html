@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPZ Viewer Spike — test.spz</title>
+<title>SPZ Viewer Spike — Matic01_v3.spz</title>
 <style>
   html, body { margin: 0; padding: 0; overflow: hidden; background: #0a0a10; font-family: system-ui, sans-serif; }
   #info {
@@ -48,13 +48,14 @@
 
 <div id="info">
   <b>SPZ Viewer Spike</b> <span style="opacity:0.5;font-size:11px">v5-fps</span><br>
-  파일: test.spz (~78MB)<br>
+  파일: samples/Matic01_v3.spz (~82MB, SPZ v3, SH 1 band)<br>
   상태: <span id="status">초기화 중...</span><br>
   <span style="color:#fa6;font-size:11px">debug → fit:<span id="dbgFit">false</span> · speed:<span id="dbgSpeed">0</span> · key:<span id="dbgKey">없음</span></span><br>
   <small>
     <kbd>마우스 드래그</kbd> 시점 회전 (1인칭) · <kbd>휠</kbd> 속도 조절<br>
     <kbd>W A S D</kbd> 또는 <kbd>↑←↓→</kbd> 이동 · <kbd>Q</kbd>/<kbd>E</kbd> 상하<br>
-    <kbd>Shift</kbd> 가속(3x) · <kbd>[</kbd>/<kbd>]</kbd> 속도 · <kbd>R</kbd> 리셋 · <kbd>F</kbd> 회전 토글
+    <kbd>Shift</kbd> 가속(3x) · <kbd>[</kbd>/<kbd>]</kbd> 속도 · <kbd>R</kbd> 리셋<br>
+    <kbd>F</kbd> X축 180° 토글 · <kbd>G</kbd> Y축 회전 cycle (0/90/180/-90) <span id="dbgYaw" style="color:#fa6">yaw=-90°</span>
   </small>
 </div>
 
@@ -74,6 +75,7 @@
 <script type="module">
 import * as THREE from 'three';
 import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 console.log('[spike] script v5-fps loaded at', new Date().toISOString());
 
@@ -82,6 +84,7 @@ const $error = document.getElementById('error');
 const $dbgFit = document.getElementById('dbgFit');
 const $dbgSpeed = document.getElementById('dbgSpeed');
 const $dbgKey = document.getElementById('dbgKey');
+const $dbgYaw = document.getElementById('dbgYaw');
 const setStatus = (s) => { $status.textContent = s; };
 const showError = (msg) => {
   $error.style.display = 'block';
@@ -161,11 +164,82 @@ try {
   const spark = new SparkRenderer({ renderer });
   scene.add(spark);
 
-  setStatus('test.spz 로드 중 (~78MB)...');
+  // 진단용 SH 0 변형. SH 1 stall이 디코딩 문제면 SH 0은 통과해야.
+  const SPZ_URL = 'samples/Matic01_v3_sh0.spz';
+  setStatus(`${SPZ_URL} 로드 중 ...`);
 
-  const splat = new SplatMesh({ url: 'test.spz' });
-  // Niantic SPZ는 Y-down/카메라 좌표계로 저장되는 경우가 많아 X축 180° 회전.
-  splat.rotation.x = Math.PI;
+  const _loadStart = performance.now();
+  console.log('[load] SplatMesh constructor 호출 t=0ms url=' + SPZ_URL);
+
+  // fetch 단계 수동 검증: HEAD로 파일 존재·크기 확인
+  fetch(SPZ_URL, { method: 'HEAD' })
+    .then(r => console.log('[load] HEAD 응답:', r.status, 'Content-Length=', r.headers.get('content-length')))
+    .catch(e => console.error('[load] HEAD 실패:', e));
+
+  // fetch 단계를 직접 수행해서 다운로드 완료 시점·크기 측정
+  fetch(SPZ_URL)
+    .then(r => r.arrayBuffer())
+    .then(buf => console.log(`[load] 수동 fetch 완료 t=${((performance.now() - _loadStart)/1000).toFixed(2)}s · bytes=${buf.byteLength} · 매직=${new Uint8Array(buf, 0, 4).reduce((a,b)=>a+b.toString(16).padStart(2,'0'),'')}`))
+    .catch(e => console.error('[load] 수동 fetch 실패:', e));
+
+  const splat = new SplatMesh({ url: SPZ_URL });
+  // 기본 yaw 보정: -90° (시계방향 90°). Postshot → splat-transform → Spark chain의
+  // Unreal NanoGS 대비 좌표계 yaw 누락. 2026-05-13 시각 검증으로 확정.
+  splat.rotation.y = -Math.PI / 2;
+
+  // SplatMesh가 어떤 API/속성을 노출하는지 전부 dump
+  const allKeys = [];
+  for (const k in splat) allKeys.push(k);
+  console.log('[load] splat for..in keys:', allKeys);
+  console.log('[load] splat Object.keys:', Object.keys(splat));
+  console.log('[load] splat prototype methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(splat)));
+  console.log('[load] splat 직후:', { type: splat.type, hasGeom: !!splat.geometry, children: splat.children.length });
+
+  // 가능한 load 이벤트 리스너 hook
+  ['load', 'ready', 'decoded', 'progress'].forEach(ev => {
+    try {
+      splat.addEventListener?.(ev, (e) => console.log(`[event] ${ev}`, e));
+    } catch {}
+  });
+
+  // collision GLB 함께 적재 (디버그용 wireframe + solid 둘 다 표시).
+  // 같은 좌표계라면 SPZ 안 어딘가에 핑크 wireframe 박스가 보여야 한다.
+  // Unreal glTF Exporter는 cm → m 자동 변환. SPZ가 m 단위라 가정 시 동일 좌표계.
+  // 단위가 다르면 박스가 멀거나 너무 작아 보임 → 단위 변환 레이어 필요.
+  const gltfLoader = new GLTFLoader();
+  gltfLoader.load('samples/scene00_collision.glb', (gltf) => {
+    console.log('[collision] GLB 적재 OK. children=', gltf.scene.children.length);
+    gltf.scene.traverse(obj => {
+      if (obj.isMesh) {
+        // wireframe overlay
+        const wf = new THREE.Mesh(
+          obj.geometry,
+          new THREE.MeshBasicMaterial({ color: 0xff00aa, wireframe: true, depthTest: false })
+        );
+        obj.updateMatrixWorld(true);
+        wf.matrixAutoUpdate = false;
+        wf.matrix.copy(obj.matrixWorld);
+        scene.add(wf);
+
+        // solid 반투명도 함께 (디버그 가시성)
+        const solid = new THREE.Mesh(
+          obj.geometry,
+          new THREE.MeshBasicMaterial({ color: 0x00ddff, transparent: true, opacity: 0.4 })
+        );
+        solid.matrixAutoUpdate = false;
+        solid.matrix.copy(obj.matrixWorld);
+        scene.add(solid);
+
+        const wBB = new THREE.Box3().setFromObject(obj);
+        console.log('[collision]', obj.name, 'world AABB =', wBB.min, '~', wBB.max);
+      }
+    });
+  }, undefined, (err) => {
+    console.error('[collision] GLB 적재 실패:', err);
+  });
+  // 기본: 회전 없음 (Postshot → INRIA PLY → splat-transform chain = Three.js 표준 Y-up).
+  // Niantic 원본 SPZ(test.spz 등)는 Y-down 저장 관례라 F 키로 X축 180° 회전 토글.
+  splat.rotation.x = 0;
   scene.add(splat);
 
   let cameraFitted = false;
@@ -174,12 +248,27 @@ try {
   let baseMoveSpeed = 5.0;
   $dbgSpeed.textContent = baseMoveSpeed.toFixed(2);
 
-  // F: 좌표계 회전 토글
-  let flipped = true;
+  // F: 좌표계 회전 토글 (X축 180°)
+  let flipped = false;
   window.addEventListener('keydown', (e) => {
     if (e.code === 'KeyF') {
       flipped = !flipped;
       splat.rotation.x = flipped ? Math.PI : 0;
+      cameraFitted = false;
+    }
+  });
+
+  // G: SPZ Y축 회전 cycle. 기본값 -90°(yawIdx=3)에서 시작.
+  // 다음 G 키 → 0° → +90° → 180° → -90° 순환.
+  const yawSteps = [0, Math.PI / 2, Math.PI, -Math.PI / 2];
+  let yawIdx = 3;
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyG') {
+      yawIdx = (yawIdx + 1) % yawSteps.length;
+      splat.rotation.y = yawSteps[yawIdx];
+      const deg = Math.round(yawSteps[yawIdx] * 180 / Math.PI);
+      if ($dbgYaw) $dbgYaw.textContent = `yaw=${deg}°`;
+      console.log(`[yaw] SPZ rotation.y = ${deg}°`);
       cameraFitted = false;
     }
   });
@@ -273,6 +362,7 @@ try {
 
   let lastFpsUpdate = performance.now();
   let framesSinceLastUpdate = 0;
+  let lastDiag = performance.now();
 
   renderer.setAnimationLoop(() => {
     const dt = movementClock.getDelta();
@@ -284,10 +374,33 @@ try {
       if (fitCameraToSplat()) {
         cameraFitted = true;
         setStatus('렌더링 중 — 자유 탐색 가능');
+        const elapsed = ((performance.now() - _loadStart) / 1000).toFixed(2);
+        console.log(`[load] ✓ fitCameraToSplat 성공. 총 t=${elapsed}s`);
       }
     }
 
     const now = performance.now();
+
+    // 1초마다 진단 dump (loaded 안 끝났으면 splat 내부 상태)
+    if (!cameraFitted && now - lastDiag > 1000) {
+      lastDiag = now;
+      const elapsed = ((now - _loadStart) / 1000).toFixed(1);
+      const box = new THREE.Box3().setFromObject(splat);
+      const size = box.getSize(new THREE.Vector3());
+      const sizeLen = size.length();
+      const diag = {
+        t: elapsed + 's',
+        children: splat.children.length,
+        hasGeom: !!splat.geometry,
+        vtxCount: splat.geometry?.attributes?.position?.count ?? 'n/a',
+        bboxSize: `[${size.x.toFixed(2)},${size.y.toFixed(2)},${size.z.toFixed(2)}] len=${sizeLen.toFixed(4)}`,
+        sparkChildren: spark.children.length,
+        sceneChildren: scene.children.length,
+      };
+      console.log('[diag]', diag);
+      setStatus(`로드 중 t=${elapsed}s · vtx=${diag.vtxCount} · bbox=${sizeLen.toFixed(2)} · children=${diag.children}`);
+    }
+
     if (now - lastFpsUpdate > 1000) {
       const fps = Math.round(framesSinceLastUpdate * 1000 / (now - lastFpsUpdate));
       if (cameraFitted) setStatus(`렌더링 중 — ${fps} FPS`);
