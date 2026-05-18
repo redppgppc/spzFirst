@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>todo</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6a737d;
+    --border: #e5e5e5;
+    --code-bg: #f6f8fa;
+    --code-fg: #24292e;
+    --link: #0366d6;
+    --accent: #0969da;
+    --table-head: #f6f8fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --code-bg: #161b22;
+      --code-fg: #c9d1d9;
+      --link: #2f81f7;
+      --accent: #58a6ff;
+      --table-head: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, "Pretendard Variable", "Pretendard",
+      "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI",
+      system-ui, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 920px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 1.8em 0 0.5em;
+    font-weight: 700;
+  }
+  h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; }
+  p { margin: 0.75em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "D2Coding", "Cascadia Code", "JetBrains Mono",
+      Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 0.12em 0.32em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 1em;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; font-size: 0.9em; color: var(--code-fg); }
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding: 0 1em;
+    color: var(--muted);
+    margin: 1em 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+  }
+  table thead { background: var(--table-head); }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  img { max-width: 100%; height: auto; }
+  .task-list-item { list-style-type: none; margin-left: -1.4em; }
+  .task-list-item input[type=checkbox] { margin-right: 0.4em; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">todo</h1>
+</header>
+<h1 id="spzfirst--작업-진행-현황">spzFirst — 작업 진행 현황</h1>
+<blockquote>
+<p>Claude가 작업 시작 시 반드시 읽고, 진척이 있을 때마다 갱신한다. 운영 규칙은 프로젝트 루트의 <code>CLAUDE.md</code> 참조.</p>
+</blockquote>
+<hr />
+<h2 id="프로젝트-개요">프로젝트 개요</h2>
+<ul>
+<li><strong>목적</strong>: Unity WebGL 기반 파노라마 서비스를 SPZ(3D Gaussian Splatting) 기반 인터랙티브 웹 뷰어로 전환.</li>
+<li><strong>핵심 가치</strong>: 잃은 10억 카테고리(실시간 3D 모델 배치 + 퀄리티 일관성) 회복.</li>
+<li><strong>합격 기준 (다층화, 2026-05-11 세션 2부터)</strong>:
+<ol type="1">
+<li><strong>첫 vertical slice</strong>: Unreal에서 옮긴 모델 위치가 웹에 그대로 반영된다 + JSON 스키마 v0.1 문서화.</li>
+<li><strong>풀 시스템 (시점 미정, PM 합의 필요)</strong>: 회사 표준 콘텐츠 파이프라인 + myWorkTodo.html 12개 요구사항 모두 작동 + 잃은 클라이언트(또는 동급)가 시연 후 발주 의사 표현.</li>
+<li><strong>사용자 학습 (암묵)</strong>: 풀 시스템 종료 시 사용자 본인이 다음 작업을 주도 가능한 수준.</li>
+</ol></li>
+<li><strong>운영 모드</strong>: "급하지 않게 완성도 우선". 절대 데드라인 없음. (세션 2 결정)</li>
+<li><strong>콘텐츠 도구</strong>: Unreal. (세션 2 결정)</li>
+<li><strong>Unreal 워크플로</strong>: 프록시(저폴리 GLB·BBox 등)로 배치 작업 + 좌표 JSON export. 실제 SPZ 시각화는 웹에서만. (세션 3 결정, Premise 7 폐기)</li>
+<li><strong>상세 디자인 문서</strong>: <code>Document/design-20260513-104744.html</code> (<strong>현행 v3, NanoGS 부활 + 충돌 메쉬 통합 vertical slice</strong>). v2 <code>Document/design-20260511-110946.html</code> supersedes. v1 <code>Document/design-20260508-164539.html</code> supersedes (v2 거쳐).</li>
+<li><strong>스키마 계약서</strong>: <code>Document/json-schema-v0.1.html</code> (<strong>현행 v0.1 DRAFT, 2026-05-14</strong>). Unreal export + 웹 로더가 둘 다 참조.</li>
+<li><strong>상태 (2026-05-15 종료 시점)</strong>: office-hours 세션 6 완료 + 솔로 실행 모드 결정 + actor 선택 메커니즘 락 (Approach B Pure BP, BP_Anchor_Base 슈퍼클래스 + BP_Anchor_Model 파생) + JSON 스키마 v0.1.1 패치 + 합의 회의 폐기. 다음 작업: BP_Anchor_Base + BP_Anchor_Model 생성 + scene00 레벨 인스턴스 1개 배치 + export_scene_json.py 1회 dry-run.</li>
+</ul>
+<hr />
+<h2 id="완료된-작업">완료된 작업</h2>
+<h3 id="2026-05-18-세션-7--진행-중">2026-05-18 (세션 7 — 진행 중)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 세션 7 진입. 사용자가 brainstorm 진행 전에 산출물 형식 변경 작업을 먼저 요청. office-hours 본 진단은 변환 작업 종료 후 재개 예정 (사용자 명시: "이번 작업 이후 다시 해").</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Document/ 산출물 형식 <code>.md</code> → <code>.html</code> 결정</strong>.<ul>
+<li>기존 10개 markdown 파일(design v1~v3, json-schema, modeler-consult, myWorkTodo, research, spz-web-viewer-journey, todo) pandoc 일괄 변환.</li>
+<li>변환 도구: pandoc (Anaconda 번들) + <code>Document/_pandoc_header.html</code>(self-contained CSS, 한국어 시스템 폰트, 라이트·다크 자동).</li>
+<li>내부 markdown 링크는 일괄 <code>.html</code>로 치환(<code>CLAUDE.md</code> 자체 표기는 보존).</li>
+<li>원본 파일: tracked 5개(design v1, design v2, myWorkTodo, research, todo)는 <code>git rm</code>, untracked 5개는 그냥 삭제.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>CLAUDE.md 운영 규칙 갱신</strong>: 1번 섹션 todo 경로(<code>Document/todo.html</code>) + 3번 섹션 산출물 저장 형식(<code>.html</code>로 저장) + 4번 섹션 디자인 문서 경로(.html) 명시.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>변환 결과 검증 OK</strong>: 표·코드블록·task list 정상 렌더링, UTF-8 한국어 OK, 내부 링크 <code>.html</code>로 갱신, 11개 <code>.html</code> + <code>_pandoc_header.html</code> 정착. 이 항목은 todo.html을 직접 Edit해 추가 (새 운영 규칙의 첫 적용 사례).</li>
+</ul>
+<h3 id="2026-05-15-세션-6--완료">2026-05-15 (세션 6 — 완료)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 세션 6 진행. actor 선택 메커니즘 락인 주제 + 솔로 실행 모드 결정.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>운영 모드 변경</strong>: 사용자 단독 진행 결정. 다른 팀과의 합의·회의 폐기. todo.html 액션 1·4의 외부 동기화 단계 압축.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Premise P-Act1~P-Act5 합의</strong> (actor 선택 + BP 슈퍼클래스 패턴 락).<ul>
+<li>P-Act1: actor 선택 = BP 클래스 상속(D). tag/folder/전체 폐기. 사용자 ACVAnchor 경험 + sample.json 트리 일치.</li>
+<li>P-Act2: 1주차는 anchor_type=<code>"model"</code> 1종만. v0.2 enum (teleport/start_pos 등)은 자리만.</li>
+<li>P-Act3: 슈퍼클래스 = BP-only로 시작. C++ 승격은 anchor_type 2종째 + 풀 시스템 진입.</li>
+<li>P-Act4: JSON export = <code>EditorActorSubsystem.get_all_level_actors()</code> + <code>BP_Anchor_Base</code> 파생 필터. Python script.</li>
+<li>P-Act5: id/editor_name/extra는 BP 슈퍼클래스 instance editable 변수. extra는 빈 객체도 always-emit <code>{}</code>.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Phase 4 alternatives 3개 비교 후 Approach B 채택</strong>: Pure BP (BP_Anchor_Base 슈퍼클래스 + BP_Anchor_Model 1종 파생).<ul>
+<li>A (Lean MVP, 슈퍼클래스 생략) 비채택: P-Act1 정신 약화 + export 코드 재작성.</li>
+<li>C (Pre-architected, placeholder BP들 미리 생성) 비채택: P-Act2 위반 + YAGNI.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong><code>Document/design-actor-selection-20260515-140853.html</code> 작성</strong>: actor 선택 표준 + BP 구조 + Python export script 골격 + Open Questions 7건.<ul>
+<li>Spec review subagent 9/10 PASS (1차 8/10에서 6건 fix → 2차 9/10).</li>
+<li>사용자 ACVAnchor 경험 인용 + samples/sample.json 패턴 동기화 명시.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong><code>Document/json-schema-v0.1.html</code> v0.1.1 패치</strong>: actor 선택 표준 단락 추가 + 합의 회의 체크리스트 폐기 (5건 self-결정으로 종결).</li>
+</ul>
+<h3 id="2026-05-14-세션-5--완료">2026-05-14 (세션 5 — 완료)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 세션 5 진행. JSON 스키마 v0.1 락인 주제.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>samples/sample.json 발견 + 정체 확인</strong>: Caliverse 메타버스(MS02) 과거 콘텐츠 포맷. 현재 비운영. 풀 시스템 종속 의무 없음. 패턴 힌트로만 활용.<ul>
+<li>트리 구조 Floor→Anchors[], Pitch/Yaw/Roll Euler, scalar Scale, MaxBox/MinBox AABB, BP_Anchor_StartPos/Teleport/Farming/Elevator, GUID/TableID/ClassName/MannequinItems/PathPoint/PathEvent 등 풀 메타 다수.</li>
+<li>디자인 v3 v0.1(scene+models[]+quaternion)과 구조 충돌 발견.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Premise P-Sch1~P-Sch7 합의</strong> (디자인 v3 v0.1 컨벤션 일부 변경).<ul>
+<li>P-Sch1: sample.json은 계약서가 아니라 패턴 사전.</li>
+<li>P-Sch2: 회전 표현 = Unreal Euler {Pitch,Yaw,Roll}, quaternion 폐기.</li>
+<li>P-Sch3: 식별자 = 단순 string <code>id</code>. GUID는 <code>extra.guid</code> 옵션.</li>
+<li>P-Sch4: collision은 별도 GLB invisible mesh 그대로. AABB는 풀 시스템 컬링용 보존.</li>
+<li>P-Sch5: forward-compat 정책 명시 (웹 로더는 모르는 필드 무시).</li>
+<li>P-Sch6: 트리 구조 미도입. 평탄 <code>anchors[]</code>로 시작. v0.2에서 <code>scenes[]</code> wrap 가능.</li>
+<li>P-Sch7: <code>coord_system="ue"</code>, <code>unit="cm"</code>, <code>space.rotation_y_deg=-90</code> 그대로.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Phase 4 alternatives 3개 비교 후 Approach S-B 채택</strong>: 중도형 (sample 컨벤션 가벼운 흡수).<ul>
+<li><code>models[]</code> → <code>anchors[]</code> 명칭 변경 (풀 시스템에서 start_pos/teleport 자리).</li>
+<li><code>anchor_type: "model"</code> enum 도입 (v0.1은 model만).</li>
+<li><code>editor_name</code> 필드 (다국어·디버그 UI 자리).</li>
+<li><code>extra: {}</code> 필드 (forward-compat, GUID/TableID/ClassName/MannequinItems 등 자유 첨부).</li>
+<li>position/rotation 객체 표기 <code>{X,Y,Z}</code> / <code>{Pitch,Yaw,Roll}</code> (sample.json 일치).</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong><code>Document/json-schema-v0.1.html</code> 작성</strong>: Unreal export + 웹 로더가 둘 다 참조하는 1쪽 계약서.<ul>
+<li>좌표계·단위·yaw 보정 합의, 루트 객체, space 객체, anchors[] 객체, forward-compat 정책, 회전·좌표 변환 의사 코드(2주차 검증으로 확정), <code>scene00.json</code> 예제, Open Questions 5건, v0.2 예정 항목, 합의 회의 체크리스트 5건 포함.</li>
+</ul></li>
+</ul>
+<h3 id="2026-05-13-세션-4--완료">2026-05-13 (세션 4 — 완료)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 세션 4 재개 + 완료. P1–P7 premise 동의 + Approach B 채택 + 디자인 v3 작성.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Premise P1–P6 동의 확정 + P7 신규 추가</strong> (충돌 메쉬 처리 1주차 슬라이스 통합).</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Phase 4 alternatives 3개 비교 후 Approach B 채택</strong>: Unreal collision proxy 통합 export.<ul>
+<li>SPZ 공간용 collision mesh + 모델 BBox/collider를 Unreal에서 작성, 같은 좌표계로 export.</li>
+<li>JSON 스키마 v0.1에 <code>collision_path</code> 필드 자리 마련 + 모델별 <code>collision_type</code>("bbox"/"mesh") 자리 마련.</li>
+<li>한 vertical slice에서 좌표 + 충돌 + 클릭까지 끝-에서-끝 관통.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>디자인 문서 v3 작성</strong>: <code>Document/design-20260513-104744.html</code>. v2 supersedes.<ul>
+<li>narrowest wedge 확장: "Unreal 좌표 + collision proxy → 웹 위치 반영 + 1인칭 충돌 + 클릭 raycast".</li>
+<li>1주차 합격 기준 신규 추가: 1인칭 이동 시 SPZ 공간 통과하지 않음 + 모델 클릭 시 콘솔 출력.</li>
+<li>액션 4건 정리: JSON 스키마 v0.1 / NanoGS collision 가용성 검증 / Unreal export prototype / 모델러 회신용 문서 1쪽 축소.</li>
+</ul></li>
+</ul>
+<h3 id="2026-05-13-세션-4--부분-진행-중단">2026-05-13 (세션 4 — 부분 진행, 중단)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 세션 4 진행. 사용자가 새 plugin 발견 보고. 디자인 방향 재검토 시작.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>NanoGS plugin 발견 + 사용자 5단계 검증 OK</strong>.<ul>
+<li>Repo: <a href="https://github.com/TimChen1383/NanoGaussianSplatting">https://github.com/TimChen1383/NanoGaussianSplatting</a> (MIT license, source 전체 공개).</li>
+<li>새 작업 폴더: <code>D:\Temp\plyTest_5_7\</code> (UE 5.7. plugin이 UE 5.6, 5.7 지원 명시).</li>
+<li>사용자 검증 단계: 시각적 정상 + 설치(level placement) + 이동/회전/스케일 + 실시간 fps 모두 OK.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>NanoGS source 코드 분석 (PLYFileReader.cpp + NanoGS.uplugin)</strong>.<ul>
+<li>결정적 차이: <strong>속성 이름 기반 조회</strong> (<code>PropertyOffsets.Find</code>). 이전 Luma/XV3dGS가 거부한 PLY property 순서 제약이 NanoGS에선 무관. PlayCanvas 변형 PLY도 그대로 받음.</li>
+<li>표준 INRIA spec 준수: <code>x,y,z,opacity,scale_0..2,rot_0..3</code> + <code>f_dc_0..2</code> + <code>f_rest_*</code>. SH bands 자동 감지(1/2/3 bands).</li>
+<li>normal/RGB uchar 불필요 (세션 3 XV3dGS 우회 시도가 NanoGS에선 필요 없었음).</li>
+<li>좌표계 변환: COLMAP/OpenCV(Y-down) → UE(Z-up) 자동 + 100x scale (meters → cm) 가정.</li>
+<li>리스크: <code>IsBetaVersion: true</code>. 안정성 장기 모니터링 필요. MIT 라이선스 + source 공개로 자체 fork/patch 가능.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>세션 4 phase 3까지 진행: premise 6개 정리 (P1–P6)</strong>. 사용자 동의는 다음 세션으로 미룸.<ul>
+<li>P1: NanoGS plugin이 길 A를 안정적으로 가능하게 한다 (5단계 검증 OK).</li>
+<li>P2: 모델러 회신 대기 의미 절반 축소. 정보 수집용으로만 (모델러 SPZ 도구가 NanoGS 호환 PLY를 출력하는가).</li>
+<li>P3: 길 B(메쉬 프록시) 폐기. fallback 안 둠. (옵션: BBox만 종이 문서에 fallback으로 남길지 사용자 확인 대기)</li>
+<li>P4: 디자인 v3는 v2(길 A) 부활/개선 형태.</li>
+<li>P5: 1주차 vertical slice = Unreal NanoGS PLY → coord JSON export → 웹 SPZ 동일 위치 표시.</li>
+<li>P6: 좌표계(COLMAP/Y-down vs PlayCanvas 변형) 일치 검증은 1주차 webview 동기화 시점에 자연 검증.</li>
+</ul></li>
+</ul>
+<h3 id="2026-05-12-세션-3">2026-05-12 (세션 3)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 세션 3 진행. Unreal에서 SPZ 직접 시각화 시도 + 실패 + 디자인 결정 변경.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Unreal plugin 식별 + 작업 공간 정리</strong>.<ul>
+<li>작업 공간: <code>D:\Temp\plyTest_5_3_2\</code> (UE 5.3, First Person 템플릿) + <code>D:\Temp\plyTest_5_4_2\</code> (UE 5.4, C++).</li>
+<li>Luma plugin 4개 변형(Baked/Dynamic × TAA/No_TAA) 의미 정리. 기본 사용 = <code>*_Baked</code>, 웹 비교 = <code>*_Baked_No_TAA</code>.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>길 A 시도 (Unreal에서 SPZ 직접 시각화) 7종 PLY 변형 모두 실패</strong>.<ol type="1">
+<li>원본 <code>test.ply</code> + Luma plugin → 알록달록 / 검정.</li>
+<li>PLY 헤더 검사로 <strong>PlayCanvas 생태계(SPZ + splat-transform + SuperSplat)가 모두 비표준 property 순서</strong>임 확인.</li>
+<li>Luma plugin → XV3dGS(=XScene by XVERSE) plugin으로 전환. UE 5.3 / 5.4 양쪽 설치 완료. 모든 PLY 변형이 <code>ply properties header format invalid</code>로 거부.</li>
+<li><code>tools/ply_reorder_to_inria.py</code> 작성 → INRIA 표준 순서로 재정렬한 PLY (<code>test_inria_ordered.ply</code>)도 거부.</li>
+<li>plugin binary <code>strings</code>로 GSImporter.dll 안의 PLY parser 기대 spec 추출: INRIA + <code>nx,ny,nz</code> + <code>red,green,blue</code> uchar.</li>
+<li><code>tools/ply_for_xv3dgs.py</code> 작성 → normal + RGB uchar 추가한 PLY (<code>test_xv3dgs.ply</code>, 65 properties, 716MB)도 거부.</li>
+<li>plugin source closed + docs Google Docs 권한 차단 + 샘플 PLY 없음으로 외부 spec 역공학 한계 도달.</li>
+</ol></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>결정: 길 A 폐기 + Premise 7 폐기 + 길 B 채택</strong>.<ul>
+<li>신 워크플로: Unreal에서는 SPZ 직접 안 본다. 프록시로 배치, 웹에서만 SPZ 렌더링.</li>
+<li>길 B 세부(프록시 형태) 결정은 모델러 측 회신 후 다음 세션에서.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>잔존물 보존</strong>: <code>Plugins/XV3dGS/</code>(45.8MB·UE 5.3 / 59.8MB·UE 5.4) + 5종 PLY 파일 + plugin spec 분석 결과. 미래 plugin spec 명문화 시 재시도용.</li>
+</ul>
+<h3 id="2026-05-11-세션-2">2026-05-11 (세션 2)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 세션 2 진행. myWorkTodo.html(사용자 요구사항 문서) 검토 + 디자인 문서 v1 대조.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>큰 결정 3건</strong>: 시간 압박 폐기 / 합격 기준 다층화 / 콘텐츠 도구 Unity → Unreal.</li>
+<li><input type="checkbox" disabled="" checked="" />
+디자인 문서 v2 작성: <code>Document/design-20260511-110946.html</code>. Spec review 9/10 PASS.</li>
+<li><input type="checkbox" disabled="" checked="" />
+사전 조사: <code>Document/research-unreal-spz-20260511.html</code>. Niantic 공식 Unreal SDK 부재, 모든 plugin이 PLY 중심임 확인.</li>
+<li><input type="checkbox" disabled="" checked="" />
+사용자가 PLY 파일 변환 + UE5 + Gaussian Splatting plugin 설치 완료.</li>
+</ul>
+<h3 id="2026-05-08-세션-1">2026-05-08 (세션 1)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>/office-hours</code> 진단 진행. 모델러 가설 검증, 시장 신호 확인.</li>
+<li><input type="checkbox" disabled="" checked="" />
+디자인 문서 작성: <code>Document/design-20260508-164539.html</code> (이후 v2에 supersedes됨).</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>미니 스파이크 1단계</strong> — SPZ를 웹에서 렌더링 가능 검증.<ul>
+<li>Three.js 0.180.0 + <code>@sparkjsdev/spark</code> + esm.sh CDN. 빌드 도구 없이 단일 HTML.</li>
+<li>test.spz (78MB) 브라우저 정상 렌더링. Three.js 인스턴스 dedup 해결(<code>?deps=three@0.180.0</code>).</li>
+<li>SPZ 좌표계 보정: X축 180° 회전(<code>F</code> 키 토글).</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+1인칭 카메라 컨트롤 자체 구현 (yaw/pitch Euler YXZ, WASD + 화살표 + Shift 가속, <code>e.code</code> 사용).</li>
+<li><input type="checkbox" disabled="" checked="" />
+디버그 HUD 추가. CLAUDE.md + todo.html 운영 체계 도입.</li>
+</ul>
+<hr />
+<h2 id="진행-중--다음-작업">진행 중 / 다음 작업</h2>
+<h3 id="-다음-세션-시작점-2026-05-18-변환-작업-후-office-hours-세션-7-재개-1순위">🟢 다음 세션 시작점 (2026-05-18 변환 작업 후, office-hours 세션 7 재개 1순위)</h3>
+<p><strong>office-hours 세션 7 재개 — brainstorm 주제 미정</strong>. 사용자가 새로 부상한 결정·문제·아이디어를 제기할 예정. 1주차 실행 중(BP 생성·Python export·scene00 배치) 막힌 점, 풀 시스템 윤곽, 새 주제 어느 쪽이든 가능. 세션 7 시작 시 todo.html 먼저 읽고 컨텍스트 확인 후 진단 질문 시작.</p>
+<h3 id="-다음-세션-시작점-2026-05-15-세션-6-종료-시점-변환-작업-직전">🟢 다음 세션 시작점 (2026-05-15 세션 6 종료 시점, 변환 작업 직전)</h3>
+<p><strong>운영 모드 (2026-05-15)</strong>: 솔로 실행 모드. 다른 팀과의 합의·회의 없이 self-결정으로 vertical slice 완수.</p>
+<p><strong>액션 1 종결</strong> (2026-05-15 세션 6): JSON 스키마 v0.1.1 패치 완료. 합의 회의 폐기, 5건 체크리스트 self-결정으로 닫음. actor 선택 표준 추가.</p>
+<p><strong>다음 즉시 작업 = 디자인 문서 The Assignment</strong> (<code>Document/design-actor-selection-20260515-140853.html</code>):</p>
+<ol type="1">
+<li><strong>BP_Anchor_Base 슈퍼클래스 생성</strong> (Actor 파생, BP-only, instance editable: Id/EditorName/Extra Map).</li>
+<li><strong>BP_Anchor_Model 파생</strong> (Base 파생, 추가 변수: GlbPath/CollisionType (User Enum E_CollisionType BBox/Mesh)).</li>
+<li><strong>scene00 레벨에 BP_Anchor_Model 인스턴스 1개 배치</strong>: Details에서 Id="chair_01"/EditorName="Chair"/GlbPath="model_chair.glb"/CollisionType=BBox 설정.</li>
+<li><strong>export_scene_json.py 1회 dry-run</strong>: <code>samples/scene00/scene00.json</code> 생성 확인 + v0.1 스키마 매칭 육안 검증.</li>
+<li>합격 시: 디자인 문서 Success Criteria 5건 체크 + Open Question 1·4 (BP 클래스명 suffix 검증, get_path_name() 승격 결정) 결과 기록.</li>
+</ol>
+<p>소요: 1.5~2시간. 실패 시 가장 가능성 높은 원인 = Open Question 1 (BP 클래스명 <code>_C</code> suffix). <code>cls.get_name()</code> 결과를 unreal.log로 한 번 찍어보고 비교 문자열 조정. 2. <strong>Unreal scene00 레벨 자산 작업</strong>: NanoGS PLY 적재 → Modeling Mode로 collision mesh 작성 → 모델 1개(의자/상자) 배치. 3. <strong>자산 GLB export (수동, 1회성)</strong>: collision mesh → <code>scene00_collision.glb</code>, 모델 → <code>model_chair.glb</code> (glTF Exporter plugin). 4. <strong>Unreal Editor Python script로 JSON export 자동화</strong>.</p>
+<ul>
+<li><strong>시작 전 결정 1건: actor 선택 기준</strong> (스키마 v0.1 외부 결정). 추천 = Tag 방식(<code>anchor_model</code> 태그 붙은 actor만 순회). 후보: tag / 폴더 / BP 클래스 / 전체 StaticMeshActor.</li>
+<li>좌표·회전은 Unreal 원본 값 그대로 출력 (변환은 웹 측, 2주차 Open Question 1·2 검증).</li>
+<li>anchors[]만 export, BP_Anchor_* 비-모델 타입은 v0.2까지 skip.</li>
+<li>골격 스니펫은 office-hours 세션 5 대화에 제공됨 (<code>EditorActorSubsystem.get_all_level_actors()</code> + <code>actor_has_tag()</code> 필터 + <code>json.dump</code>).</li>
+</ul>
+<ol start="5" type="1">
+<li><strong>scene00 묶음 폴더 정리</strong>: <code>scene00.json</code>, <code>scene00_space.ply</code>(또는 <code>_v3.spz</code>), <code>scene00_collision.glb</code>, <code>model_chair.glb</code>.</li>
+<li><strong>index.html 정리</strong> (2주차 진입): 디버그 로그 줄이기 + collision GLB toggle. JSON 로더 + Euler 변환 + Box3 BBox + Raycaster 통합.</li>
+</ol>
+<h3 id="-1주차-액션-4건-디자인-v3-the-assignment--진행-현황">🔴 1주차 액션 4건 (디자인 v3 the assignment) — 진행 현황</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<strong>액션 1 종결 (2026-05-15, 세션 6)</strong>: <code>Document/json-schema-v0.1.html</code> v0.1.1 패치 완료. 합의 회의 폐기.<ul>
+<li>office-hours 세션 5에서 samples/sample.json 발견 후 컨벤션 변경: quaternion → Euler {Pitch,Yaw,Roll}, models[] → anchors[], scalar scale, editor_name/extra{} 필드 추가, position/rotation 객체 표기.</li>
+<li>office-hours 세션 6에서 actor 선택 표준 (BP 클래스 상속) 단락 추가 + 합의 회의 체크리스트 5건 self-결정으로 종결.</li>
+<li>UTF-8 without BOM.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>액션 2 (1일차) 통과 (2026-05-13)</strong>: collision 작업 도구 + GLB export 도구 결정.<ul>
+<li>결정: <strong>Unreal Modeling Mode + glTF Exporter plugin</strong> (Step 1 spike 통과로 확정).</li>
+<li>NanoGS auto collision 분기 폐기 (사용자 결정: "충돌 메쉬는 언리얼에서 작업해서 던저 주는 방식").</li>
+<li>검증: <code>samples/test_collision.glb</code> + <code>samples/scene00_collision.glb</code> 둘 다 Three.js 적재·시각화 OK.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" />
+<strong>액션 3 (1주차 1~5일)</strong>: Unreal NanoGS 배치 + collision proxy 작성 + JSON export 코드 + scene00 묶음 저장.<ul>
+<li>SPZ 공간용 collision mesh (BSP brush 또는 simple low-poly) + 모델 1개 + BBox/box collider.</li>
+<li>Unreal Datasmith Exporter 또는 glTF Exporter로 collision mesh를 GLB로 export.</li>
+<li>JSON export: <code>scene00.json</code> (좌표·회전·스케일·collision_path 포함).</li>
+<li>합격: <code>D:\Temp\plyTest_5_7\Content\Output\scene00\</code> 또는 <code>D:\GitHub\Work\spzFirst\samples\scene00\</code>에 <code>scene00.json</code>, <code>scene00_space.ply</code>, <code>scene00_collision.glb</code>, <code>model_chair.glb</code> 저장.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>액션 4 (병행 1~3일) — 1쪽 축소 완료 (2026-05-13 세션 4)</strong>: <code>Document/modeler-consult-20260512.html</code> 1쪽으로 축소.<ul>
+<li>길 B 관련 옵션 A/B/C/D 질문 제거됨.</li>
+<li>NanoGS가 받는 PLY spec(INRIA + property 자유 + normal/RGB 불필요 + 좌표계 자동 변환) 명시됨.</li>
+<li>모델러 측 SPZ 출력 도구의 PLY export 가능 여부 질문 1건만 남김.</li>
+<li><strong>남은 사용자 액션</strong>: 모델러 발송 + 회신 대기 (회신 안 와도 1주차 진행 가능).</li>
+</ul></li>
+</ul>
+<h3 id="-1주차-보조">🟠 1주차 보조</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+<strong>PLY 호환성 매트릭스 검증 (1회성)</strong>.<ul>
+<li><code>D:\Temp\plyTest_5_7\Content\Ply\</code> 5종 PLY 중 NanoGS에서 시각적·좌표 정상으로 보이는 것 표로 정리.</li>
+<li>결과를 디자인 v3 또는 별도 <code>Document/ply-compat-20260513.html</code>에 기록.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Matic01.ply → NanoGS 시각 검증 통과 (2026-05-13)</strong>.<ul>
+<li><code>D:\GitHub\Work\spzFirst\Matic01.ply</code> (958.9MB, Postshot v1.0.110 출력, 표준 INRIA, 4.26M vertex)를 NanoGS plugin에 import.</li>
+<li><strong>합격</strong>. Postshot → INRIA PLY → NanoGS chain 신뢰도 확보.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>Matic01.ply → SPZ 1.x(version 3) 다운컨버트 (2026-05-13, 변환 완료)</strong>.<ul>
+<li>1차 시도 <code>--spz-version 3</code> (SH 3 bands 그대로) → <strong>WASM Aborted</strong>. SPZ v3가 SH 3 못 받거나 splat-transform v2.1.1 버그.</li>
+<li>2차 시도 <code>-H 1 --spz-version 3</code> (SH 1로 다운그레이드) → <strong>성공</strong>. 결과 <code>Matic01_v3.spz</code> (81.8MB, gzip 매직 OK).</li>
+<li><strong>풀 시스템 변환 chain 표준 명령 확정</strong>: <code>npx splat-transform &lt;input.ply&gt; -H 1 &lt;output_v3.spz&gt; --spz-version 3 -w</code>.</li>
+</ul></li>
+<li><input type="checkbox" disabled="" />
+<strong>Matic01_v3.spz 웹 시각 검증</strong> (사용자, 5분).<ul>
+<li><code>index.html</code>에서 <code>Matic01.spz</code> → <code>Matic01_v3.spz</code>로 파일명 변경 → 새로고침.</li>
+<li>합격: 로딩 OK + 1인칭 카메라 동작 + 시각 품질 평가 (SH 1 다운그레이드 영향 무광택 실내라면 거의 차이 없음).</li>
+</ul></li>
+<li><input type="checkbox" disabled="" />
+<strong>SH 3 full quality 보존 트랙 (선택, 풀 시스템 단계)</strong>.<ul>
+<li>SPZ v3 + SH 3 또는 NGSP(v4) 지원 웹 라이브러리 검토. Spark 업그레이드 / 대안 라이브러리 / 자체 PLY 로더.</li>
+<li>1차 데모 합격엔 영향 없음. 풀 시스템에서 시각 품질 정밀화 필요 시 트리거.</li>
+</ul></li>
+</ul>
+<h3 id="-2주차-1주차-합격-후-시작">🟡 2주차 (1주차 합격 후 시작)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+<strong>웹 측 JSON 로더 + 모델 배치 + 충돌 + 클릭</strong> (<code>index.html</code> 확장, 사용자 주체).<ul>
+<li><strong>2주차 전반(0.5주)</strong>: JSON fetch + 파싱 + GLTFLoader + NanoGS PLY 로더 결정.
+<ul>
+<li>결정 포인트: NanoGS 출력 PLY를 SPZ로 재변환해서 Spark에 먹일지, 웹 측에서 PLY 직접 파싱할지 (PLY → SPZ 재변환이 단순).</li>
+</ul></li>
+<li><strong>2주차 중반(0.3주)</strong>: collision mesh 로드 + Three.js Scene invisible material + Raycaster 설정.</li>
+<li><strong>2주차 후반(0.2주)</strong>: 1인칭 이동에 충돌 raycast 통합 + 모델 클릭 이벤트 (콘솔 출력만, UI는 다음 slice).</li>
+<li><strong>2주차 합격 기준</strong>:
+<ul>
+<li>Unreal에서 옮긴 모델 위치가 웹 새로고침 시 정확히 반영.</li>
+<li>1인칭 이동 시 SPZ 공간 통과하지 않음.</li>
+<li>모델 클릭 시 모델 ID가 콘솔에 출력.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="-병행-pm영업">🔵 병행 (PM/영업)</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+<strong>PM에게 Unity → Unreal 변경 합의 + 모델러 Unreal 합류 가능성 공식 확인</strong> (세션 2부터 미해결).</li>
+<li><input type="checkbox" disabled="" />
+<strong>합격 기준 다층화의 PM/스폰서 합의</strong> (세션 2부터 미해결).</li>
+<li><input type="checkbox" disabled="" />
+<strong>카테고리 시장 신호 시한 확인</strong>: 자진 퇴장 동안 다른 회사 진입 위험.</li>
+<li><input type="checkbox" disabled="" />
+<strong>잃은 클라이언트 재미팅 가능성 + 카테고리 연간 발주 건수/단가 데이터</strong> (세션 1부터 미해결).</li>
+</ul>
+<h3 id="-1차-데모-합격-후">🟢 1차 데모 합격 후</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+<strong>다음 office-hours 세션</strong>: 풀 시스템 디자인 본격 작성.<ul>
+<li>myWorkTodo.html 12개 요구사항 전체 통합 설계.</li>
+<li>에디터 모드, 다국어, 씬 시스템, PC/모바일 분기, 2D 스프라이트, 클릭 인터랙션 등.</li>
+<li>cross-model 리뷰(Codex 또는 Claude 서브에이전트) 권장.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="미해결--차후-고려">미해결 / 차후 고려</h2>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+빌드 시스템 도입 (Vite 등). 단일 HTML이 1500줄 넘어가면 관리 어려움.</li>
+<li><input type="checkbox" disabled="" />
+모바일 브라우저 호환성·성능 테스트 (iOS Safari, Android Chrome).</li>
+<li><input type="checkbox" disabled="" />
+풀 시스템 아키텍처 설계 (CMS, 콘텐츠 업로드 UI, 권한, 다중 사용자) — 1차 데모 합격 후 별도 <code>/office-hours</code> 권장.</li>
+<li><input type="checkbox" disabled="" />
+PlayCanvas 호스팅 비용·라이선스 회사 정책 적합성 확인 (필요 시).</li>
+<li><input type="checkbox" disabled="" />
+모델러의 SPZ 출력 파이프라인이 Niantic 표준 호환인지 확인.</li>
+<li><input type="checkbox" disabled="" />
+AR/모바일 확장 검토 (현재는 웹 브라우저만 타겟이지만 향후 가능성).</li>
+<li><input type="checkbox" disabled="" />
+<strong>XV3dGS plugin 재시도 트리거</strong>: plugin 저자가 spec 공식 문서화하거나 sample PLY를 공개하면 길 A 부활 검토. GitHub repo 모니터링 가치 있음. (현재 길 A는 NanoGS로 부활 — 이 항목은 NanoGS 실패 시 fallback 카드로 보존.)</li>
+<li><input type="checkbox" disabled="" />
+<strong>NanoGS plugin 안정성 모니터링</strong>: <code>IsBetaVersion: true</code>. 실 작업 중 크래시·렌더링 결함·빌드 깨짐 발생 시 issue 추적. MIT 라이선스 + source 공개로 직접 fix/fork 가능. fallback 두지 않기로 결정(P3)했으므로 발생 시 office-hours 세션 5 트리거.</li>
+<li><input type="checkbox" disabled="" />
+<strong>NanoGS 좌표계 변환 가정 검증</strong>: COLMAP/OpenCV(Y-down) + meters 가정. PlayCanvas 변환 PLY가 이 가정과 일치하는지 1주차 webview 동기화 시점에 자연 검증. 어긋남 발생 시 export 코드에서 보정.</li>
+<li><input type="checkbox" disabled="" />
+<strong>NanoGS PLY → 웹 적재 경로 결정</strong>: PLY → SPZ 재변환 후 Spark에 먹임(가장 단순) vs 웹에서 PLY 직접 파싱. 2주차 1일차 결정이지만, 1주차 export 단계에서 미리 도구 결정 권장.</li>
+<li><input type="checkbox" disabled="" />
+<strong>collision mesh GLB export 도구 결정</strong>: Unreal Datasmith Exporter / glTF Exporter plugin / FBX → GLB 외부 변환. 1주차 0일차 결정.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<strong>JSON export actor 선택 기준 결정</strong> (세션 5 부상 → 세션 6 종결, 2026-05-15): BP 클래스 상속(<code>BP_Anchor_Base</code> 슈퍼클래스 + 파생 BP들) 채택. 사용자 ACVAnchor 경험 + samples/sample.json 패턴 일치. 상세: <code>Document/design-actor-selection-20260515-140853.html</code>.</li>
+</ul>
+<hr />
+<h2 id="결정-이력">결정 이력</h2>
+<table>
+<thead>
+<tr class="header">
+<th>일자</th>
+<th>결정</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2026-05-08</td>
+<td>스파이크 단계 한정으로 PlayCanvas → Three.js + Spark</td>
+<td>PlayCanvas의 GS 베타가 SPZ 직접 지원 안 함. Spark가 SPZ 네이티브라 더 빠른 검증 경로. 풀 시스템화 시 PlayCanvas 재검증 예정.</td>
+</tr>
+<tr class="even">
+<td>2026-05-08</td>
+<td>산출물은 <code>Document/</code> 폴더에 저장 (<code>~/.gstack/projects/</code> 사용 안 함)</td>
+<td>사용자 선호. 산출물이 프로젝트와 함께 살아야 함.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-08</td>
+<td>OrbitControls → 자체 1인칭 yaw/pitch 컨트롤</td>
+<td>사용자 요구: "카메라가 자기 위치에서 회전". OrbitControls는 타겟 점 주위 공전 방식이라 부적합.</td>
+</tr>
+<tr class="even">
+<td>2026-05-08</td>
+<td>사용자가 다음 세션에 개발 요구사항 문서 반입 예정</td>
+<td>기존 office-hours 진단은 모델러 가설 + 시장 신호 추론 기반. 사용자 본인의 정리된 요구사항으로 검증·보강 필요.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-11</td>
+<td>디자인 문서 v1의 Premise 5 폐기 ("3명 팀이 풀 시스템부터 만드는 건 부적절")</td>
+<td>사용자가 "급하지 않게 완성도 우선" 결정. 시간을 외부 제약이 아닌 자기 자원으로 가져감.</td>
+</tr>
+<tr class="even">
+<td>2026-05-11</td>
+<td>1차 데모 = 단일 영업 URL 정의 폐기</td>
+<td>myWorkTodo.html 12개 요구사항이 1차 데모에 포함되어야 한다는 사용자 결정.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-11</td>
+<td>콘텐츠 도구 Unity → Unreal</td>
+<td>사용자 결정. 모델러/팀 합의는 PM 협의로 별도 확인 필요.</td>
+</tr>
+<tr class="even">
+<td>2026-05-11</td>
+<td>다음 1~2주 vertical slice = Unreal → JSON → 웹 끝-에서-끝 관통</td>
+<td>한 슬라이스로 3개 미지수(Unreal SPZ 호환성, JSON 스키마 최소 필드, 웹 로더 설계) 동시 해소.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-11</td>
+<td>Unreal SPZ 처리 경로 = "SPZ → PLY 변환 → PLY 입력 plugin 적재" 확정</td>
+<td>사전 조사 결과 Niantic 공식 Unreal SDK 부재, 모든 plugin이 PLY 중심.</td>
+</tr>
+<tr class="even">
+<td>2026-05-12</td>
+<td>Unreal plugin = Luma AI Unreal Plugin 확정 + 기본 사용 변형 = <code>*_Baked</code></td>
+<td>PLY import 산출물 prefix <code>Luma_test_80</code>로 plugin 식별. 환경 라이팅 반응 불필요. 웹 Spark 비교 시점에만 <code>*_Baked_No_TAA</code>.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-12</td>
+<td>Unreal 엔진 버전 = 5.3</td>
+<td>Luma plugin UE 5.4+ 호환 이슈 회피. UE 5.4도 별도 검증했으나 동일 plugin spec 문제 확인.</td>
+</tr>
+<tr class="even">
+<td>2026-05-12</td>
+<td><strong>Premise 7 폐기 (Unreal에서 SPZ 직접 시각화 경로)</strong></td>
+<td>Luma + XV3dGS 양쪽 plugin이 PlayCanvas 계열 PLY 거부. property 순서 재정렬 + normal + RGB uchar 추가 (binary spec 분석) 후에도 거부. plugin source closed + docs 권한 차단으로 spec 역공학 한계. <strong>세션 3에서 길 A 폐기 + 길 B(메쉬 프록시) 채택 확정.</strong> 프록시 세부 형태는 모델러 회신 후 결정.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-12</td>
+<td>LumaAIPlugin disabled / XV3dGS enabled 유지</td>
+<td>두 plugin 모두 미작동이지만 plugin spec 재시도 시 자산 충돌 회피 + 잔존물 보존.</td>
+</tr>
+<tr class="even">
+<td>2026-05-13</td>
+<td><strong>NanoGS plugin 발견 + 5단계 검증 OK. Premise 7 부활 가능성 매우 높음.</strong></td>
+<td>github TimChen1383/NanoGaussianSplatting (MIT, source 공개). UE 5.6/5.7 지원. 사용자가 시각 정상 + 설치 + 실시간 fps 5단계 검증. source 분석상 PLY property 순서 자유 + 표준 INRIA spec 준수. 디자인 v3 정식 변경은 office-hours 세션 4 재개 후 확정 (premise P1–P6 동의 → alternatives 선택).</td>
+</tr>
+<tr class="odd">
+<td>2026-05-13</td>
+<td>UE 5.7 + plyTest_5_7 작업 폴더로 이관</td>
+<td>NanoGS plugin이 UE 5.6, 5.7 지원. 사용자가 NanoGS 검증을 UE 5.7에서 수행. 5.3·5.4 작업 공간(plyTest_5_3_2, plyTest_5_4_2)은 Luma/XV3dGS 실패 잔존물로 보존.</td>
+</tr>
+<tr class="even">
+<td>2026-05-13</td>
+<td><strong>Premise P1–P6 동의 + P7 신규 추가 (충돌 메쉬 처리 1주차 통합)</strong></td>
+<td>세션 4 phase 3 정리한 6개 premise 모두 동의. 추가로 사용자가 "충돌 메쉬 처리도 작업에 포함" 요구. myWorkTodo.html 1인칭 이동 + 클릭 가능이 1차 데모 합격 기준에 명시되어 있어 1주차 vertical slice에 통합. fallback(P3)은 두지 않음.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-13</td>
+<td><strong>Approach B 채택: Unreal collision proxy 통합 export</strong></td>
+<td>디자인 v3 alternatives 3개(A 웹 BBox / B Unreal collision proxy 통합 / C 점진적 통합) 중 B 선택. 회사 표준 워크플로(콘텐츠 제작자가 Unreal에서 모든 결정)에 부합 + JSON 스키마 v0.1이 처음부터 완전한 모습 + 한 슬라이스에서 끝-에서-끝 관통 검증. NanoGS collision 가용성은 1주차 0~1일차에 결정.</td>
+</tr>
+<tr class="even">
+<td>2026-05-13</td>
+<td><strong>디자인 문서 v3 발효, v2 supersedes</strong></td>
+<td><code>Document/design-20260513-104744.html</code>. v3 narrowest wedge = "Unreal 좌표 + collision proxy → 웹 위치 반영 + 1인칭 충돌 + 클릭 raycast". 1주차 합격 기준 신규: 1인칭 SPZ 공간 통과 안 함 + 모델 클릭 콘솔 출력.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-13</td>
+<td><strong>모델러 협의 가이드 1쪽 축소</strong></td>
+<td><code>Document/modeler-consult-20260512.html</code> 길 B 옵션 A/B/C/D 질문 제거. NanoGS PLY spec 명시 + 모델러 SPZ 도구의 PLY export 가능 여부 1건만 질문. 회신 안 와도 1주차 진행 가능 (우리 측 변환 도구로 처리).</td>
+</tr>
+<tr class="even">
+<td>2026-05-13</td>
+<td><strong>충돌 메쉬 source = Unreal 명시 작업 단일 경로 확정</strong></td>
+<td>사용자 결정: "충돌 메쉬는 언리얼에서 작업해서 던저 주는 방식". NanoGS auto collision 분기 폐기. 콘텐츠 제작자가 Unreal에서 collision mesh 직접 작성(권장: Modeling Mode) → GLB export. 자동/수동 혼재 안 함. 풀 시스템 단계에서도 동일 방식 일관 적용. 액션 2의 의미가 "NanoGS collision 가용성 검증"에서 "Unreal collision 작업 도구 + GLB export 도구 결정"으로 변경. P7 보강.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-13</td>
+<td><strong>모델러 도구 = Postshot v1.0.110 확인</strong></td>
+<td><code>Matic01.ply</code> 헤더의 <code>comment Postshot v1.0.110</code>로 정체 확인. Postshot이 <strong>표준 INRIA Gaussian Splatting PLY를 직접 출력</strong>(4.26M vertex, 59 properties, SH 3 bands, normal/RGB 없음) → NanoGS와 spec 100% 일치. 액션 4(모델러 회신용 정보 수집)의 큰 질문 하나가 사실상 풀림. Postshot이 출력하는 SPZ는 <strong>SPZ 2.0(NGSP, version 4)</strong> 포맷이고 현재 <code>@sparkjsdev/spark</code>(SPZ 1.x = version 3 가정)는 못 받음. 웹 적재용은 <code>splat-transform --spz-version 3</code>으로 다운컨버트 또는 Spark 업그레이드 검토 필요.</td>
+</tr>
+<tr class="even">
+<td>2026-05-13</td>
+<td><strong>splat-transform 도구 검증 통과</strong></td>
+<td><code>npx splat-transform</code> (v2.1.1) 호출 OK. SPZ 1.x(version 3) ↔︎ SPZ 2.0(version 4, NGSP) 양방향 변환 지원. PLY/SOG/GLB/SPZ/CSV 멀티포맷. 부수 기능 <code>--collision-mesh</code> (SPZ→collision GLB 자동 생성) 존재하나 P7 결정(Unreal 명시 작업)에 따라 본 디자인 채택 안 함. 정보만 보존.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-13</td>
+<td><strong>데이터 파일 전부 <code>samples/</code> 폴더로 이관</strong></td>
+<td>루트가 <code>.spz</code>/<code>.ply</code>로 어수선해져서 정리. <code>samples/</code>에 test.spz, Matic01.spz, Matic01.ply, Matic01_v3.spz, test_collision.glb 통합. <code>index.html</code>의 url path도 <code>samples/Matic01_v3.spz</code>로 갱신. 풀 시스템 단계의 콘텐츠 폴더 구조 시작점.</td>
+</tr>
+<tr class="even">
+<td>2026-05-13</td>
+<td><strong>SPZ 좌표계 기본값 변경: X축 180° 회전 → 회전 없음 (옵션 A)</strong></td>
+<td>Postshot → INRIA PLY → splat-transform chain은 Three.js 표준 Y-up으로 저장됨. 새 표준이 풀 시스템 기준이라 기본값을 회전 없음(<code>splat.rotation.x = 0</code>, <code>flipped = false</code>)으로. Niantic 원본 SPZ(test.spz 등) 적재 시 F 키 한 번. 풀 시스템 정식 해결은 JSON 스키마 v0.1의 <code>coord_system</code> 필드로 모델·씬별 메타데이터 결정.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-13</td>
+<td><strong>Step 1 spike 확장: index.html에 collision GLB도 함께 적재</strong></td>
+<td>박스 보임 (렌더링·좌표계 변환 자체는 정상). 그러나 <strong>Unreal 박스 위치 ≠ SPZ 안 의도 위치</strong>. 디자인 v3 Open Question #2("좌표계 일치 검증은 1주차 webview 동기화 시점에 자연 검증")가 실제 부상. Spike 박스가 빈 Unreal 레벨에서 export된 것이라 SPZ 원점 무관. 본격 해결은 1주차 액션 3에서 진행: Unreal NanoGS 레벨에 SPZ 같이 적재 + SPZ 위에 의도 배치 + export.</td>
+</tr>
+<tr class="even">
+<td>2026-05-13</td>
+<td><strong>좌표계 yaw 보정 -90° 확정</strong></td>
+<td><code>scene00_collision.glb</code> (NanoGS 레벨에서 SPZ 같이 적재 후 export) 적재 후 SPZ가 박스 대비 yaw +90° 어긋남 시각 확인. G 키 cycle 토글(0/90/180/-90)로 4 케이스 시각 비교 → <strong><code>splat.rotation.y = -Math.PI / 2</code> (시계방향 90°)</strong> 정렬 통과. 원인: Postshot → splat-transform → Spark chain의 좌표계 변환이 Unreal NanoGS의 변환과 yaw 90° 차이. index.html 기본값 적용 + G 키 시작점 -90°로 굳힘. 풀 시스템 정식 해결은 JSON 스키마 v0.1의 <code>space.rotation_y_deg</code> 필드로 메타데이터화 (모델러 도구별 자동 보정).</td>
+</tr>
+<tr class="odd">
+<td>2026-05-13</td>
+<td><strong>풀 시스템 변환 chain 1차 확정</strong></td>
+<td><code>Postshot → INRIA PLY → splat-transform -H 0 또는 1 --spz-version 3 → SPZ v3 (gzip) → Spark → Three.js (rotation.y = -Math.PI/2 보정)</code>. Unreal NanoGS 측은 <code>INRIA PLY → NanoGS plugin → 시각 + collision proxy export</code>. 두 trunk가 같은 PLY 원천을 공유. 모든 단계 검증 통과 (시각·위치 정렬). 풀 시스템 자동화 시 이 chain이 콘텐츠 파이프라인의 단일 표준 변환 흐름.</td>
+</tr>
+<tr class="even">
+<td>2026-05-14</td>
+<td><strong>samples/sample.json 정체 확인 = 과거 프로젝트 산물(참고용)</strong></td>
+<td>Caliverse 메타버스(MS02) 과거 콘텐츠 포맷. 현재 비운영. SPZ 프로젝트는 이 포맷에 종속될 의무 없음. 다만 풀 시스템 진입 시 비슷한 구조(트리·anchor type enum·메타필드)로 갈 가능성 큼 → v0.1은 미래와 충돌하지 않는 방향으로 잡기로 결정.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-14</td>
+<td><strong>JSON 스키마 v0.1 회전 표현 Euler {Pitch,Yaw,Roll}로 확정 (디자인 v3 변경)</strong></td>
+<td>디자인 v3는 quaternion <code>[x,y,z,w]</code> 가정이었으나 sample.json 발견 + Unreal 콘텐츠 제작자 친숙도 우선으로 Euler 채택. 웹 로더가 Three.js Euler 변환 책임. Euler order(<code>'YXZ'</code> 가정)·좌표 부호는 2주차 1일차 검증으로 확정 (Open Question 1, 2).</td>
+</tr>
+<tr class="even">
+<td>2026-05-14</td>
+<td><strong>JSON 스키마 v0.1 = Approach S-B 채택 (sample 컨벤션 가벼운 흡수)</strong></td>
+<td><code>models[]</code> → <code>anchors[]</code> 명칭(풀 시스템 start_pos/teleport 자리), <code>anchor_type: "model"</code> enum(v0.1은 model만), <code>editor_name</code>(다국어·디버그), <code>extra: {}</code>(forward-compat, GUID/TableID 등 자유), scalar <code>scale</code>, position/rotation 객체 표기. 풀 시스템 마이그레이션 부담 거의 0 + 1주차 추가 부담 약 1시간.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-14</td>
+<td><strong>JSON 스키마 forward-compat 정책 명시</strong></td>
+<td>웹 로더는 모르는 root-level/anchor 필드 무시. 모르는 anchor_type은 console.warn 후 skip. 모르는 collision_type은 fallback bbox. Unreal export는 v0.1 외 필드 출력 허용(extra 또는 root-level). 이 정책으로 v0.1 ↔︎ v0.2 사이 양쪽 도구 동시 깨짐 방지.</td>
+</tr>
+<tr class="even">
+<td>2026-05-15</td>
+<td><strong>솔로 실행 모드 결정</strong></td>
+<td>사용자 단독 진행. 다른 팀과의 합의·회의 폐기. 액션 1(JSON 스키마 합의 회의)·액션 4(모델러 회신 대기) 외부 동기화 단계 모두 self-결정·정보용으로 압축. 의사결정 속도 우선 + 외부 의존 제거.</td>
+</tr>
+<tr class="odd">
+<td>2026-05-15</td>
+<td><strong>actor 선택 메커니즘 = Approach B Pure BP 채택</strong></td>
+<td>Premise P-Act1~P-Act5 합의 + Phase 4 alternatives 3종 비교(A Lean MVP / B Pure BP / C Pre-architected). 사용자 이전 Caliverse 프로젝트 ACVAnchor 슈퍼클래스 + 파생 BP 패턴 + JSON export 검증 경험이 추천을 D/B로 뒤집음. samples/sample.json BP_Anchor_* 트리와 1:1 매핑. 1주차는 BP-only 슈퍼클래스(P-Act3), C++ 승격은 anchor_type 2종째 + 풀 시스템 진입 시점. 상세: <code>Document/design-actor-selection-20260515-140853.html</code>.</td>
+</tr>
+<tr class="even">
+<td>2026-05-15</td>
+<td><strong>JSON 스키마 v0.1.1 패치</strong></td>
+<td>actor 선택 표준 단락 추가 + 합의 회의 체크리스트 5건 self-결정으로 종결 + 변경 이력 한 줄 추가. extra 객체는 always-emit <code>{}</code> (diff 안정성).</td>
+</tr>
+<tr class="odd">
+<td>2026-05-18</td>
+<td><strong>Document/ 산출물 형식 markdown → HTML 변경 + 기존 10개 일괄 변환</strong></td>
+<td>사용자 결정. 브라우저에서 바로 열어 읽고 공유. pandoc + 임베드 CSS(라이트·다크 자동) self-contained HTML. CLAUDE.md 3번 산출물 저장 규칙 + 1번 todo 경로 갱신. 앞으로 새 디자인·플랜·회고·분석 리포트는 모두 <code>Document/*.html</code>로 저장.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="참고-자료">참고 자료</h2>
+<h3 id="문서">문서</h3>
+<ul>
+<li>디자인 문서 (<strong>현행 v3, NanoGS 부활 + 충돌 통합</strong>): <code>Document/design-20260513-104744.html</code>.</li>
+<li><strong>스키마 계약서 (현행 v0.1 DRAFT, 2026-05-14 세션 5)</strong>: <code>Document/json-schema-v0.1.html</code>. Unreal export + 웹 로더가 둘 다 참조.</li>
+<li><strong>학습·공유용 이북 (4개 세션 의사결정 일지, 2026-05-13)</strong>: <code>Document/spz-web-viewer-journey-20260513.html</code>.</li>
+<li>디자인 문서 (세션 2, supersedes됨): <code>Document/design-20260511-110946.html</code>.</li>
+<li>디자인 문서 (세션 1, supersedes됨): <code>Document/design-20260508-164539.html</code>.</li>
+<li>사전 조사: <code>Document/research-unreal-spz-20260511.html</code>.</li>
+<li>사용자 요구사항: <code>Document/myWorkTodo.html</code>.</li>
+<li>모델러 협의 가이드 (1쪽 축소 완료): <code>Document/modeler-consult-20260512.html</code>.</li>
+<li><strong>참고: 과거 프로젝트 콘텐츠 포맷 (Caliverse MS02, 비운영)</strong>: <code>samples/sample.json</code>. SPZ 프로젝트 종속 의무 없음. v0.1 컨벤션 일부 흡수의 영감.</li>
+</ul>
+<h3 id="코드--자산">코드 / 자산</h3>
+<ul>
+<li>웹 측 스파이크 코드: <code>index.html</code> (프로젝트 루트). 현재 적재 파일 = <code>samples/Matic01_v3.spz</code>.</li>
+<li>Step 1 spike 검증 페이지: <code>test_collision.html</code> (collision GLB import 테스트).</li>
+<li>데이터 파일 (전부 <code>samples/</code> 폴더, 2026-05-13 정리):
+<ul>
+<li><code>samples/test.spz</code> (78MB, gzip SPZ 1.x, 세션 1부터 검증 통과).</li>
+<li><code>samples/Matic01.spz</code> (103MB, <strong>NGSP / SPZ 2.0</strong>, Postshot 출력, Spark는 못 받음 보존용).</li>
+<li><code>samples/Matic01.ply</code> (959MB, Postshot 출력 표준 INRIA PLY, NanoGS 적재 검증 통과).</li>
+<li><code>samples/Matic01_v3.spz</code> (82MB, splat-transform <code>-H 1 --spz-version 3</code> 변환, Spark 적재 검증 대기).</li>
+<li><code>samples/test_collision.glb</code> (4.5KB, Unreal Modeling Mode + glTF Exporter 박스 1개 spike).</li>
+</ul></li>
+<li>PLY 재정렬 도구: <code>tools/ply_reorder_to_inria.py</code> (PlayCanvas → INRIA 순서, NanoGS 이후 사용 빈도 낮음).</li>
+<li>PLY XV3dGS 호환 도구: <code>tools/ply_for_xv3dgs.py</code> (INRIA + normal + RGB uchar, XV3dGS 폐기 후 보존용).</li>
+</ul>
+<h3 id="unreal-작업-공간">Unreal 작업 공간</h3>
+<ul>
+<li><strong>UE 5.7 (현행, 2026-05-13~)</strong>: <code>D:\Temp\plyTest_5_7\</code> (<strong>NanoGS plugin enabled</strong>, 5단계 검증 OK). PLY·SPZ 파일: <code>D:\Temp\plyTest_5_7\Content\Ply\</code>.</li>
+<li>UE 5.3 (잔존): <code>D:\Temp\plyTest_5_3_2\</code> (LumaAIPlugin disabled + XV3dGS enabled, 모두 실패).</li>
+<li>UE 5.4 (잔존): <code>D:\Temp\plyTest_5_4_2\</code> (XV3dGS enabled, 실패).</li>
+<li>PLY·SPZ 파일 보존 (UE 5.3 시절): <code>D:\Temp\plyTest_5_3_2\Content\StarterContent\Ply\</code>.
+<ul>
+<li><code>test.spz</code> (원본 SPZ, 81.6MB, 웹 정상 렌더링 확인됨).</li>
+<li><code>test.ply</code> (원본 PLY, 673MB, PlayCanvas 순서, 변환 도구 추정 = nianticlabs spz JS).</li>
+<li><code>test_inria.ply</code> (splat-transform 변환, 673MB, 같은 비표준 순서).</li>
+<li><code>test_savedas.ply</code> (SuperSplat Save As, 673MB, 같은 비표준 순서).</li>
+<li><code>test.compressed.ply</code> (SuperSplat Compressed, 183MB).</li>
+<li><code>test_inria_ordered.ply</code> (수동 INRIA 재정렬, 673MB).</li>
+<li><code>test_xv3dgs.ply</code> (INRIA + normal + RGB uchar, 716MB).</li>
+</ul></li>
+</ul>
+<h3 id="unreal-plugin-참조">Unreal plugin 참조</h3>
+<ul>
+<li><strong>NanoGS (현행)</strong>: <a href="https://github.com/TimChen1383/NanoGaussianSplatting">https://github.com/TimChen1383/NanoGaussianSplatting</a> (MIT, source 공개, UE 5.6/5.7 지원, BetaVersion).</li>
+<li>LumaAIPlugin (실패, 폐기): closed source.</li>
+<li>XV3dGS / XScene by XVERSE (실패, 폐기): closed source.</li>
+</ul>
+<h3 id="운영">운영</h3>
+<ul>
+<li>운영 규칙: <code>CLAUDE.md</code> (프로젝트 루트).</li>
+</ul>
+</body>
+</html>

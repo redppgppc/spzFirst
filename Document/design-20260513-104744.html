@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>design-20260513-104744</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6a737d;
+    --border: #e5e5e5;
+    --code-bg: #f6f8fa;
+    --code-fg: #24292e;
+    --link: #0366d6;
+    --accent: #0969da;
+    --table-head: #f6f8fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --code-bg: #161b22;
+      --code-fg: #c9d1d9;
+      --link: #2f81f7;
+      --accent: #58a6ff;
+      --table-head: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, "Pretendard Variable", "Pretendard",
+      "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI",
+      system-ui, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 920px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 1.8em 0 0.5em;
+    font-weight: 700;
+  }
+  h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; }
+  p { margin: 0.75em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "D2Coding", "Cascadia Code", "JetBrains Mono",
+      Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 0.12em 0.32em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 1em;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; font-size: 0.9em; color: var(--code-fg); }
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding: 0 1em;
+    color: var(--muted);
+    margin: 1em 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+  }
+  table thead { background: var(--table-head); }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  img { max-width: 100%; height: auto; }
+  .task-list-item { list-style-type: none; margin-left: -1.4em; }
+  .task-list-item input[type=checkbox] { margin-right: 0.4em; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">design-20260513-104744</h1>
+</header>
+<h1 id="design-spz-웹-뷰어-v3--nanogs-부활--충돌-메쉬-통합-vertical-slice">Design: SPZ 웹 뷰어 v3 — NanoGS 부활 + 충돌 메쉬 통합 vertical slice</h1>
+<p>Generated by /office-hours on 2026-05-13 Branch: main Repo: D:\GitHub\Work\spzFirst Status: APPROVED (2026-05-13, premise P1–P7 확정 + Approach B 채택) Mode: Intrapreneurship Supersedes: design-20260511-110946.html (Premise 7 폐기 → P1 부활 + Approach B 충돌 통합)</p>
+<hr />
+<h2 id="이-문서가-왜-새로-작성되었나">이 문서가 왜 새로 작성되었나</h2>
+<p>v2 문서는 세션 3(2026-05-12)에서 Premise 7("Unreal에서 SPZ를 안정적으로 다룰 수 있다")이 사실상 폐기된 시점에 같이 무력화됐다. Luma + XV3dGS 두 plugin이 PlayCanvas 계열 PLY를 모두 거부했고, 길 A(Unreal에서 SPZ 직접 시각화)가 막혔기 때문이다.</p>
+<p>세션 4(2026-05-13)에서 두 가지가 바뀌었다.</p>
+<ol type="1">
+<li><strong>NanoGS plugin 발견 + 5단계 검증 OK.</strong> GitHub TimChen1383/NanoGaussianSplatting (MIT, source 공개, UE 5.6/5.7 지원). 사용자가 시각·설치·이동/회전/스케일·실시간 fps 5단계로 검증. 길 A가 부활했다.</li>
+<li><strong>충돌 메쉬 처리를 1차 데모 합격 범위에 포함.</strong> myWorkTodo.md의 "1인칭 이동" + "클릭 가능"이 1차 데모 합격 기준에 들어있는데, NanoGS는 시각만 제공하니 별도 collision 데이터가 필요하다.</li>
+</ol>
+<p>두 변화의 결과로 vertical slice 정의가 달라진다. v2가 "Unreal 좌표 → 웹 위치 반영"이었다면, v3는 **"Unreal 좌표 + collision proxy → 웹 위치 반영 + 1인칭 충돌 + 클릭 raycast"**까지 한 슬라이스에 통합한다.</p>
+<hr />
+<h2 id="problem-statement">Problem Statement</h2>
+<p>회사는 Unity 기반 360도 파노라마 웹 서비스를 운영 중. 잃은 10억 카테고리(공간 안에 실제 같은 3D 모델 배치 + 퀄리티 일관성)를 회복해야 한다. 이번 세션에서 추가 변경된 시장 측 정보는 없음. 합격 기준 다층화(v2)와 콘텐츠 도구 Unreal(v2) 결정 유효.</p>
+<hr />
+<h2 id="demand-evidence">Demand Evidence</h2>
+<p>v2 그대로. 단가 10억 카테고리 1건 무산 + 자진 퇴장. 시장 신호 시한은 여전히 PM 측 확인 대기.</p>
+<hr />
+<h2 id="status-quo">Status Quo</h2>
+<ul>
+<li>웹: <code>index.html</code> 단일 파일. Three.js 0.180.0 + <code>@sparkjsdev/spark</code> + esm.sh CDN. SPZ 렌더링 + 1인칭 카메라 + 디버그 HUD 통과.</li>
+<li>Unreal: UE 5.7 + NanoGS plugin 설치 (<code>D:\Temp\plyTest_5_7\</code>). PLY 시각 렌더링 + 레벨 배치 + 변환 5단계 검증 OK.</li>
+<li>미착수: JSON export, 충돌 처리, 모델 배치, 에디터 모드, 다국어, 씬 시스템, 2D 스프라이트, PC/모바일 분기.</li>
+</ul>
+<hr />
+<h2 id="target-user--narrowest-wedge">Target User &amp; narrowest wedge</h2>
+<p><strong>1차 사용자(B2B 사내)</strong>: Unreal에서 작업하는 콘텐츠 제작자 + 사내 PM. <strong>최종 수혜자</strong>: 외부 클라이언트 의사결정자.</p>
+<p><strong>v3 narrowest wedge</strong> (v2 정의 확장):</p>
+<blockquote>
+<p>"Unreal에서 SPZ 공간(NanoGS PLY) + GLB 모델 1개 + collision proxy(SPZ 공간 벽·바닥 + 모델 BBox)를 배치하고, 그 배치 정보를 JSON으로 export한 뒤, 웹이 그 JSON을 읽어 동일 공간에 동일 위치로 모델을 띄우고 1인칭 이동 시 SPZ 공간을 통과하지 않으며 모델 클릭이 동작한다."</p>
+</blockquote>
+<p>한 슬라이스에서 검증되는 미지수 4개: (1) NanoGS PLY 호환성, (2) JSON 스키마 v0.1 최소 필드, (3) 웹 측 로더 설계, (4) <strong>충돌 데이터의 export·로드·raycast 경로</strong>.</p>
+<p>의도적으로 빠지는 것 (이 slice에서만): 에디터 모드, 다국어, 다중 씬, 모바일 분기, 2D 스프라이트. 슬라이스 통과 후 다음 슬라이스로.</p>
+<hr />
+<h2 id="constraints">Constraints</h2>
+<ul>
+<li>팀: 개발 3명. 사용자 본인 = 웹 처음 + 한국어 환경.</li>
+<li>환경: 웹 브라우저(데스크탑·모바일). 콘텐츠 도구 Unreal 5.7 + NanoGS plugin.</li>
+<li>기간: 절대 데드라인 없음. 완성도 우선. 시장 신호 시한 PM 확인 대기.</li>
+<li>빌드 시스템: 단일 HTML. 1500줄 초과 또는 멀티 페이지 진입 시 Vite 도입 검토 (CLAUDE.md 명시).</li>
+</ul>
+<hr />
+<h2 id="premises">Premises</h2>
+<p>새 전제 묶음. v2의 Premise 7 폐기는 무효화되고 P1로 부활. P7(충돌 통합)이 신설.</p>
+<ol type="1">
+<li><strong>P1 — NanoGS plugin이 "길 A(Unreal에서 SPZ 직접 시각화 + 좌표 추출)"를 안정적으로 가능하게 한다.</strong> 근거: 시각 정상 / 설치 / 이동·회전·스케일 / 실시간 fps 5단계 검증 OK. PLY property 순서 자유, INRIA spec 준수, SH bands 자동 감지. 좌표계 자동 변환(COLMAP/OpenCV Y-down → UE Z-up, 100x scale).</li>
+<li><strong>P2 — 모델러 회신은 정보 수집용으로만 의미 있다.</strong> 길 B(메쉬 프록시) 결정용 의미는 폐기. NanoGS가 받는 PLY spec이 충분히 관대해서 모델러 측 SPZ 도구가 어떤 PLY를 출력하든 호환 가능성 큼.</li>
+<li><strong>P3 — 길 B(메쉬 프록시 방식 폐기) fallback 두지 않음.</strong> 단순화 우선. NanoGS 실패 시 본 디자인 전체 재검토.</li>
+<li><strong>P4 — 디자인 v3는 v2의 길 A 부활·개선 형태.</strong> Premise 7 폐기 결정이 NanoGS 발견으로 무효화됨.</li>
+<li><strong>P5 — 1주차 vertical slice = Unreal NanoGS PLY 배치 → 좌표 JSON export → 웹 SPZ 동일 위치 표시.</strong> v2의 시작점 그대로.</li>
+<li><strong>P6 — 좌표계 일치 검증은 별도 단계 두지 않고 1주차 webview 동기화 시점에 자연 검증.</strong> 어긋남 발생 시 export 코드에서 보정.</li>
+<li><strong>P7 (신규) — 충돌 메쉬 처리는 1주차 슬라이스에 통합한다. 콘텐츠 제작자가 Unreal에서 명시적으로 작업한 collision mesh를 export하는 단일 경로.</strong> SPZ 공간 충돌 + 모델 클릭이 myWorkTodo.html 1차 데모 합격 기준에 포함되므로 별도 슬라이스로 미루지 않는다. NanoGS auto collision 경로는 폐기. 웹 측은 invisible GLB mesh로 받아 Three.js raycast/movement에 사용.</li>
+</ol>
+<p>v2의 P1–P4, P6, P8 (모델러 SPZ 출력 / 웹 배포 / 3DGS Lumen급 라이팅 / Niantic 의존성 합리 / 단일 영업 데모 자연 포함)은 그대로 유효이므로 v3 본문에 다시 적지 않음.</p>
+<hr />
+<h2 id="cross-model-perspective">Cross-Model Perspective</h2>
+<p>세션 4도 단축 진행되어 Codex 제3자 리뷰를 거치지 않았다. 1주차 vertical slice 완료 후 풀 시스템 디자인 본격 작성 시점에 cross-model 검토 권장(v2 권고 유지).</p>
+<hr />
+<h2 id="approaches-considered">Approaches Considered</h2>
+<p>충돌 메쉬를 <strong>어디서·어떤 형태</strong>로 만드느냐가 핵심 분기.</p>
+<h3 id="approach-a-웹-측-bbox-자동-생성">Approach A: 웹 측 BBox 자동 생성</h3>
+<ul>
+<li><strong>1주차</strong>: Unreal NanoGS PLY 배치 → 좌표·회전·스케일 JSON export. 충돌은 다루지 않음.</li>
+<li><strong>2주차 (웹)</strong>: JSON 로더 + GLB 배치 + Three.js <code>Box3</code> 기반 invisible BBox collision.</li>
+<li><strong>충돌 source</strong>: 모델 GLB 자동 BBox.</li>
+<li>장점: 1주차 risk 최소. 웹 처음 사용자 학습 부담 적음.</li>
+<li>단점: SPZ 공간 충돌(벽·바닥) 처리 안 됨. 사용자가 공간 통과 가능. 모델 형상이 BBox와 어긋나면 클릭 부정확.</li>
+<li>Completeness: 5/10.</li>
+</ul>
+<h3 id="approach-b-unreal-collision-proxy-통합-export-선택-">Approach B: Unreal collision proxy 통합 export (선택) ⭐</h3>
+<ul>
+<li><strong>1주차</strong>: NanoGS PLY 배치 + <strong>Unreal에서 collision proxy 작성·export</strong>.
+<ul>
+<li>SPZ 공간용: Unreal BSP brush 또는 low-poly mesh로 벽·바닥 작성 → JSON에 <code>collision_mesh</code> 필드로 export.</li>
+<li>모델용: 모델 BBox 또는 사용자가 부착한 simple box collider.</li>
+<li>JSON 스키마 v0.1에 collision 필드 자리 마련.</li>
+</ul></li>
+<li><strong>2주차 (웹)</strong>: JSON 로더 + GLB 배치 + collision mesh 로드(invisible) + Three.js raycaster로 1인칭 이동 충돌 + 클릭 처리.</li>
+<li>장점: 한 vertical slice에서 충돌까지 끝-에서-끝 관통 검증. 회사 표준 워크플로(콘텐츠 제작자가 Unreal에서 모든 결정)에 부합. JSON 스키마 처음부터 완전.</li>
+<li>단점: 1주차 작업 증가. NanoGS collision 가용성 1~2일 추가 검증 필요.</li>
+<li>Completeness: 9/10.</li>
+</ul>
+<h3 id="approach-c-점진적-통합-1주차-좌표-2주차-floor만-3주차-공간-충돌">Approach C: 점진적 통합 (1주차 좌표, 2주차 floor만, 3주차 공간 충돌)</h3>
+<ul>
+<li><strong>1주차</strong>: Approach A와 동일.</li>
+<li><strong>2주차 (웹)</strong>: 1인칭 이동 시 floor plane(Y=0)만 충돌. 모델 클릭은 GLB raycast (mesh가 있으니 정확).</li>
+<li><strong>3주차 별도 slice</strong>: Unreal collision proxy export → SPZ 공간 충돌.</li>
+<li>장점: 1주차 risk 최소 + 클릭은 GLB mesh로 정확.</li>
+<li>단점: SPZ 공간 충돌 3주차 미뤄짐. JSON 스키마 v0.1 → v0.2 깨질 가능성.</li>
+<li>Completeness: 7/10.</li>
+</ul>
+<hr />
+<h2 id="recommended-approach">Recommended Approach</h2>
+<p><strong>Approach B: Unreal collision proxy 통합 export</strong></p>
+<h3 id="선택-이유">선택 이유</h3>
+<ul>
+<li>myWorkTodo.html "1인칭 이동" + "클릭 가능"이 1차 데모 합격 기준 명시. 충돌 없이는 1인칭 이동이 사실상 작동 안 함.</li>
+<li>사용자가 세션 4에서 명시적으로 "충돌 메쉬 처리도 작업에 포함" 요구.</li>
+<li>회사 표준 워크플로 = "콘텐츠 제작자가 Unreal에서 모든 결정". 충돌 데이터가 콘텐츠 측 결정이라는 게 자연스러움.</li>
+<li>JSON 스키마가 처음부터 완전한 모습 → v0.1 → v0.2 깨질 risk 작음.</li>
+<li>NanoGS collision 가용성 검증은 1주차 0~1일차에 끝남 → 전체 일정 risk 작음.</li>
+</ul>
+<h3 id="단계">단계</h3>
+<p><strong>1주차 (0~5일): Unreal NanoGS 배치 + collision proxy export + JSON 스키마 v0.1 초안</strong></p>
+<ul>
+<li><strong>0일차 반나절: 스키마 합의 미니 회의</strong> (사용자 + Unreal 담당자 30분).
+<ul>
+<li>좌표계/단위/회전 표현/경로 표기 + <strong>collision_mesh 필드 형식</strong>.</li>
+<li>1쪽 메모로 합의 → <code>Document/json-schema-v0.1.html</code> 초안.</li>
+</ul></li>
+<li><strong>1일차 (0.5일): collision 작업 도구 결정 + GLB export 도구 결정</strong>.
+<ul>
+<li>collision 작업 도구 후보: Unreal Modeling Mode(권장) / BSP brush / 외부 DCC import.</li>
+<li>GLB export 도구 후보: glTF Exporter plugin / Datasmith → glTF 변환 / FBX → 외부 변환.</li>
+<li>결정을 Open Questions #1에 기록.</li>
+</ul></li>
+<li><strong>1~3일차: Unreal collision mesh 작성 + 모델 배치 + JSON export 코드</strong>.
+<ul>
+<li>NanoGS PLY 적재 → SPZ 공간 시각 확인 → 그 위에 collision mesh 그림 (벽·바닥).</li>
+<li>모델 1개 배치 + 모델 BBox 또는 simple box collider 부착.</li>
+<li>결정한 GLB export 도구로 collision mesh를 GLB 변환 + 모델도 GLB 변환.</li>
+<li>JSON export 코드: 모든 객체 좌표·회전·스케일·collision_path를 <code>scene00.json</code>에 기록.</li>
+</ul></li>
+<li><strong>3~5일차: NanoGS PLY 파일 + collision GLB + JSON 묶음 작업 폴더 정리</strong>.
+<ul>
+<li><code>D:\Temp\plyTest_5_7\Content\Output\scene00\</code> 구조 가정: <code>scene00.json</code>, <code>scene00_space.ply</code> (NanoGS PLY), <code>scene00_collision.glb</code>, <code>model_chair.glb</code>.</li>
+</ul></li>
+<li><strong>1주차 합격 기준</strong>:
+<ul>
+<li><code>Document/json-schema-v0.1.html</code> 작성 (collision 필드 포함).</li>
+<li><code>scene00</code> 묶음 파일이 작업 폴더에 저장.</li>
+<li>Unreal 뷰포트에서 SPZ + collision proxy + 모델이 같은 좌표계로 보임.</li>
+</ul></li>
+</ul>
+<p><strong>2주차 (5~10일): 웹 측 JSON 로더 + 모델 배치 + 충돌 + 클릭</strong> (사용자 주체)</p>
+<ul>
+<li><strong>2주차 전반(0.5주)</strong>: JSON fetch + 파싱 + GLB 로더(GLTFLoader) + NanoGS PLY 로더 (<code>@sparkjsdev/spark</code> SPZ 로더 외에 별도 PLY 로더 검토 또는 PLY → SPZ 다시 변환 후 Spark 사용 결정).
+<ul>
+<li>결정 포인트: NanoGS가 출력한 PLY를 다시 SPZ로 변환해서 Spark에 먹일지, 또는 웹 측에서 PLY → Gaussian 데이터로 직접 파싱할지. 현재 <code>index.html</code>이 SPZ만 받으니 PLY → SPZ 재변환이 단순.</li>
+</ul></li>
+<li><strong>2주차 중반(0.3주)</strong>: collision mesh 로드 + Three.js Scene에 invisible material로 추가 + Three.js Raycaster 설정.</li>
+<li><strong>2주차 후반(0.2주)</strong>: 1인칭 이동 코드에 충돌 처리 통합 (현재 코드에 collision raycast 추가) + 모델 클릭 이벤트.</li>
+<li><strong>2주차 합격 기준</strong>:
+<ul>
+<li>Unreal에서 옮긴 모델 위치가 웹 새로고침 시 정확히 반영.</li>
+<li>1인칭 이동 시 SPZ 공간(벽·바닥) 통과하지 않음.</li>
+<li>모델 클릭 시 콘솔에 모델 ID 출력 (UI는 다음 slice).</li>
+</ul></li>
+</ul>
+<p><strong>검증 후 분기</strong></p>
+<ul>
+<li>합격 → 다음 slice 후보: 다중 모델 배치, 2D 스프라이트, 클릭 인터랙션 UI, JSON 스키마 v0.2 확장. 에디터 모드는 별도 slice.</li>
+<li>부분 합격 (좌표는 맞는데 충돌 어긋남) → collision GLB의 좌표계 변환 레이어 추가.</li>
+<li>실패 (NanoGS 자체 깨짐, 또는 collision 가용성 0) → P3 결정(fallback 안 둠)에 따라 본 디자인 전체 재검토 + office-hours 세션 5.</li>
+</ul>
+<hr />
+<h2 id="collision-데이터의-위치형식-명확화">Collision 데이터의 위치·형식 (명확화)</h2>
+<p><strong>중요</strong>: PLY 포맷 자체에는 collision이 들어가지 않는다. PLY는 Gaussian Splatting 시각 데이터(point + opacity + scale + rotation + SH coefficients)만 담는 포맷이다.</p>
+<p>본 디자인의 collision 처리는 <strong>별도 GLB 파일 + JSON에서 묶기</strong> 방식이다.</p>
+<h3 id="파일-구성">파일 구성</h3>
+<table>
+<thead>
+<tr class="header">
+<th>파일</th>
+<th>역할</th>
+<th>포맷</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>scene00_space.ply</code></td>
+<td>SPZ 공간 시각</td>
+<td>NanoGS PLY (Gaussian Splatting)</td>
+</tr>
+<tr class="even">
+<td><code>scene00_collision.glb</code></td>
+<td>1인칭 이동 충돌 + 클릭 raycast 대상 (invisible)</td>
+<td>일반 low-poly mesh GLB</td>
+</tr>
+<tr class="odd">
+<td><code>model_chair.glb</code></td>
+<td>모델 시각 + 모델 BBox 또는 box collider</td>
+<td>일반 mesh GLB</td>
+</tr>
+<tr class="even">
+<td><code>scene00.json</code></td>
+<td>위 3개 파일을 같은 좌표계로 묶는 계약서</td>
+<td>JSON</td>
+</tr>
+</tbody>
+</table>
+<h3 id="unreal-측-작업-흐름">Unreal 측 작업 흐름</h3>
+<ol type="1">
+<li>NanoGS plugin으로 PLY 적재 → SPZ 공간이 Unreal 뷰포트에 보임.</li>
+<li>그 위에 사용자가 <strong>BSP brush 또는 low-poly mesh</strong>로 벽·바닥 윤곽 그림 (Unreal에서 작업 시에는 보이지만 웹에서는 invisible로 사용).</li>
+<li>같은 씬에서 모두 export: PLY는 그대로 복사, collision proxy는 GLB로 export, 좌표·회전·스케일은 JSON에 기록.</li>
+</ol>
+<h3 id="웹-측-작업-흐름">웹 측 작업 흐름</h3>
+<ol type="1">
+<li>JSON 읽음.</li>
+<li>PLY는 Spark(또는 Niantic SPZ 로더 재변환)에 먹여서 시각으로 띄움.</li>
+<li>collision GLB는 Three.js에 적재하되 <code>material.visible = false</code> (또는 디버그 토글로 wireframe).</li>
+<li>1인칭 카메라 이동 시 collision GLB에 raycast → 통과 방지. 모델 클릭은 collision GLB 또는 모델 mesh 대상.</li>
+</ol>
+<h3 id="collision-mesh-source-결정-2026-05-13-확정">Collision mesh source 결정 (2026-05-13 확정)</h3>
+<p><strong>결정</strong>: 충돌 메쉬는 <strong>콘텐츠 제작자가 Unreal에서 명시적으로 작업한 mesh를 export하는 방식</strong>으로 한다. NanoGS auto collision 경로는 폐기.</p>
+<p>이유:</p>
+<ul>
+<li>콘텐츠 제작자가 SPZ 공간 위에 의도적으로 그린 윤곽이 자동 생성보다 정확. 1인칭 이동 시 어디까지 갈 수 있는지가 콘텐츠 결정 사항으로 명확해짐.</li>
+<li>풀 시스템 단계에서도 동일 방식으로 일관 가능. 자동 경로와 수동 경로를 혼재시키지 않음.</li>
+<li>NanoGS auto collision이 가능하더라도 웹용 collision GLB는 어차피 별도 필요(Three.js Gaussian Splat 렌더는 raycast 대상이 아님). 자동 경로는 Unreal 뷰포트 작업 편의만 줄 뿐 export 단계는 동일.</li>
+</ul>
+<p>도구 후보 (1주차 0일차 결정):</p>
+<ul>
+<li><strong>Unreal BSP brush</strong>: 가장 단순. 박스·계단·실린더 조합으로 벽·바닥 그림. 작업 빠름. polygon count 자동 관리.</li>
+<li><strong>Unreal Modeling Mode (UE 5.x 기본 내장)</strong>: BSP보다 자유로운 mesh 편집. Box·Plane·Extrude·CSG 가능.</li>
+<li><strong>외부 DCC(Blender/Maya)에서 low-poly mesh 작성 후 GLB import</strong>: 모델러가 익숙한 도구 활용 가능. 단 좌표계 변환 추가 단계.</li>
+</ul>
+<p>권장: <strong>Unreal Modeling Mode</strong>. BSP보다 자유롭고, 외부 DCC보다 좌표계 변환 단계 없음. 사용자/모델러가 직접 NanoGS PLY 시각을 보면서 그 위에 mesh 그릴 수 있음.</p>
+<hr />
+<h2 id="json-스키마-v01-collision-포함-확장">JSON 스키마 v0.1 (collision 포함 확장)</h2>
+<p>1주차 0일차에 사용자 + Unreal 담당자가 1쪽 메모로 확정. 초안 골자:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;schema_version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1&quot;</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scene_id&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;coord_system&quot;</span><span class="fu">:</span> <span class="st">&quot;ue&quot;</span><span class="fu">,</span>  <span class="er">//</span> <span class="dt">&quot;ue&quot;</span><span class="er">(left-handed</span><span class="fu">,</span> <span class="er">Z-up)</span> <span class="er">또는</span> <span class="dt">&quot;three&quot;</span><span class="er">(right-handed</span><span class="fu">,</span> <span class="er">Y-up).</span> <span class="er">웹</span> <span class="er">측이</span> <span class="er">변환.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;unit&quot;</span><span class="fu">:</span> <span class="st">&quot;cm&quot;</span><span class="fu">,</span>  <span class="er">//</span> <span class="er">NanoGS가</span> <span class="er">100x</span> <span class="er">scale로</span> <span class="er">meter→cm</span> <span class="er">변환하므로</span> <span class="er">cm</span> <span class="er">기본.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;space&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;spz_path&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00_v3.spz&quot;</span><span class="fu">,</span>   <span class="er">//</span> <span class="er">splat-transform</span> <span class="er">출력</span> <span class="er">SPZ</span> <span class="er">v3</span> <span class="er">(Spark</span> <span class="er">적재용).</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;ply_path&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00.ply&quot;</span><span class="fu">,</span>      <span class="er">//</span> <span class="er">모델러</span> <span class="er">Postshot</span> <span class="er">출력</span> <span class="er">PLY</span> <span class="er">(NanoGS</span> <span class="er">적재용</span> <span class="er">원본).</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;collision_path&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00_collision.glb&quot;</span><span class="fu">,</span>  <span class="er">//</span> <span class="er">공간</span> <span class="er">벽·바닥</span> <span class="er">invisible</span> <span class="er">mesh.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;rotation_y_deg&quot;</span><span class="fu">:</span> <span class="dv">-90</span>           <span class="er">//</span> <span class="dv">2026-05-13</span> <span class="er">검증:</span> <span class="er">Postshot</span> <span class="er">chain의</span> <span class="er">yaw</span> <span class="er">보정</span> <span class="er">값.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="er">//</span> <span class="er">풀</span> <span class="er">시스템</span> <span class="er">자동화</span> <span class="er">시</span> <span class="er">모델러</span> <span class="er">도구별</span> <span class="er">다른</span> <span class="er">값</span> <span class="er">가능.</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;models&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;chair_01&quot;</span><span class="fu">,</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;3d&quot;</span><span class="fu">,</span>  <span class="er">//</span> <span class="dt">&quot;3d&quot;</span> <span class="er">또는</span> <span class="dt">&quot;sprite&quot;</span> <span class="er">(v0.1은</span> <span class="dt">&quot;3d&quot;</span><span class="er">만).</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;glb_path&quot;</span><span class="fu">:</span> <span class="st">&quot;model_chair.glb&quot;</span><span class="fu">,</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;position&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">]</span><span class="fu">,</span>  <span class="er">//</span> <span class="er">cm.</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;rotation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">1</span><span class="ot">]</span><span class="fu">,</span>  <span class="er">//</span> <span class="er">quaternion</span> <span class="er">(x</span><span class="fu">,</span> <span class="er">y</span><span class="fu">,</span> <span class="er">z</span><span class="fu">,</span> <span class="er">w).</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;scale&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">1</span><span class="ot">,</span> <span class="dv">1</span><span class="ot">,</span> <span class="dv">1</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;collision_type&quot;</span><span class="fu">:</span> <span class="st">&quot;bbox&quot;</span>  <span class="er">//</span> <span class="st">&quot;bbox&quot;</span> <span class="er">또는</span> <span class="st">&quot;mesh&quot;</span> <span class="er">(v0.</span><span class="dv">1</span><span class="er">은</span> <span class="st">&quot;bbox&quot;</span><span class="er">만).</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><strong>진화 경로</strong>: v0.1은 1주차 작성 → 2주차 실 데이터 검증 → 깨지면 v0.2. 합격 기준: 1주차 = 문서 존재, 2주차 = 실 데이터로 통과.</p>
+<hr />
+<h2 id="open-questions">Open Questions</h2>
+<ol type="1">
+<li><strong>collision 작업 도구 + GLB export 도구는 무엇인가?</strong> 1주차 1일차 0.5일 결정. 권장: Unreal Modeling Mode + glTF Exporter plugin. (NanoGS auto collision은 P7 확정으로 폐기 — 콘텐츠 제작자가 명시 작업.)</li>
+<li><del><strong>NanoGS의 좌표계 자동 변환...</strong></del> <strong>2026-05-13 검증 완료</strong>: Postshot → splat-transform → Spark chain은 Unreal NanoGS 대비 yaw +90° 어긋남. 보정: 웹 측 SPZ에 <code>rotation.y = -Math.PI/2</code> (시계방향 90°). 단위·X·Y 정렬은 OK. 풀 시스템 정식 해결은 JSON 스키마 v0.1의 <code>space.rotation_y_deg</code> 필드로 메타데이터화 (모델러 도구별 자동 보정 값).</li>
+<li><strong>모델러 측 SPZ 출력 도구가 NanoGS 호환 PLY를 직접 출력하는가, 아니면 SPZ → PLY 변환을 거쳐야 하는가?</strong> <code>Document/modeler-consult-20260512.html</code> 1쪽 축소 후 회신 대기.</li>
+<li><strong>NanoGS PLY를 웹에서 적재하는 단순한 경로</strong>: PLY → SPZ 재변환 후 Spark에 먹임 (가장 단순) vs 웹 측 PLY 직접 파싱. 2주차 1일차 결정.</li>
+<li><strong>collision mesh를 GLB로 export하는 Unreal 도구</strong>: Datasmith Exporter / glTF Exporter plugin / FBX → GLB 외부 변환. 1주차 0일차 결정.</li>
+<li><strong>모델 클릭 시 동작은 어떻게 정의하는가?</strong> v0.1은 콘솔 출력만. 정식 click_action 정의는 다음 slice.</li>
+<li><strong>JSON 스키마의 type/collision_type 확장 시점</strong>: "sprite" 또는 "mesh" collision은 v0.2 이후.</li>
+</ol>
+<hr />
+<h2 id="success-criteria">Success Criteria</h2>
+<p>v2의 다층화 기준 유지. 첫 vertical slice 합격만 v3에서 갱신.</p>
+<ol type="1">
+<li><p><strong>첫 vertical slice 합격 (v3 갱신, 이번 1~2주 기준)</strong>:</p>
+<ul>
+<li>Unreal에서 모델 위치를 옮기면 웹에 그대로 반영된다.</li>
+<li>JSON 스키마 v0.1이 문서화된다 (collision 필드 포함).</li>
+<li><strong>1인칭 이동 시 SPZ 공간 통과하지 않는다.</strong> (신규)</li>
+<li><strong>모델 클릭 시 모델 ID가 콘솔에 출력된다.</strong> (신규)</li>
+</ul></li>
+<li><p><strong>풀 시스템 합격 기준 (v2 그대로)</strong>:</p>
+<ul>
+<li>회사 표준 콘텐츠 파이프라인 + myWorkTodo.html 9개 요구사항 전체 작동 + 잃은 클라이언트 또는 동급 잠재 클라이언트 발주 의사 표현.</li>
+</ul></li>
+<li><p><strong>사용자 학습 합격 기준 (암묵, v2 그대로)</strong>:</p>
+<ul>
+<li>풀 시스템 종료 시점에 사용자가 다음 작업 본인 주도 가능.</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="distribution-plan">Distribution Plan</h2>
+<p>본 vertical slice 단계 배포: 로컬 브라우저 또는 정적 파일 서빙. 수동 배포. 풀 시스템 단계의 호스팅·빌드·CI/CD는 별도 디자인 문서 범위.</p>
+<p>빌드 도구 진입 시점: <code>index.html</code> 1500줄 초과 또는 멀티 페이지(start/loading/mainscene 등) 진입 시 Vite 도입 검토 (CLAUDE.md).</p>
+<hr />
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>NanoGS plugin이 SPZ → procedural mesh 변환 시 collision 제공 여부 (1주차 1일차 검증).</li>
+<li>Unreal collision mesh GLB export 도구 결정 (1주차 0일차).</li>
+<li>모델러로부터 테스트 SPZ 공간 1개 + 모델 자산 1개 (이미 보유: <code>test.spz</code>, <code>D:\Temp\plyTest_5_7\Content\Ply\</code> 5종 PLY).</li>
+<li>모델러 회신: SPZ 출력 도구의 NanoGS 호환 PLY 출력 여부 (<code>Document/modeler-consult-20260512.html</code> 1쪽 축소 후 발송).</li>
+<li>PM/영업으로부터 잃은 클라이언트 재시연 또는 동급 잠재 클라이언트 확보 가능성 (풀 시스템 진입 전).</li>
+<li>0일차 스키마 합의 회의: Unreal 담당자 + 사용자 30분.</li>
+</ul>
+<hr />
+<h2 id="the-assignment">The Assignment</h2>
+<p>세션 4 결과로 즉시 실행할 액션 4건.</p>
+<blockquote>
+<p><strong>액션 1 (사용자 + Unreal 담당자, 30분 + 1쪽 작성, 1주차 0일차):</strong> JSON 스키마 v0.1 합의 회의 + <code>Document/json-schema-v0.1.html</code> 초안 작성.</p>
+<ul>
+<li>위 "JSON 스키마 v0.1" 골자 사용. collision 필드 포함.</li>
+<li><code>coord_system</code>, <code>unit</code>, quaternion 회전 표현, GLB 경로 표기, collision_path 형식 합의.</li>
+<li>UTF-8 without BOM.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>액션 2 (사용자, 0.5일, 1주차 1일차):</strong> collision 작업 도구 + GLB export 도구 결정.</p>
+<ul>
+<li>collision 작업 도구: Unreal Modeling Mode(권장) / BSP brush / 외부 DCC import 중 선택.</li>
+<li>GLB export 도구: glTF Exporter plugin / Datasmith / FBX → 외부 변환 중 선택.</li>
+<li>NanoGS auto collision 분기는 폐기됨 (P7 확정). 본 결정의 의도는 콘텐츠 제작자가 Unreal에서 명시 작업 → export의 단일 경로 표준화.</li>
+<li>결정을 Open Questions #1에 기록.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>액션 3 (사용자, 1주차 1~5일):</strong> Unreal NanoGS 배치 + collision proxy 작성 + JSON export 코드 + scene00 묶음 파일 저장.</p>
+<ul>
+<li>합격: <code>D:\Temp\plyTest_5_7\Content\Output\scene00\</code> 또는 <code>D:\GitHub\Work\spzFirst\samples\scene00\</code>에 <code>scene00.json</code>, <code>scene00_space.ply</code>, <code>scene00_collision.glb</code>, <code>model_chair.glb</code> 저장.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>액션 4 (사용자, 병행 1~3일):</strong> 모델러 회신용 <code>Document/modeler-consult-20260512.html</code> 1쪽 축소.</p>
+<ul>
+<li>길 B 관련 옵션 A/B/C/D 질문 제거.</li>
+<li>NanoGS가 받는 PLY spec(INRIA + property 자유) 명시 + 모델러 측 SPZ 출력 도구의 PLY export 가능 여부만 확인.</li>
+<li>회신은 1주차 시작에 반영. 회신 안 와도 1주차 진행 가능.</li>
+</ul>
+</blockquote>
+<p>본 액션 4건이 깨지면 본 디자인 전체가 어긋난다. 1주차 시작 전 액션 1·2·4 완료 권장.</p>
+<hr />
+<h2 id="reviewer-concerns">Reviewer Concerns</h2>
+<p>본 디자인 v3도 단축 진행되어 spec review loop를 거치지 않았다. 다음 항목을 풀 시스템 디자인 작성 시점에 우선 점검.</p>
+<ul>
+<li><del><strong>NanoGS collision 가용성 미검증</strong></del> — P7 확정 시점에 폐기. Unreal 명시 작업 단일 경로로 굳음.</li>
+<li><strong>collision 작업 도구 선택의 학습 곡선</strong> — Unreal Modeling Mode 권장이지만 사용자/모델러가 처음 다루는 경우 1주차 작업이 미끄러질 가능성. BSP brush로 fallback 가능하니 risk 작음.</li>
+<li><strong>NanoGS의 <code>IsBetaVersion: true</code> 장기 안정성.</strong> 1주차 작업 중 크래시·렌더링 결함·빌드 깨짐 발생 시 issue 추적. MIT + source 공개로 자체 fix/fork 가능. (v2 → v3로 넘어오면서 fallback 없는 결정을 했으므로 발생 시 office-hours 세션 5 트리거.)</li>
+<li><strong>합격 기준 다층화의 PM 합의 부재</strong> (v2부터 미해결).</li>
+<li><strong>시장 신호 시한 미확인</strong> (v2부터 미해결).</li>
+<li><strong>NanoGS PLY를 웹에서 적재하는 경로 결정 미루기.</strong> 2주차 1일차에 결정한다고 했으나, 1주차 export 단계에서 "결과 파일을 SPZ로 재변환하는 도구를 미리 결정"해야 2주차에 막히지 않음.</li>
+</ul>
+<hr />
+<h2 id="what-i-noticed-about-how-you-think">What I noticed about how you think</h2>
+<p>세션 4에서 관찰된 신호.</p>
+<ul>
+<li><strong>본인이 직접 검증한 결과를 신뢰하고 의사결정에 즉시 반영했다.</strong> NanoGS plugin을 발견하고 5단계(시각 + 설치 + 이동 + 회전 + 스케일 + 실시간 fps)로 직접 검증한 뒤 "이걸로 가자"라고 한 줄로 정리. 검증 단계가 명료하다.</li>
+<li><strong>fallback 두지 않는 결정을 했다.</strong> Premise P3에서 길 B를 폐기하고 fallback 없음으로 갔다. 일반적으로 사내 프로젝트에서 보기 어려운 결정. 결정의 결과가 실패할 경우 본 디자인 전체 재검토라는 비용을 짊어진다는 의미.</li>
+<li><strong>요구사항 통합을 한 줄로 추가했다.</strong> "충돌 메쉬 처리 하는 부분도 작업에 포함"이라는 한 줄로 1주차 vertical slice 정의 자체를 확장했다. myWorkTodo.md의 1인칭 이동 + 클릭이 이 결정으로 1차 데모 합격 기준에 정식 들어왔다.</li>
+<li><strong>세션 간 컨텍스트 손실이 없다.</strong> todo.md를 활용한 운영 체계가 4개 세션을 거치며 안정화됐다. 세션 시작·중단·재개가 매끄럽다.</li>
+</ul>
+</body>
+</html>

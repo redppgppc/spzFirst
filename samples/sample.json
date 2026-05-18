@@ -1,0 +1,487 @@
+[
+	{
+		"Name": "Row1",
+		"InstanceMap": "/Game/Maps/Room/MY_Home.MY_Home",
+		"AlwaysShow": false,
+		"Anchors": [
+			{
+				"Type": "AT_StartPos",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_10051",
+				"FileName": "",
+				"GUID": "F8E98E1246A02BE9906B56A431F98C3F",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_StartPos.BP_Anchor_StartPos_C",
+				"TableID": 0,
+				"Position":
+				{
+					"X": 705.89121991732361,
+					"Y": 997.72328688919401,
+					"Z": 38.823651595457903
+				},
+				"Rotation":
+				{
+					"Pitch": -0,
+					"Yaw": -98.694269300654256,
+					"Roll": 0
+				},
+				"PathName": "",
+				"EditorName": "",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 762.87476800042532,
+					"Y": 1054.7068349722958,
+					"Z": 138.8236515954579
+				},
+				"MinBox":
+				{
+					"X": 648.9076718342219,
+					"Y": 940.73973880609219,
+					"Z": 38.823651595457903
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Teleport",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_10052",
+				"FileName": "",
+				"GUID": "3019DA4D4054A26F90416AACB4EC0BF4",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Teleport.BP_Anchor_Teleport_C",
+				"TableID": 18,
+				"Position":
+				{
+					"X": 808.6829141670554,
+					"Y": 1426.0918511074394,
+					"Z": 17.296054999999999
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 170,
+					"Roll": -0
+				},
+				"PathName": "",
+				"EditorName": "warp_name_0018",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 3368.6829141670555,
+					"Y": 3986.0918511074397,
+					"Z": 2833.2960549999998
+				},
+				"MinBox":
+				{
+					"X": -1751.3170858329445,
+					"Y": -1133.9081488925606,
+					"Z": -2286.7039450000002
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_12305",
+				"FileName": "",
+				"GUID": "F0B80E784B0606AF1B4553B52F1EE962",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10003,
+				"Position":
+				{
+					"X": -441,
+					"Y": -210,
+					"Z": 100
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 0,
+					"Roll": 0
+				},
+				"PathName": "",
+				"EditorName": "WestFarm_Apple_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": -424.81260299682617,
+					"Y": -199.51261520385742,
+					"Z": 103.2210693359375
+				},
+				"MinBox":
+				{
+					"X": -457.24668502807617,
+					"Y": -220.49308395385742,
+					"Z": 96.7777099609375
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_12306",
+				"FileName": "",
+				"GUID": "4390F8A746244C694B6800B28139B8E2",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10016,
+				"Position":
+				{
+					"X": 0,
+					"Y": 0,
+					"Z": 100
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 0,
+					"Roll": 0
+				},
+				"PathName": "",
+				"EditorName": "Chicken_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 23.632318496704102,
+					"Y": 15.744262218475342,
+					"Z": 120.86332321166992
+				},
+				"MinBox":
+				{
+					"X": -23.632318496704102,
+					"Y": -15.74509859085083,
+					"Z": 99.980804443359375
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_12307",
+				"FileName": "",
+				"GUID": "10C2C5204C48EA3C0211DB928E130C7B",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10008,
+				"Position":
+				{
+					"X": 0,
+					"Y": -273,
+					"Z": 100
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 0,
+					"Roll": 0
+				},
+				"PathName": "",
+				"EditorName": "WestFarm_Strawberry_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 133.27976226806641,
+					"Y": -128.55926513671875,
+					"Z": 109.08287048339844
+				},
+				"MinBox":
+				{
+					"X": -162.04610443115234,
+					"Y": -413.38070678710938,
+					"Z": 96.777725219726562
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_12308",
+				"FileName": "",
+				"GUID": "99B58E4D4389FFA4918E24AA9CFB4385",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10005,
+				"Position":
+				{
+					"X": -432,
+					"Y": 158,
+					"Z": 100
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 0,
+					"Roll": 0
+				},
+				"PathName": "",
+				"EditorName": "WestFarm_Carrot_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": -319.70458984375,
+					"Y": 256.41658401489258,
+					"Z": 105.22103881835938
+				},
+				"MinBox":
+				{
+					"X": -562.30940246582031,
+					"Y": 76.278247833251953,
+					"Z": 96.21087646484375
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_12309",
+				"FileName": "",
+				"GUID": "12CCCA0C4A48E683E236869E2B5F03DB",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10019,
+				"Position":
+				{
+					"X": 0,
+					"Y": 257,
+					"Z": 0
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 0,
+					"Roll": 0
+				},
+				"PathName": "",
+				"EditorName": "FishingChair_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 42.854682922363281,
+					"Y": 302.69181060791016,
+					"Z": 120.20133972167969
+				},
+				"MinBox":
+				{
+					"X": -42.861434936523438,
+					"Y": 210.33630752563477,
+					"Z": -0.21667793393135071
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Elevator",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_10008",
+				"FileName": "",
+				"GUID": "37E4593F46ABA5290DF31CB17BCA5736",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Elevator.BP_Anchor_Elevator_C",
+				"TableID": 106,
+				"Position":
+				{
+					"X": 867,
+					"Y": 0,
+					"Z": 12
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 80,
+					"Roll": -0
+				},
+				"PathName": "",
+				"EditorName": "warp_name_0015",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 990.64402770996094,
+					"Y": 135.75183868408203,
+					"Z": 318.910888671875
+				},
+				"MinBox":
+				{
+					"X": 743.35597229003906,
+					"Y": -211.61547088623047,
+					"Z": 12.316497802734375
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_10012",
+				"FileName": "",
+				"GUID": "0753BAAD4A6B72EFFEE9E2B5376E9733",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10020,
+				"Position":
+				{
+					"X": 300,
+					"Y": 600,
+					"Z": 0
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 89.999999999999986,
+					"Roll": -0
+				},
+				"PathName": "",
+				"EditorName": "FishingChair_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 342.85468292236328,
+					"Y": 645.69181060791016,
+					"Z": 120.20133972167969
+				},
+				"MinBox":
+				{
+					"X": 257.13856506347656,
+					"Y": 553.33630752563477,
+					"Z": -0.21667793393135071
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_10013",
+				"FileName": "",
+				"GUID": "2E9D9B7A44AB313FDD111FB0B1549423",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10021,
+				"Position":
+				{
+					"X": 0,
+					"Y": 700,
+					"Z": 0
+				},
+				"Rotation":
+				{
+					"Pitch": 0,
+					"Yaw": 180,
+					"Roll": -0
+				},
+				"PathName": "",
+				"EditorName": "FishingChair_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": 42.854682922363281,
+					"Y": 745.69181060791016,
+					"Z": 120.20133972167969
+				},
+				"MinBox":
+				{
+					"X": -42.861434936523438,
+					"Y": 653.33630752563477,
+					"Z": -0.21667793393135071
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			},
+			{
+				"Type": "AT_Farming",
+				"UpdateVersion": 1,
+				"AnchorName": "Prop_10014",
+				"FileName": "",
+				"GUID": "F318A38A4938CC969F130085AA1862DC",
+				"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Farming.BP_Anchor_Farming_C",
+				"TableID": 10022,
+				"Position":
+				{
+					"X": -300,
+					"Y": 800,
+					"Z": 0
+				},
+				"Rotation":
+				{
+					"Pitch": -0,
+					"Yaw": -90.000000000000014,
+					"Roll": 0
+				},
+				"PathName": "",
+				"EditorName": "FishingChair_Name",
+				"SelectAnchorTypes": [],
+				"MaxBox":
+				{
+					"X": -257.14531707763672,
+					"Y": 845.69181060791016,
+					"Z": 120.20133972167969
+				},
+				"MinBox":
+				{
+					"X": -342.86143493652344,
+					"Y": 753.33630752563477,
+					"Z": -0.21667793393135071
+				},
+				"MannequinItems": [],
+				"Scale": 1,
+				"PathPoint": [],
+				"PathEvent": []
+			}
+		],
+		"Type": "AT_Floor",
+		"UpdateVersion": 24,
+		"AnchorName": "Land_10103_B001_ins01",
+		"FileName": "D:/Caliverse/Client/CaliverseMS02/Content/Data/Rooms/Land_10103_B001_ins01.room",
+		"GUID": "2E4293464E480C79510ABDA580BF86EF",
+		"ClassName": "BlueprintGeneratedClass /Game/CommonAssets/DevToolBPs/BP_Anchor_Instance.BP_Anchor_Instance_C",
+		"TableID": 0,
+		"Position":
+		{
+			"X": 0,
+			"Y": 0,
+			"Z": 0
+		},
+		"Rotation":
+		{
+			"Pitch": 0,
+			"Yaw": 0,
+			"Roll": 0
+		},
+		"PathName": "",
+		"EditorName": "MyHome",
+		"SelectAnchorTypes": [],
+		"MaxBox":
+		{
+			"X": 3368.6829141670555,
+			"Y": 3986.0918511074397,
+			"Z": 2833.2960549999998
+		},
+		"MinBox":
+		{
+			"X": -1751.3170858329445,
+			"Y": -1133.9081488925606,
+			"Z": -2286.7039450000002
+		},
+		"MannequinItems": [],
+		"Scale": 1,
+		"PathPoint": [],
+		"PathEvent": []
+	}
+]

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>modeler-consult-20260512</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6a737d;
+    --border: #e5e5e5;
+    --code-bg: #f6f8fa;
+    --code-fg: #24292e;
+    --link: #0366d6;
+    --accent: #0969da;
+    --table-head: #f6f8fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --code-bg: #161b22;
+      --code-fg: #c9d1d9;
+      --link: #2f81f7;
+      --accent: #58a6ff;
+      --table-head: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, "Pretendard Variable", "Pretendard",
+      "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI",
+      system-ui, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 920px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 1.8em 0 0.5em;
+    font-weight: 700;
+  }
+  h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; }
+  p { margin: 0.75em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "D2Coding", "Cascadia Code", "JetBrains Mono",
+      Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 0.12em 0.32em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 1em;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; font-size: 0.9em; color: var(--code-fg); }
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding: 0 1em;
+    color: var(--muted);
+    margin: 1em 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+  }
+  table thead { background: var(--table-head); }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  img { max-width: 100%; height: auto; }
+  .task-list-item { list-style-type: none; margin-left: -1.4em; }
+  .task-list-item input[type=checkbox] { margin-right: 0.4em; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">modeler-consult-20260512</h1>
+</header>
+<h1 id="모델러-협의-가이드-2026-05-12-2026-05-13-1쪽-축소">모델러 협의 가이드 (2026-05-12, 2026-05-13 1쪽 축소)</h1>
+<blockquote>
+<p>본 문서는 사용자가 모델러와 대화할 때 들고 가는 자료입니다. 2026-05-13 NanoGS plugin 발견 + 5단계 검증 OK로 길 B(메쉬 프록시) 폐기. 본 문서 목적은 <strong>정보 수집 1건</strong>으로 축소됨.</p>
+</blockquote>
+<hr />
+<h2 id="1줄-요약">1줄 요약</h2>
+<p><strong>모델러 측 SPZ 출력 도구가 NanoGS plugin이 받는 PLY를 직접 출력 가능한지 확인.</strong> 가능하면 우리 측 SPZ → PLY 변환 단계 자체를 우회할 수 있습니다. 안 되어도 우리 측 변환 도구로 처리 가능하므로 1주차 작업은 진행 가능합니다.</p>
+<hr />
+<h2 id="배경">배경</h2>
+<p>이전 시도(2026-05-12 세션 3): Luma + XV3dGS plugin이 PlayCanvas 계열 PLY 거부. plugin source closed로 spec 역공학 불가. 길 A 폐기 + 길 B(메쉬 프록시) 채택했었음.</p>
+<p>이번 발견(2026-05-13 세션 4): <strong>NanoGS plugin</strong> (github TimChen1383/NanoGaussianSplatting, MIT, source 공개, UE 5.6/5.7 지원). 사용자가 시각 + 설치 + 이동/회전/스케일 + 실시간 fps 5단계 검증 OK. <strong>길 A 부활.</strong> 길 B(메쉬 프록시) 폐기.</p>
+<p>이에 따라 모델러 회신은 길 B 결정용 의미가 사라졌습니다. 정보 수집용 1건만 남았습니다.</p>
+<hr />
+<h2 id="nanogs가-받는-ply-spec-참고">NanoGS가 받는 PLY spec (참고)</h2>
+<p>source 분석(<code>PLYFileReader.cpp</code>) 결과:</p>
+<ul>
+<li><strong>표준 INRIA Gaussian Splatting PLY 준수</strong>.</li>
+<li>필수 properties: <code>x, y, z, opacity, scale_0, scale_1, scale_2, rot_0, rot_1, rot_2, rot_3, f_dc_0, f_dc_1, f_dc_2</code>.</li>
+<li>선택: <code>f_rest_0 ... f_rest_44</code> (SH bands 자동 감지, 1/2/3 bands 모두 지원).</li>
+<li><strong>속성 이름 기반 조회</strong>: PLY property <strong>순서 자유</strong>. PlayCanvas 변형 PLY도 받음.</li>
+<li>normal(<code>nx, ny, nz</code>), RGB uchar 불필요.</li>
+<li>좌표계: COLMAP/OpenCV(Y-down) 가정 → UE(Z-up) 자동 변환 + 100x scale (meters → cm) 자동 적용.</li>
+</ul>
+<hr />
+<h2 id="모델러에게-물어볼-질문-1건만">모델러에게 물어볼 질문 (1건만)</h2>
+<blockquote>
+<p>"지금 SPZ 만들 때 쓰시는 도구(Reality Capture / Polycam / KIRI Engine / 자체 GS training 등)에서 <strong>표준 INRIA Gaussian Splatting PLY</strong>도 같이 출력할 수 있나요? property 순서는 자유고, normal·RGB는 없어도 됩니다. SPZ 출력과 같은 capture session에서 PLY도 받을 수 있으면 좋습니다."</p>
+</blockquote>
+<p><strong>모델러가 확인할 사항</strong>:</p>
+<ul>
+<li>사용 중인 도구 이름 + 버전.</li>
+<li>export 옵션에 "PLY", "Gaussian Splatting export", "INRIA format" 등이 있는지.</li>
+<li>같은 capture session에서 SPZ와 PLY 둘 다 출력 가능한지 (위치 정합성).</li>
+</ul>
+<hr />
+<h2 id="우리-측-후속-액션">우리 측 후속 액션</h2>
+<table>
+<thead>
+<tr class="header">
+<th>모델러 회신</th>
+<th>우리 측 액션</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>YES (도구가 INRIA PLY 직접 출력 가능)</td>
+<td>모델러 PLY 샘플 1개 받아 NanoGS import 테스트. 통과 시 우리 측 SPZ → PLY 변환 단계 생략. 변환 비용·품질 손실 우려 제거.</td>
+</tr>
+<tr class="even">
+<td>NO 또는 시간 부담 큼</td>
+<td>우리 측이 <code>nianticlabs/spz</code> 또는 <code>playcanvas/splat-transform</code>으로 SPZ → PLY 변환 후 NanoGS에 적재. 추가 단계지만 검증된 경로(<code>test.spz</code> 5단계 검증 OK). 1주차 작업 진행 가능.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="시간-박스--회신-안-와도-진행-가능">시간 박스 + 회신 안 와도 진행 가능</h2>
+<ul>
+<li><strong>회신 대기 최대 1주일</strong>. 회신 안 와도 우리 측 변환 도구로 1주차 작업 진행 가능.</li>
+<li>모델러 도구 정보는 풀 시스템 단계에서도 유용 (콘텐츠 파이프라인 표준화 시 참고).</li>
+</ul>
+<hr />
+<h2 id="잔존-자산-필요-시-모델러에게-전달">잔존 자산 (필요 시 모델러에게 전달)</h2>
+<ul>
+<li><strong>원본 SPZ</strong>: <code>D:\Temp\plyTest_5_7\Content\Ply\test.spz</code> (81.6MB, 웹·Unreal NanoGS 양쪽 정상 동작).</li>
+<li><strong>NanoGS 검증된 PLY들</strong>: <code>D:\Temp\plyTest_5_7\Content\Ply\</code> 5종 (변환 도구별 차이는 NanoGS 입장에서 무관, property 자유).</li>
+<li><strong>PLY 검사 도구</strong>: <code>tools/ply_reorder_to_inria.py</code> (필요 시).</li>
+</ul>
+<hr />
+<h2 id="한-가지-더-작은-부탁">한 가지 더 (작은 부탁)</h2>
+<p>모델러가 만든 SPZ가 우리 웹 뷰어에서는 잘 보이지만 <strong>좌표계가 X축 180° 회전 보정 필요</strong>한 상태입니다 (<code>index.html</code>의 <code>F</code> 키 토글 참조). NanoGS도 COLMAP/Y-down 가정으로 자동 변환을 수행하니, 모델러 측 출력 좌표계를 명시해주시면 우리 측 변환 단계에서 보정할 수 있습니다. 1차 데모 합격 후 풀 시스템 단계에서 표준화 같이 검토 부탁드립니다.</p>
+</body>
+</html>

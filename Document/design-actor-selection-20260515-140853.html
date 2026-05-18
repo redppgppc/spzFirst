@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>design-actor-selection-20260515-140853</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6a737d;
+    --border: #e5e5e5;
+    --code-bg: #f6f8fa;
+    --code-fg: #24292e;
+    --link: #0366d6;
+    --accent: #0969da;
+    --table-head: #f6f8fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --code-bg: #161b22;
+      --code-fg: #c9d1d9;
+      --link: #2f81f7;
+      --accent: #58a6ff;
+      --table-head: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, "Pretendard Variable", "Pretendard",
+      "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI",
+      system-ui, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 920px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 1.8em 0 0.5em;
+    font-weight: 700;
+  }
+  h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; }
+  p { margin: 0.75em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "D2Coding", "Cascadia Code", "JetBrains Mono",
+      Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 0.12em 0.32em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 1em;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; font-size: 0.9em; color: var(--code-fg); }
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding: 0 1em;
+    color: var(--muted);
+    margin: 1em 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+  }
+  table thead { background: var(--table-head); }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  img { max-width: 100%; height: auto; }
+  .task-list-item { list-style-type: none; margin-left: -1.4em; }
+  .task-list-item input[type=checkbox] { margin-right: 0.4em; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">design-actor-selection-20260515-140853</h1>
+</header>
+<h1 id="design-actor-선택-메커니즘-json-export-기준">Design: actor 선택 메커니즘 (JSON export 기준)</h1>
+<p>작성: 2026-05-15 (office-hours 세션 6) 모드: Startup (서브 결정 — 부모 디자인 v3 보강) 상태: APPROVED 부모: <code>Document/design-20260513-104744.html</code> (v3, 현행) 영향 문서: <code>Document/json-schema-v0.1.html</code> (actor 선택 표준 단락 추가, v0.1.1 패치)</p>
+<hr />
+<h2 id="이-문서의-역할">이 문서의 역할</h2>
+<p>디자인 v3 액션 3 (Unreal NanoGS 배치 + collision proxy 작성 + JSON export 코드 + scene00 묶음 저장) 중 <strong>JSON export 코드</strong>의 첫 결정인 <strong>"레벨 안의 어떤 actor를 anchors[]로 export할 것인가"</strong> 선택 메커니즘을 잠그는 서브 디자인 문서.</p>
+<p>todo.html 미해결 항목 "JSON export actor 선택 기준 결정" + json-schema-v0.1.html "합의 회의 체크리스트"의 잠재 항목을 닫는다. 이 결정으로 export Python script · scene00 폴더 구조 · v0.1.1 스키마 패치 세 곳이 동시에 잠긴다.</p>
+<hr />
+<h2 id="problem-statement">Problem Statement</h2>
+<p>Unreal 레벨에 NanoGS SPZ 공간 + collision mesh + 모델 BP들이 함께 놓인 상태에서, Python script가 <code>EditorActorSubsystem.get_all_level_actors()</code>를 호출했을 때 어떤 actor들만 골라 <code>anchors[]</code>로 export할지의 필터 기준을 정한다.</p>
+<p>후보 4종:</p>
+<ul>
+<li>A) 전체 StaticMeshActor (필터 없음)</li>
+<li>B) Tag 기반 (<code>anchor_model</code> 같은 actor tag)</li>
+<li>C) World Outliner 폴더 (<code>Anchors/</code>)</li>
+<li>D) BP 클래스 상속 (<code>BP_Anchor_Base</code> superclass + 파생 BP들)</li>
+</ul>
+<p>이 결정은 풀 시스템(myWorkTodo.html 12개 요구사항 통합)으로 확장 시점에 anchor_type enum (<code>start_pos</code>/<code>teleport</code>/<code>farming</code>/<code>elevator</code> 등) 분기 기반과 직결된다.</p>
+<hr />
+<h2 id="운영-컨텍스트-2026-05-15-변경">운영 컨텍스트 (2026-05-15 변경)</h2>
+<p><strong>솔로 실행 모드</strong>. 다른 팀과의 합의·회의 없이 사용자 단독 진행. todo.html 액션 1(JSON 스키마 v0.1 합의 회의)·액션 4(모델러 회신 대기)는 self-결정 5분으로 압축. 사용자 본인이 곧 Unreal 담당자 + 콘텐츠 의사결정자.</p>
+<p>이 컨텍스트는 다음 한 가지에 영향:</p>
+<ul>
+<li>외부 컨벤션 강제력 없음. 사용자 본인의 검증된 패턴이 곧 표준이 됨.</li>
+</ul>
+<hr />
+<h2 id="사용자-제공-도메인-컨텍스트-결정-reframe">사용자 제공 도메인 컨텍스트 (결정 reframe)</h2>
+<blockquote>
+<p>"이전 언리얼 프로젝트에서 작업 할 때 ACVAnchor라는 슈퍼클래스에서 파생된 Anchor들을 BP 오브젝트를 만들고 맵에 배치하고 배치된 BP들을 관리 하다가 json으로 저장하는 방식을 이용했음."</p>
+</blockquote>
+<p>이 한 줄이 결정을 뒤집었다. 옵션 D는 "셋업 비용 큰 옵션"이 아니라 <strong>사용자가 이전 프로젝트에서 end-to-end 검증한 회사 표준 패턴</strong>이다. <code>samples/sample.json</code>(Caliverse MS02 메타버스의 과거 콘텐츠 포맷)의 <code>BP_Anchor_StartPos/Teleport/Farming/Elevator</code> 트리도 같은 슈퍼클래스 → 파생 BP 패턴.</p>
+<p>ACVAnchor (Actor + Caliverse + Anchor)에서 Caliverse 도메인 표준이라는 물증.</p>
+<p>→ 옵션 B(tag) · C(folder)는 사실상 D를 약화시킨 임시판이며, A(전체)는 회사 패턴과 충돌. D 채택.</p>
+<hr />
+<h2 id="premises-락">Premises (락)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Premise</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>P-Act1</td>
+<td>actor 선택 메커니즘 = BP 클래스 상속 (D). tag/folder/전체 폐기.</td>
+<td>사용자가 이전 프로젝트(Caliverse 추정) ACVAnchor 패턴으로 end-to-end 검증. samples/sample.json 트리도 같은 패턴. v0.1 anchor_type enum과 1:1 매핑.</td>
+</tr>
+<tr class="even">
+<td>P-Act2</td>
+<td>1주차 vertical slice는 anchor_type=<code>"model"</code> 1종만. teleport/start_pos/farming/mannequin 등 v0.2 enum은 superclass·export traversal 자리만 잡고 실 파생 클래스는 만들지 않음.</td>
+<td>wedge 보호. 1개 모델 검증 가능 면적 유지.</td>
+</tr>
+<tr class="odd">
+<td>P-Act3</td>
+<td>슈퍼클래스 위치 = BP-only로 시작. C++ 슈퍼클래스 승격은 anchor_type 2개째 추가 시점(= 풀 시스템 진입).</td>
+<td>C++ Live Coding/Build 사이클 비용 회피. UE 5.7 hot reload 안정성 리스크 회피. 솔로 실행 = 컴파일 셋업 부담 없는 게 유리.</td>
+</tr>
+<tr class="even">
+<td>P-Act4</td>
+<td>JSON export = <code>EditorActorSubsystem.get_all_level_actors()</code> + <code>BP_Anchor_Base</code> 파생 actor만 필터. Python script (빌드 불필요).</td>
+<td>Editor Scripting 표준. unreal Python API로 BP 클래스 비교 가능.</td>
+</tr>
+<tr class="odd">
+<td>P-Act5</td>
+<td>id/editor_name/extra 필드 노출 방식 = BP 슈퍼클래스의 instance editable 변수. Details 패널 직접 편집. extra는 <code>Map&lt;FString,FString&gt;</code> 변수, JSON은 객체로 직렬화. extra는 비어 있어도 <code>{}</code>로 항상 출력 (diff 안정성).</td>
+<td>Unreal 표준 워크플로. modeler/사용자 직관적. always-emit으로 schema 옵셔널이지만 diff에서 필드 추가/삭제 노이즈 회피.</td>
+</tr>
+</tbody>
+</table>
+<p>5건 모두 사용자 동의 완료 (2026-05-15 office-hours 세션 6).</p>
+<hr />
+<h2 id="approaches-considered">Approaches Considered</h2>
+<h3 id="approach-a-lean-mvp--슈퍼클래스-생략-단일-bp">Approach A: Lean MVP — 슈퍼클래스 생략 (단일 BP)</h3>
+<ul>
+<li>Summary: BP_Anchor_Model 한 개만 만들고 Python에서 그 클래스 직접 체크. 슈퍼클래스 추가는 anchor_type 2종째 등장 시.</li>
+<li>Effort: S (30분)</li>
+<li>Risk: Low</li>
+<li>Pros: 1주차 셋업 최소. anchor_type=model만 있는 1주차 자체엔 군더더기 없음. BP reparent로 후속 마이그레이션 거의 0.</li>
+<li>Cons: P-Act1 정신 약화 (사용자의 ACVAnchor 패턴이 1주차에 시각적으로 안 보임). JSON export 코드를 곧 슈퍼클래스 traversal로 다시 손대야 함.</li>
+<li>Reuses: <code>EditorActorSubsystem.get_all_level_actors()</code> + 단일 클래스 비교 한 줄.</li>
+<li>Completeness: 6/10</li>
+</ul>
+<h3 id="approach-b-pure-bp--슈퍼클래스--1종-파생--채택">Approach B: Pure BP — 슈퍼클래스 + 1종 파생 (★ 채택)</h3>
+<ul>
+<li>Summary: <code>BP_Anchor_Base</code> (Actor 파생) 슈퍼클래스 + <code>BP_Anchor_Model</code> (Base 파생). Details 패널에 id/editor_name/extra 노출. Python에서 슈퍼클래스 파생 actor만 traverse.</li>
+<li>Effort: S (1시간)</li>
+<li>Risk: Low</li>
+<li>Pros: 1주차에 사용자 검증 패턴이 즉시 코드로. v0.2 anchor_type 확장 시 BP_Anchor_X 파생 추가만으로 끝. JSON export 코드 한 번 작성 후 재작성 불필요. samples/sample.json 트리 구조와 명확한 매핑.</li>
+<li>Cons: 셋업 30분 더. wedge가 "필요 이상으로 큼"이라 느낄 수 있으나 재작성 회피로 총 비용은 A와 비슷.</li>
+<li>Reuses: 사용자 이전 ACVAnchor 워크플로 그대로. samples/sample.json 패턴 일치.</li>
+<li>Completeness: 9/10</li>
+</ul>
+<h3 id="approach-c-pre-architected--placeholder-bp들-미리-생성">Approach C: Pre-architected — placeholder BP들 미리 생성</h3>
+<ul>
+<li>Summary: B + 빈 placeholder BP들(BP_Anchor_Teleport, BP_Anchor_StartPos)을 1주차에 미리 만들고 Python export에서 anchor_type별 분기 자리도 pre-wired.</li>
+<li>Effort: M (2~3시간)</li>
+<li>Risk: Med (P-Act2 위반)</li>
+<li>Pros: 풀 시스템 진입 매우 매끄러움. 사용자가 "여기에 teleport BP 끌어다 놓으면 됨"이 시각적으로 즉시 인지.</li>
+<li>Cons: P-Act2 직접 위반 (1주차는 model 1종만). YAGNI. 1주차 합격 검증 면적 1종 → 다종 확대 = 디버깅 부담. 안 쓰는 BP가 git에 들어감.</li>
+<li>Reuses: B 위에 placeholder 추가.</li>
+<li>Completeness: 10/10 BUT 스코프 부풀림</li>
+</ul>
+<hr />
+<h2 id="recommended-approach-b-pure-bp">Recommended Approach: B (Pure BP)</h2>
+<p>채택 근거:</p>
+<ol type="1">
+<li><strong>사용자 도메인 경험 일치</strong>: ACVAnchor 슈퍼클래스 + 파생 BP + JSON export 패턴이 이미 검증된 워크플로. 동일 패턴 그대로.</li>
+<li><strong>sample.json 동기화</strong>: 회사 과거 콘텐츠 포맷의 BP_Anchor_* 트리와 직접 매핑. 풀 시스템 진입 시 마이그레이션 부담 거의 0.</li>
+<li><strong>v0.2 무마찰 확장</strong>: anchor_type enum (<code>teleport</code>/<code>start_pos</code>/<code>farming</code>/<code>elevator</code> 등)이 BP 파생 추가만으로 자연스럽게 확장. JSON export 코드 재작성 없음.</li>
+<li><strong>1주차 wedge 유지</strong>: anchor_type=model 1종만이라 P-Act2 부합. 셋업 1시간은 재작성 회피로 상쇄.</li>
+<li><strong>솔로 실행 적합</strong>: BP-only (P-Act3)라 C++ 컴파일 사이클 없음. Live Coding 안정성 리스크 회피.</li>
+</ol>
+<p>A 비채택: 30분 절약은 후속 export 코드 재작성으로 상쇄. 사용자 패턴 정신을 1주차에 안 보여주는 손실 큼.</p>
+<p>C 비채택: P-Act2 직접 위반. wedge 부풀림. anchor_type 2개째 등장 시점(= 풀 시스템 진입)에 B → C 확장은 자연스러움.</p>
+<hr />
+<h2 id="구현-골격-approach-b">구현 골격 (Approach B)</h2>
+<h3 id="unreal-측">Unreal 측</h3>
+<ol type="1">
+<li><p><strong>BP_Anchor_Base 슈퍼클래스 생성</strong> (Actor 파생, BP-only).</p>
+<ul>
+<li>위치: <code>D:\Temp\plyTest_5_7\Content\Anchors\BP_Anchor_Base.uasset</code></li>
+<li>변수 (instance editable):
+<ul>
+<li><code>Id</code> : FString — 씬 내 유일 식별자</li>
+<li><code>EditorName</code> : FString — 표시명</li>
+<li><code>Extra</code> : Map&lt;FString, FString&gt; — forward-compat 자유 메타</li>
+</ul></li>
+<li>컴포넌트: SceneRoot 외 없음 (시각은 파생 클래스가 추가).</li>
+</ul></li>
+<li><p><strong>BP_Anchor_Model 파생</strong> (BP_Anchor_Base 파생).</p>
+<ul>
+<li>위치: <code>D:\Temp\plyTest_5_7\Content\Anchors\BP_Anchor_Model.uasset</code></li>
+<li>추가 변수 (instance editable):
+<ul>
+<li><code>GlbPath</code> : FString — 시각 GLB 상대 경로</li>
+<li><code>CollisionType</code> : User Enumeration <code>E_CollisionType</code> (BBox=0, Mesh=1) — v0.1은 BBox만 사용. enum 자산 위치: <code>D:\Temp\plyTest_5_7\Content\Anchors\E_CollisionType.uasset</code></li>
+</ul></li>
+<li>컴포넌트: StaticMeshComponent (Details에서 모델 mesh 지정, 시각 미리보기용).</li>
+</ul></li>
+<li><p><strong>scene00 레벨에 actor 1개 배치</strong>.</p>
+<ul>
+<li>BP_Anchor_Model 인스턴스 1개를 SPZ 공간 안 의도 위치에 드래그.</li>
+<li>Details 패널에서 <code>Id="chair_01"</code>, <code>EditorName="Chair"</code>, <code>GlbPath="model_chair.glb"</code>, <code>CollisionType=BBox</code> 설정.</li>
+</ul></li>
+</ol>
+<h3 id="python-export-script">Python export script</h3>
+<p><code>D:\Temp\plyTest_5_7\Tools\export_scene_json.py</code> (가칭):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> unreal</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>OUTPUT_DIR <span class="op">=</span> <span class="vs">r&quot;D:\GitHub\Work\spzFirst\samples\scene00&quot;</span>  <span class="co"># </span><span class="al">TODO</span><span class="co"> Open Question 5</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>SCHEMA_VERSION <span class="op">=</span> <span class="st">&quot;0.1&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_anchor(actor):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    cls <span class="op">=</span> actor.get_class()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> cls:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cls.get_name() <span class="op">==</span> <span class="st">&quot;BP_Anchor_Base_C&quot;</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        cls <span class="op">=</span> cls.get_super_class()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> actor_to_anchor(actor):</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    cls_name <span class="op">=</span> actor.get_class().get_name()</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    anchor_type <span class="op">=</span> <span class="st">&quot;model&quot;</span> <span class="cf">if</span> cls_name <span class="op">==</span> <span class="st">&quot;BP_Anchor_Model_C&quot;</span> <span class="cf">else</span> cls_name.lower()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    pos <span class="op">=</span> actor.get_actor_location()</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    rot <span class="op">=</span> actor.get_actor_rotation()</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    scale <span class="op">=</span> actor.get_actor_scale3d()</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    base <span class="op">=</span> {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;anchor_type&quot;</span>: anchor_type,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;id&quot;</span>: actor.get_editor_property(<span class="st">&quot;Id&quot;</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;editor_name&quot;</span>: actor.get_editor_property(<span class="st">&quot;EditorName&quot;</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 좌표·회전·스케일은 cm·도·scalar Unreal 원본 그대로. 변환은 웹 책임 (P-Act4).</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;position&quot;</span>: {<span class="st">&quot;X&quot;</span>: pos.x, <span class="st">&quot;Y&quot;</span>: pos.y, <span class="st">&quot;Z&quot;</span>: pos.z},</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;rotation&quot;</span>: {<span class="st">&quot;Pitch&quot;</span>: rot.pitch, <span class="st">&quot;Yaw&quot;</span>: rot.yaw, <span class="st">&quot;Roll&quot;</span>: rot.roll},</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;scale&quot;</span>: scale.x,  <span class="co"># uniform 가정. non-uniform이면 v0.2에서 객체화</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># extra는 비어도 {} 출력 (P-Act5 always-emit 정책)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;extra&quot;</span>: <span class="bu">dict</span>(actor.get_editor_property(<span class="st">&quot;Extra&quot;</span>)),</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> anchor_type <span class="op">==</span> <span class="st">&quot;model&quot;</span>:</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        base[<span class="st">&quot;glb_path&quot;</span>] <span class="op">=</span> actor.get_editor_property(<span class="st">&quot;GlbPath&quot;</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        ct <span class="op">=</span> actor.get_editor_property(<span class="st">&quot;CollisionType&quot;</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># CollisionType은 unreal.EnumBase. 정수 비교는 int() 강제.</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        ct_int <span class="op">=</span> <span class="bu">int</span>(ct)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        base[<span class="st">&quot;collision_type&quot;</span>] <span class="op">=</span> <span class="st">&quot;bbox&quot;</span> <span class="cf">if</span> ct_int <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">&quot;mesh&quot;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> base</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>eas <span class="op">=</span> unreal.get_editor_subsystem(unreal.EditorActorSubsystem)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>all_actors <span class="op">=</span> eas.get_all_level_actors()</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>anchors <span class="op">=</span> [actor_to_anchor(a) <span class="cf">for</span> a <span class="kw">in</span> all_actors <span class="cf">if</span> is_anchor(a)]</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># id 중복·빈값 가드 (Open Question 6)</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>ids_seen <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> anchors:</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    aid <span class="op">=</span> a[<span class="st">&quot;id&quot;</span>]</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> aid:</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        unreal.log_warning(<span class="ss">f&quot;anchor with empty id: </span><span class="sc">{a.</span>get(<span class="st">&#39;editor_name&#39;</span>, <span class="st">&#39;?&#39;</span>)<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> aid <span class="kw">in</span> ids_seen:</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        unreal.log_warning(<span class="ss">f&quot;duplicate anchor id: </span><span class="sc">{</span>aid<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    ids_seen.add(aid)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>scene <span class="op">=</span> {</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;schema_version&quot;</span>: SCHEMA_VERSION,</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;scene_id&quot;</span>: <span class="st">&quot;scene00&quot;</span>,</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;coord_system&quot;</span>: <span class="st">&quot;ue&quot;</span>,</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;unit&quot;</span>: <span class="st">&quot;cm&quot;</span>,</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;space&quot;</span>: {</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;spz_path&quot;</span>: <span class="st">&quot;scene00_v3.spz&quot;</span>,</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;ply_path&quot;</span>: <span class="st">&quot;scene00.ply&quot;</span>,</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;collision_path&quot;</span>: <span class="st">&quot;scene00_collision.glb&quot;</span>,</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;rotation_y_deg&quot;</span>: <span class="op">-</span><span class="dv">90</span>,</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;anchors&quot;</span>: anchors,</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>os.makedirs(OUTPUT_DIR, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> os.path.join(OUTPUT_DIR, <span class="st">&quot;scene00.json&quot;</span>)</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(out, <span class="st">&quot;w&quot;</span>, encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    json.dump(scene, f, indent<span class="op">=</span><span class="dv">2</span>, ensure_ascii<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>unreal.log(<span class="ss">f&quot;scene00.json exported: </span><span class="sc">{</span>out<span class="sc">}</span><span class="ss"> (anchors=</span><span class="sc">{</span><span class="bu">len</span>(anchors)<span class="sc">}</span><span class="ss">)&quot;</span>)</span></code></pre></div>
+<p>UTF-8 without BOM. JSON output 파일은 git에 들어감.</p>
+<hr />
+<h2 id="open-questions-이-결정-후-새로-부상">Open Questions (이 결정 후 새로 부상)</h2>
+<ol type="1">
+<li><strong><code>get_class().get_name()</code>이 BP_Anchor_Base_C인지 BP_Anchor_Base인지 검증</strong>: Unreal Python API의 BP 클래스명 suffix 규칙 확인. 1차 export 실행 시 즉시 확인 가능. 동시에 4번 함께 결정.</li>
+<li><strong>Extra Map 직렬화 순서</strong>: Python <code>dict(unreal.Map)</code> 변환 시 키 순서 보장 여부. 안정 정렬 필요하면 <code>dict(sorted(...))</code>로 변경.</li>
+<li><strong>scale uniform 가정 위반 시</strong>: <code>actor.get_actor_scale3d()</code>의 X/Y/Z가 다르면 X만 채택하면 정보 손실. v0.1은 우선 첫 값만, 비균일 검출 시 console.warn. v0.2에서 <code>scale: {X,Y,Z}</code> 객체화 가능성.</li>
+<li><strong>클래스 비교 robust화</strong>: <code>cls.get_name() == "BP_Anchor_Base_C"</code> 문자열 비교는 BP rename·namespace 충돌에 취약. <code>cls.get_path_name()</code> 비교 (예: <code>/Game/Anchors/BP_Anchor_Base.BP_Anchor_Base_C</code>)가 더 안전. 1번과 같은 dry-run에서 <code>get_path_name()</code> 출력 확인 후 정책 확정. 1주차 단일 레벨에선 1번 비교로도 충분하나 풀 시스템 진입 전엔 path 비교로 승격 권장.</li>
+<li><strong>scene00 출력 경로</strong>: 위 코드에선 <code>samples/scene00/</code>로 직접 출력하지만 1차 검증은 Unreal Content/Output 경로에 출력 후 수동 복사가 안전할 수도. 사용자 선호로 결정. 결정될 때까지 코드 상수에 <code># TODO Open Question 5</code> 표기 유지.</li>
+<li><strong>id 중복·빈값 정책</strong>: 현재 export script는 <code>unreal.log_warning</code>만 출력하고 진행. 1주차는 단일 anchor라 무관하지만 다중 anchor 단계 진입 전 hard fail (assert) 또는 자동 suffix 부여 정책 결정 필요.</li>
+<li><strong>Multi-level 지원 시점</strong>: 현재 코드는 활성 레벨 단일. World Composition/World Partition 사용 시 traverse 변경 필요. 풀 시스템 진입 시 결정.</li>
+</ol>
+<hr />
+<h2 id="success-criteria">Success Criteria</h2>
+<p>이 결정의 1차 검증 (1주차 액션 3 완료 시점):</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+BP_Anchor_Base + BP_Anchor_Model 생성 OK.</li>
+<li><input type="checkbox" disabled="" />
+BP_Anchor_Model 인스턴스 1개를 scene00 레벨에 배치 + Details에서 id/editor_name/glb_path 채움 OK.</li>
+<li><input type="checkbox" disabled="" />
+export_scene_json.py 실행 시 <code>samples/scene00/scene00.json</code> 생성 + 그 안에 anchor 1건이 정확히 들어감.</li>
+<li><input type="checkbox" disabled="" />
+JSON이 v0.1 스키마 (json-schema-v0.1.html) 형식과 일치.</li>
+<li><input type="checkbox" disabled="" />
+다른 BP_Anchor_* 파생 클래스를 1개 추가 생성하면 export script 변경 없이 자동 포함됨 (확장성 검증, 선택).</li>
+</ul>
+<hr />
+<h2 id="distribution-plan">Distribution Plan</h2>
+<p>해당 사항 없음. 이 결정의 산출물은:</p>
+<ul>
+<li>BP 자산 (Unreal Content): 사용자 로컬 워크스페이스</li>
+<li>Python script: 사용자 로컬 워크스페이스</li>
+<li>JSON 출력: spzFirst repo (<code>samples/scene00/</code>)에 commit</li>
+</ul>
+<p>배포는 부모 디자인 v3의 web 측 index.html 기존 흐름과 동일.</p>
+<hr />
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>액션 1 (json-schema-v0.1.html): v0.1.1 패치 필요 — 이 디자인의 actor 선택 표준 단락 추가.</li>
+<li>액션 3 (vertical slice): 본 디자인이 그 첫 코드 단계.</li>
+<li>액션 4 (modeler-consult): 영향 없음 (modeler는 PLY 출력만 담당, BP 패턴 무관).</li>
+</ul>
+<hr />
+<h2 id="the-assignment">The Assignment</h2>
+<p>다음 액션 1건. office-hours 세션 6 closing.</p>
+<blockquote>
+<p><strong>BP_Anchor_Base + BP_Anchor_Model 슈퍼클래스 생성 + scene00 레벨에 인스턴스 1개 배치 + export_scene_json.py 1회 dry-run.</strong></p>
+<p>시간: 1.5~2시간. UTF-8 without BOM 확인. JSON 출력이 v0.1 스키마와 매칭되는지 육안 검증. anchor 1건이 정확히 들어가면 success.</p>
+<p>실패 시 가장 가능성 높은 원인: Open Question 1 (BP 클래스명 suffix). <code>get_class().get_name()</code> 결과를 unreal.log로 한 번 찍어보고 필요 시 비교 문자열 조정.</p>
+</blockquote>
+<hr />
+<h2 id="what-i-noticed-about-how-you-think">What I noticed about how you think</h2>
+<ul>
+<li>옵션 4지선다에서 즉시 "다른 팀과의 합의는 없이 진행될 거야"로 framing 자체를 갈아치웠음. 주어진 박스 안에서 답하지 않고 박스의 가정을 검사함. 솔로 실행 결정 자체보다 그 메타 동작이 더 중요.</li>
+<li>"이전 언리얼 프로젝트에서 작업 할 때 ACVAnchor라는 슈퍼클래스..." — 추천이 B인 상황에서 본인 경험을 한 줄로 던져 추천을 D로 뒤집음. 권위에 안 굽히고 lived experience를 우선시한 행동. 좋은 신호.</li>
+<li>ACVAnchor 같은 명명 자체가 Caliverse 도메인 prefix(<code>AC</code> = Actor + Caliverse 추정)를 갖고 있음. 이전 프로젝트에서 명명 규칙을 의식적으로 잡은 사람이라는 흔적.</li>
+<li>결정 직후 "좋아 이와 같이 진행하자" 5단어로 5건 premise 일괄 락. 서두르지 않고 정리 후 한 번에 끊는 패턴. office-hours 세션 5의 v0.1 채택 때도 비슷한 빠른 락.</li>
+</ul>
+</body>
+</html>

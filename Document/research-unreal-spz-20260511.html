@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>research-unreal-spz-20260511</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6a737d;
+    --border: #e5e5e5;
+    --code-bg: #f6f8fa;
+    --code-fg: #24292e;
+    --link: #0366d6;
+    --accent: #0969da;
+    --table-head: #f6f8fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --code-bg: #161b22;
+      --code-fg: #c9d1d9;
+      --link: #2f81f7;
+      --accent: #58a6ff;
+      --table-head: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, "Pretendard Variable", "Pretendard",
+      "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI",
+      system-ui, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 920px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 1.8em 0 0.5em;
+    font-weight: 700;
+  }
+  h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; }
+  p { margin: 0.75em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "D2Coding", "Cascadia Code", "JetBrains Mono",
+      Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 0.12em 0.32em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 1em;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; font-size: 0.9em; color: var(--code-fg); }
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding: 0 1em;
+    color: var(--muted);
+    margin: 1em 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+  }
+  table thead { background: var(--table-head); }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  img { max-width: 100%; height: auto; }
+  .task-list-item { list-style-type: none; margin-left: -1.4em; }
+  .task-list-item input[type=checkbox] { margin-right: 0.4em; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">research-unreal-spz-20260511</h1>
+</header>
+<h1 id="research-unreal-engine에서-spz-처리-경로-사전-조사">Research: Unreal Engine에서 SPZ 처리 경로 사전 조사</h1>
+<p>작성일: 2026-05-11 연계 문서: <code>design-20260511-110946.html</code> The Assignment 액션 1 목적: Unreal 에디터에서 실제 시도하기 전, plugin 후보 4가지의 현재 상태를 사전 조사해 결정 트리를 채운다.</p>
+<hr />
+<h2 id="핵심-결론-1줄">핵심 결론 (1줄)</h2>
+<p><strong>Unreal에서 SPZ를 직접 다루는 plugin은 사실상 존재하지 않는다. 모든 경로가 "SPZ → PLY 변환 후 UE plugin으로 import"로 수렴한다.</strong> 다만 변환 도구가 풍부해서 1일차 검증 자체는 어렵지 않다.</p>
+<hr />
+<h2 id="후보별-현재-상태-2026-05-기준">후보별 현재 상태 (2026-05 기준)</h2>
+<h3 id="후보-1-niantic-공식-unreal-plugin">후보 1: Niantic 공식 Unreal Plugin</h3>
+<p><strong>결론: 존재하지 않음.</strong></p>
+<ul>
+<li>Niantic SDK는 여전히 Unity 우선. Unreal 지원은 커뮤니티 요청 단계.</li>
+<li>공식 GitHub: <code>github.com/nianticlabs/spz</code> — 포맷 사양 + 변환 도구만 공개. Engine plugin 아님.</li>
+<li>Niantic Community에 "Support for unreal engine" 피처 요청 스레드 존재. 공식 응답으로 "지원 예정" 같은 명시 없음.</li>
+</ul>
+<p>→ 액션 1의 후보 (1)을 <strong>SKIP</strong>.</p>
+<h3 id="후보-2-luma-ai-unreal-plugin">후보 2: Luma AI Unreal Plugin</h3>
+<p><strong>결론: 존재함. 무료. 매우 성숙. 그러나 SPZ를 직접 import하지 않음 — PLY 또는 .luma 포맷 사용.</strong></p>
+<ul>
+<li>UE Marketplace(Fab)에서 무료 배포. 상업적 사용 허용.</li>
+<li>드래그앤드롭으로 <code>.ply</code> 또는 <code>.luma</code> import → 자동으로 Blueprint 생성.</li>
+<li>정리(크롭/컬링), 라이팅(analytical/sun lights), VFX 통합 도구 포함.</li>
+<li>60fps 기준 1M Gaussian 이하 씬은 미드레인지 GPU에서 실시간 렌더 가능.</li>
+<li>제약: 그림자 렌더링 미지원, 2M Gaussian 초과 시 chunking 필요(seam 발생 가능).</li>
+</ul>
+<p>→ <strong>SPZ를 PLY로 변환 후 적재하면 작동할 가능성 높음.</strong> 1차 시도 후보.</p>
+<h3 id="후보-3-ue5-gs-커뮤니티-plugin">후보 3: UE5 GS 커뮤니티 Plugin</h3>
+<p><strong>결론: 여러 개 존재. 대부분 PLY 입력. SPZ 직접 지원 명시 없음.</strong></p>
+<p>발견된 plugin:</p>
+<ul>
+<li><strong><code>mlslabs/MLSLabsGaussianSplattingRenderer-UE</code></strong> — 고성능 UE5 plugin. 3DGS + 4DGS(volumetric video) 지원. .sog 포맷 추가 지원. SPZ 명시 없음.</li>
+<li><strong><code>xverse-engine/XScene-UEPlugin</code></strong> — 실시간 시각화, 관리, 편집, 하이브리드 렌더링. PLY 중심.</li>
+<li><strong><code>JI20/unreal-splat</code></strong> — 표준 GS training output(.ply) 만 지원. SPZ 명시 없음.</li>
+</ul>
+<p>→ Luma 외 대안. Luma가 안 되면 차순위 시도.</p>
+<h3 id="후보-4-spz--변환-후-적재">후보 4: SPZ → 변환 후 적재</h3>
+<p><strong>결론: 가장 확실한 경로. 변환 도구가 풍부함.</strong></p>
+<p>변환 도구:</p>
+<table>
+<thead>
+<tr class="header">
+<th>도구</th>
+<th>형태</th>
+<th>지원 형식</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><code>nianticlabs.github.io/spz</code></strong></td>
+<td>브라우저 WASM</td>
+<td>SPZ ↔︎ PLY, 메타데이터 검사</td>
+<td><strong>설치 불필요. 1차 시도용 최적.</strong></td>
+</tr>
+<tr class="even">
+<td><strong><code>playcanvas/splat-transform</code></strong></td>
+<td>CLI + 라이브러리</td>
+<td>PLY, Compressed PLY, SOG, SPZ, SPLAT, KSPLAT, LCC → PLY, Compressed PLY, SOG, SPZ, <strong>GLB</strong>, CSV, HTML Viewer, LOD, Voxel</td>
+<td><strong>SPZ → GLB 직접 변환 가능.</strong> 디자인 v2의 GLB 변환 파이프라인 이슈 #1 해결 후보.</td>
+</tr>
+<tr class="odd">
+<td><strong><code>francescofugazzi/3dgsconverter</code></strong></td>
+<td>Python CLI</td>
+<td>3DGS(.ply), KSplat, SOG, SPZ, Splat, CloudCompare, Parquet, Compressed PLY 간 N-to-N</td>
+<td>GPU 가속 필터링(SOR, Density) 포함. 가장 풍부한 옵션.</td>
+</tr>
+<tr class="even">
+<td><strong><code>tumluliu/spz-converter</code></strong></td>
+<td>CLI</td>
+<td>PLY/SPLAT → SPZ</td>
+<td>단방향 (역방향 아님). 비채택.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="추가-발견-풀-시스템-단계에-영향">추가 발견 (풀 시스템 단계에 영향)</h2>
+<h3 id="gltf-표준에-spz-확장-추가">glTF 표준에 SPZ 확장 추가</h3>
+<p>2025년 후반에 <code>KHR_gaussian_splatting</code> + <code>KHR_gaussian_splatting_compression_spz</code> 두 확장이 glTF 표준에 추가됨.</p>
+<p>→ 미래의 GLB는 SPZ를 그대로 담을 수 있게 됨. → 디자인 v2의 풀 시스템 단계에서 "JSON + GLB" 워크플로가 자연스럽게 SPZ도 흡수 가능. → vertical slice 단계에서는 아직 실용화 안 됐을 가능성 큼. 1차 검증은 변환 도구 사용.</p>
+<h3 id="cesium-for-unreal의-3d-gaussian-splat-tilesets">Cesium for Unreal의 3D Gaussian Splat Tilesets</h3>
+<p>대용량 GS 데이터셋 LOD 스트리밍 지원. 본 프로젝트(단일 씬, 단일 SPZ 파일)에는 과한 도구지만 풀 시스템 단계에서 LOD가 필요해질 때 후보.</p>
+<hr />
+<h2 id="권장-1일차-검증-절차-액션-1-구체화">권장 1일차 검증 절차 (액션 1 구체화)</h2>
+<p><strong>가장 빠르고 가벼운 검증 경로:</strong></p>
+<pre><code>[step 1] (10분) test.spz를 nianticlabs.github.io/spz 에 업로드
+         → PLY로 변환 → test.ply 다운로드
+         → 변환 성공 여부 + 메타데이터 확인 (Gaussian 개수, 파일 크기)
+
+[step 2] (30분~1시간) Unreal Engine 5 설치 확인 + Luma AI Unreal Plugin 설치
+         → UE Marketplace(Fab) 에서 &quot;Luma AI&quot; 검색 → 무료 설치
+         → 새 프로젝트 생성 또는 빈 씬 열기
+
+[step 3] (10분) test.ply를 Unreal 콘텐츠 브라우저에 드래그앤드롭
+         → Luma plugin이 자동으로 Blueprint 생성 → 뷰포트에 배치
+         → 카메라 컨트롤로 둘러보기
+
+[step 4] (검증 판정)
+         합격: 정상 렌더링 + 카메라 컨트롤 가능 → 액션 1 통과, 1주차 단계로 진입
+         부분 합격: 렌더는 되나 색상/스케일/좌표계 이상 → 좌표계 변환 메모 남기고 진행
+         실패: import 안 됨 또는 렌더 깨짐 → 후보 3 plugin(MLSLabs/XScene)으로 차순위 시도</code></pre>
+<p><strong>예상 소요 시간</strong>: 1~2시간 (Unreal 설치 시간 제외). 디자인 문서가 "1~3일"로 잡은 것보다 훨씬 빠를 가능성 큼.</p>
+<p><strong>만약 모든 plugin이 실패하면</strong>: Approach B 회전. Unreal 트랙은 별도 분리. 단 더미 JSON은 v0.1 스키마 문서를 따라 작성.</p>
+<hr />
+<h2 id="검증-시-같이-답해야-할-부수-질문">검증 시 같이 답해야 할 부수 질문</h2>
+<ol type="1">
+<li><strong>Luma plugin이 .luma 포맷을 별도로 받는가?</strong> Luma AI 서비스를 거치지 않은 자체 SPZ→PLY 변환물이 정상 작동하는지 확인.</li>
+<li><strong>PLY 파일 크기는 얼마나 커지는가?</strong> SPZ가 10배 압축이라 PLY는 대략 10배 커짐. test.spz 78MB → PLY ~780MB 가능성. 1차 검증에는 무리 없으나 풀 시스템에서는 부담.</li>
+<li><strong>변환 후 Gaussian 개수 보존되는가?</strong> WASM 변환 도구의 정확도 확인.</li>
+<li><strong>playcanvas/splat-transform 의 SPZ → GLB 변환 결과가 Unreal에서 import되는가?</strong> 만약 된다면 GLB 변환 파이프라인 + Unreal SPZ 처리가 동시에 해결됨. 별도 시도 가치 있음.</li>
+</ol>
+<hr />
+<h2 id="디자인-v2-업데이트-권장-사항">디자인 v2 업데이트 권장 사항</h2>
+<p>본 조사 결과로 디자인 문서의 다음 부분 업데이트 필요:</p>
+<ol type="1">
+<li><strong>The Assignment 액션 1</strong>: plugin 후보 순서를 (1) Luma AI → (2) MLSLabs/XScene → (3) SPZ→GLB(via splat-transform)→Luma 로 수정. Niantic 공식 후보 제거.</li>
+<li><strong>Premise 7</strong>: "Niantic 공식 SDK는 Unity 우선" 다음에 "공식 Unreal plugin 부재 확인됨(2026-05)" 추가.</li>
+<li><strong>Open Questions #1</strong>: 본 조사 결과 요약 1줄 추가.</li>
+<li><strong>Dependencies</strong>: SPZ → PLY 변환 도구(<code>nianticlabs.github.io/spz</code> 또는 <code>playcanvas/splat-transform</code>) 사용 명시.</li>
+</ol>
+<hr />
+<h2 id="참고-자료-검증-시-직접-방문">참고 자료 (검증 시 직접 방문)</h2>
+<ul>
+<li>Niantic SPZ: <a href="https://github.com/nianticlabs/spz">https://github.com/nianticlabs/spz</a></li>
+<li>SPZ WASM 변환기: <a href="https://nianticlabs.github.io/spz">https://nianticlabs.github.io/spz</a></li>
+<li>Luma AI Unreal Plugin (Fab): <a href="https://www.fab.com/listings/b52460e0-3ace-465e-a378-495a5531e318">https://www.fab.com/listings/b52460e0-3ace-465e-a378-495a5531e318</a></li>
+<li>Luma AI Unreal Plugin 문서: <a href="https://lumaai.notion.site/Luma-Unreal-Engine-Plugin-0-41-8005919d93444c008982346185e933a1">https://lumaai.notion.site/Luma-Unreal-Engine-Plugin-0-41-8005919d93444c008982346185e933a1</a></li>
+<li>PlayCanvas splat-transform: <a href="https://github.com/playcanvas/splat-transform">https://github.com/playcanvas/splat-transform</a></li>
+<li>3dgsconverter: <a href="https://github.com/francescofugazzi/3dgsconverter">https://github.com/francescofugazzi/3dgsconverter</a></li>
+<li>MLSLabs GS Renderer: <a href="https://github.com/mlslabs/MLSLabsGaussianSplattingRenderer-UE">https://github.com/mlslabs/MLSLabsGaussianSplattingRenderer-UE</a></li>
+<li>XScene UE Plugin: <a href="https://github.com/xverse-engine/XScene-UEPlugin">https://github.com/xverse-engine/XScene-UEPlugin</a></li>
+<li>unreal-splat: <a href="https://github.com/JI20/unreal-splat">https://github.com/JI20/unreal-splat</a></li>
+<li>Niantic SPZ 4 발표: <a href="https://www.nianticspatial.com/blog/spz4">https://www.nianticspatial.com/blog/spz4</a></li>
+<li>Cesium for Unreal 3DGS: <a href="https://cesium.com/blog/2026/04/27/3d-gaussian-splats-lod/">https://cesium.com/blog/2026/04/27/3d-gaussian-splats-lod/</a></li>
+</ul>
+</body>
+</html>

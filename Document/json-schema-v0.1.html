@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>json-schema-v0.1</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6a737d;
+    --border: #e5e5e5;
+    --code-bg: #f6f8fa;
+    --code-fg: #24292e;
+    --link: #0366d6;
+    --accent: #0969da;
+    --table-head: #f6f8fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --code-bg: #161b22;
+      --code-fg: #c9d1d9;
+      --link: #2f81f7;
+      --accent: #58a6ff;
+      --table-head: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, "Pretendard Variable", "Pretendard",
+      "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI",
+      system-ui, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 920px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 1.8em 0 0.5em;
+    font-weight: 700;
+  }
+  h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; }
+  p { margin: 0.75em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "D2Coding", "Cascadia Code", "JetBrains Mono",
+      Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 0.12em 0.32em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 1em;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; font-size: 0.9em; color: var(--code-fg); }
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding: 0 1em;
+    color: var(--muted);
+    margin: 1em 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+  }
+  table thead { background: var(--table-head); }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  img { max-width: 100%; height: auto; }
+  .task-list-item { list-style-type: none; margin-left: -1.4em; }
+  .task-list-item input[type=checkbox] { margin-right: 0.4em; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">json-schema-v0.1</h1>
+</header>
+<h1 id="json-스키마-v01--spz-웹-뷰어-1차-데모-계약서">JSON 스키마 v0.1 — SPZ 웹 뷰어 1차 데모 계약서</h1>
+<p>작성: 2026-05-14 (office-hours 세션 5) 근거: <code>Document/design-20260513-104744.html</code> (디자인 v3 액션 1) + <code>samples/sample.json</code> 발견 후 v3 v0.1 컨벤션 갱신 + <code>Document/design-actor-selection-20260515-140853.html</code> (actor 선택 표준 락) 상태: v0.1.1 (2026-05-15 actor 선택 표준 추가, 솔로 실행 모드로 합의 회의 폐기) mode: Solo execution</p>
+<hr />
+<h2 id="이-문서의-역할">이 문서의 역할</h2>
+<p>Unreal export 코드와 웹 로더가 둘 다 참조하는 단일 계약서. 디자인 v3의 1주차 액션 1 산출물.</p>
+<p><strong>v0.1 범위</strong>: 1주차 vertical slice 합격에 필요한 최소 계약 (Unreal에서 옮긴 모델 위치가 웹에 반영 + 1인칭 SPZ 공간 충돌 + 모델 클릭 콘솔 출력).</p>
+<p><strong>v0.2 이후 예정</strong>: anchor_type enum 확장 (<code>start_pos</code>, <code>teleport</code>, <code>farming</code>, <code>elevator</code> 등 풀 시스템 진입 시), collision_type enum 확장 (<code>mesh</code>), 트리 구조 wrap 가능성 (<code>scenes[]</code>).</p>
+<p>설계 출발점은 <code>samples/sample.json</code> (회사 Caliverse 메타버스의 과거 콘텐츠 포맷, 현재 비운영) 컨벤션을 가볍게 흡수. 풀 시스템 진입 시 마이그레이션 부담을 줄이기 위해 필드 명칭·구조를 최대한 미래와 충돌하지 않게 잡음.</p>
+<hr />
+<h2 id="좌표계단위-합의">좌표계·단위 합의</h2>
+<table>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>값</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>coord_system</code></td>
+<td><code>"ue"</code></td>
+<td>Unreal: left-handed, Z-up, X-forward</td>
+</tr>
+<tr class="even">
+<td><code>unit</code></td>
+<td><code>"cm"</code></td>
+<td>NanoGS가 meters → cm 변환하므로 cm 기본</td>
+</tr>
+<tr class="odd">
+<td>씬 전체 yaw 보정</td>
+<td><code>space.rotation_y_deg</code></td>
+<td>현재 검증값 <code>-90</code> (Postshot → splat-transform → Spark chain 기준, 2026-05-13 G 키 사이클로 확정)</td>
+</tr>
+<tr class="even">
+<td>모델별 좌표·회전 변환</td>
+<td>웹 로더 책임</td>
+<td>Unreal → Three.js Y-up right-handed 변환 수식은 2주차 1일차 검증으로 확정 (Open Question 2 참조)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="루트-객체">루트 객체</h2>
+<table>
+<thead>
+<tr class="header">
+<th>필드</th>
+<th>타입</th>
+<th>필수</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>schema_version</code></td>
+<td>string</td>
+<td>O</td>
+<td><code>"0.1"</code>. 웹 로더가 호환성 확인에 사용</td>
+</tr>
+<tr class="even">
+<td><code>scene_id</code></td>
+<td>string</td>
+<td>O</td>
+<td>씬 식별자. 파일명·캐싱 키</td>
+</tr>
+<tr class="odd">
+<td><code>coord_system</code></td>
+<td>string enum</td>
+<td>O</td>
+<td><code>"ue"</code> (v0.1은 <code>"ue"</code>만)</td>
+</tr>
+<tr class="even">
+<td><code>unit</code></td>
+<td>string enum</td>
+<td>O</td>
+<td><code>"cm"</code> (v0.1은 <code>"cm"</code>만)</td>
+</tr>
+<tr class="odd">
+<td><code>space</code></td>
+<td>object</td>
+<td>O</td>
+<td>SPZ 공간 정보 (아래 참조)</td>
+</tr>
+<tr class="even">
+<td><code>anchors</code></td>
+<td>array</td>
+<td>O</td>
+<td>씬 안에 배치된 객체 목록 (아래 참조)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="space-객체"><code>space</code> 객체</h2>
+<table>
+<thead>
+<tr class="header">
+<th>필드</th>
+<th>타입</th>
+<th>필수</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>spz_path</code></td>
+<td>string</td>
+<td>O</td>
+<td>Spark 적재용 SPZ v3 (gzip). splat-transform <code>-H 1 --spz-version 3</code> 출력</td>
+</tr>
+<tr class="even">
+<td><code>ply_path</code></td>
+<td>string</td>
+<td>△</td>
+<td>NanoGS 적재용 원본 PLY (Postshot 출력 INRIA spec). Unreal 측만 사용</td>
+</tr>
+<tr class="odd">
+<td><code>collision_path</code></td>
+<td>string</td>
+<td>O</td>
+<td>SPZ 공간 벽·바닥 invisible GLB mesh. Unreal Modeling Mode 작성</td>
+</tr>
+<tr class="even">
+<td><code>rotation_y_deg</code></td>
+<td>number</td>
+<td>O</td>
+<td>SPZ 측 yaw 보정 (도 단위). 현재 검증값 <code>-90</code></td>
+</tr>
+</tbody>
+</table>
+<p>경로는 <code>scene00.json</code> 파일 기준 상대 경로. UTF-8 without BOM.</p>
+<hr />
+<h2 id="anchors-객체"><code>anchors[]</code> 객체</h2>
+<table>
+<thead>
+<tr class="header">
+<th>필드</th>
+<th>타입</th>
+<th>필수</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>anchor_type</code></td>
+<td>string enum</td>
+<td>O</td>
+<td>v0.1은 <code>"model"</code>만. v0.2 이후 <code>"start_pos"</code>, <code>"teleport"</code>, <code>"farming"</code>, <code>"elevator"</code> 등</td>
+</tr>
+<tr class="even">
+<td><code>id</code></td>
+<td>string</td>
+<td>O</td>
+<td>씬 내 유일. 클릭 이벤트의 콘솔 출력 키</td>
+</tr>
+<tr class="odd">
+<td><code>editor_name</code></td>
+<td>string</td>
+<td>O</td>
+<td>사람이 읽는 표시명. 1주차엔 영문 키워드, 다국어는 v0.2</td>
+</tr>
+<tr class="even">
+<td><code>glb_path</code></td>
+<td>string</td>
+<td>O (anchor_type=model)</td>
+<td>시각용 GLB. <code>collision_type="bbox"</code>이면 BBox는 GLB 자체에서 자동 계산</td>
+</tr>
+<tr class="odd">
+<td><code>position</code></td>
+<td>object <code>{X,Y,Z}</code></td>
+<td>O</td>
+<td>cm, Unreal 좌표계</td>
+</tr>
+<tr class="even">
+<td><code>rotation</code></td>
+<td>object <code>{Pitch,Yaw,Roll}</code></td>
+<td>O</td>
+<td>도 단위, Unreal Euler</td>
+</tr>
+<tr class="odd">
+<td><code>scale</code></td>
+<td>number</td>
+<td>O</td>
+<td>scalar uniform scale (sample.json 컨벤션)</td>
+</tr>
+<tr class="even">
+<td><code>collision_type</code></td>
+<td>string enum</td>
+<td>O</td>
+<td>v0.1은 <code>"bbox"</code>만. v0.2 이후 <code>"mesh"</code></td>
+</tr>
+<tr class="odd">
+<td><code>extra</code></td>
+<td>object</td>
+<td>×</td>
+<td>forward-compat용. GUID·TableID·ClassName·MannequinItems 등 회사 메타 자유 첨부</td>
+</tr>
+</tbody>
+</table>
+<p>명칭이 <code>models</code> 가 아니라 <code>anchors</code>인 이유: 풀 시스템 진입 시 <code>start_pos</code>/<code>teleport</code>/<code>farming</code>/<code>elevator</code> 같은 비-모델 객체가 들어올 자리를 미리 마련.</p>
+<hr />
+<h2 id="forward-compat-정책">forward-compat 정책</h2>
+<p><strong>웹 로더</strong>:</p>
+<ul>
+<li>정의되지 않은 root-level 필드 무시</li>
+<li>모르는 <code>anchor_type</code> (v0.1은 <code>"model"</code> 외) → <code>console.warn</code> 후 skip</li>
+<li>모르는 <code>collision_type</code> → fallback <code>"bbox"</code> + <code>console.warn</code></li>
+<li><code>schema_version</code> 미일치 (예: <code>"0.2"</code>) → <code>console.warn</code> 후 진행 시도</li>
+</ul>
+<p><strong>Unreal export</strong>:</p>
+<ul>
+<li>v0.1에 정의되지 않은 필드 출력 허용 (<code>extra.*</code> 또는 root-level 자유)</li>
+<li><code>schema_version</code> 필드는 반드시 <code>"0.1"</code>로 출력</li>
+<li>좌표·회전·스케일은 Unreal 원본 값 그대로 (cm·도·scalar)</li>
+</ul>
+<p>이 정책으로 1주차 v0.1과 풀 시스템 v0.2 사이에 양쪽 도구를 동시에 깨지 않고 점진 전환 가능.</p>
+<hr />
+<h2 id="회전좌표-변환-참고-2주차-검증으로-확정">회전·좌표 변환 (참고, 2주차 검증으로 확정)</h2>
+<p>웹 로더가 Unreal → Three.js로 변환하는 의사 코드. 검증값은 2주차 1일차 산출.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 좌표: Unreal (X-forward, Y-right, Z-up, cm) → Three.js (X-right, Y-up, Z-back, m)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// 검증으로 부호·축 swap 확정 예정.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>position_three<span class="op">.</span><span class="at">x</span> <span class="op">=</span> position_ue<span class="op">.</span><span class="at">X</span> <span class="op">/</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>position_three<span class="op">.</span><span class="at">y</span> <span class="op">=</span> position_ue<span class="op">.</span><span class="at">Z</span> <span class="op">/</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>position_three<span class="op">.</span><span class="at">z</span> <span class="op">=</span> <span class="op">-</span>position_ue<span class="op">.</span><span class="at">Y</span> <span class="op">/</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// 회전: Unreal Pitch/Yaw/Roll (도) → Three.js Euler (라디안)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// order &#39;YXZ&#39; 가정. 검증으로 확정 예정.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> yaw   <span class="op">=</span> THREE<span class="op">.</span><span class="at">MathUtils</span><span class="op">.</span><span class="fu">degToRad</span>(rot_ue<span class="op">.</span><span class="at">Yaw</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> pitch <span class="op">=</span> THREE<span class="op">.</span><span class="at">MathUtils</span><span class="op">.</span><span class="fu">degToRad</span>(rot_ue<span class="op">.</span><span class="at">Pitch</span>)<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> roll  <span class="op">=</span> THREE<span class="op">.</span><span class="at">MathUtils</span><span class="op">.</span><span class="fu">degToRad</span>(rot_ue<span class="op">.</span><span class="at">Roll</span>)<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>obj<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="fu">set</span>(pitch<span class="op">,</span> yaw<span class="op">,</span> roll<span class="op">,</span> <span class="st">&#39;YXZ&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">// 씬 전체 SPZ yaw 보정 (이미 검증됨)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>splat<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">y</span> <span class="op">=</span> THREE<span class="op">.</span><span class="at">MathUtils</span><span class="op">.</span><span class="fu">degToRad</span>(json<span class="op">.</span><span class="at">space</span><span class="op">.</span><span class="at">rotation_y_deg</span>)<span class="op">;</span></span></code></pre></div>
+<p>검증 절차: 2주차 1일차에 모델 1개를 Unreal 임의 위치·회전으로 배치 후 웹에서 일치 확인. 어긋남 발생 시 부호·축 swap 또는 Euler order를 G 키 사이클 식으로 토글해 시각 비교.</p>
+<hr />
+<h2 id="scene00json-예제-1주차-작업-후-모습"><code>scene00.json</code> 예제 (1주차 작업 후 모습)</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;schema_version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scene_id&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00&quot;</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;coord_system&quot;</span><span class="fu">:</span> <span class="st">&quot;ue&quot;</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;unit&quot;</span><span class="fu">:</span> <span class="st">&quot;cm&quot;</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;space&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;spz_path&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00_v3.spz&quot;</span><span class="fu">,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;ply_path&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00.ply&quot;</span><span class="fu">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;collision_path&quot;</span><span class="fu">:</span> <span class="st">&quot;scene00_collision.glb&quot;</span><span class="fu">,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;rotation_y_deg&quot;</span><span class="fu">:</span> <span class="dv">-90</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;anchors&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;anchor_type&quot;</span><span class="fu">:</span> <span class="st">&quot;model&quot;</span><span class="fu">,</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;chair_01&quot;</span><span class="fu">,</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;editor_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Chair&quot;</span><span class="fu">,</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;glb_path&quot;</span><span class="fu">:</span> <span class="st">&quot;model_chair.glb&quot;</span><span class="fu">,</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;position&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;X&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">&quot;Y&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">&quot;Z&quot;</span><span class="fu">:</span> <span class="dv">0</span> <span class="fu">},</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;rotation&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;Pitch&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">&quot;Yaw&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">&quot;Roll&quot;</span><span class="fu">:</span> <span class="dv">0</span> <span class="fu">},</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;scale&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;collision_type&quot;</span><span class="fu">:</span> <span class="st">&quot;bbox&quot;</span><span class="fu">,</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;extra&quot;</span><span class="fu">:</span> <span class="fu">{}</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<hr />
+<h2 id="open-questions">Open Questions</h2>
+<ol type="1">
+<li><strong>Euler order 확정</strong>: Three.js <code>'YXZ'</code> 가정. Unreal 회전 합성 순서가 Yaw → Pitch → Roll (UE 내부)이라 <code>'YXZ'</code>가 자연. 2주차 1일차 검증.</li>
+<li><strong>좌표 부호 swap 확정</strong>: <code>z_three = -y_ue</code> 가정. 검증 어긋남 시 토글.</li>
+<li><strong><code>extra</code> 객체 표준 키</strong>: 풀 시스템 진입 시 <code>extra.guid</code>, <code>extra.table_id</code>, <code>extra.class_name</code> 명문화 필요. v0.1은 자유.</li>
+<li><strong>collision_type="bbox"의 BBox 계산 위치</strong>: GLB 적재 후 Three.js <code>Box3.setFromObject()</code> 사용 가정. Unreal export 시점에 미리 계산해 JSON에 넣을지 v0.2 결정.</li>
+<li><strong>glb_path 누락 시 동작</strong>: anchor_type이 <code>"model"</code>인데 GLB 없으면 v0.1은 console.warn 후 skip. v0.2에서 sprite/anchor 타입 추가 시 정책 재검토.</li>
+</ol>
+<hr />
+<h2 id="다음-버전v02-예정-항목">다음 버전(v0.2) 예정 항목</h2>
+<ul>
+<li><code>anchor_type</code> enum 확장: <code>"start_pos"</code>, <code>"teleport"</code>, <code>"farming"</code>, <code>"elevator"</code>, <code>"sprite"</code> (myWorkTodo.html 12개 요구사항 통합 시).</li>
+<li><code>collision_type</code> enum 확장: <code>"mesh"</code> (모델별 정밀 mesh collision).</li>
+<li>트리 구조 wrap 가능성: <code>scenes[]</code>로 한 단계 wrap, 다중 룸·다중 floor 처리.</li>
+<li>다국어 표시명: <code>editor_name</code> → <code>editor_name_i18n: {ko, en, ...}</code> 또는 i18n key 분리.</li>
+<li><code>extra</code> 표준 키 명문화 (회사 표준 GUID/TableID/ClassName 통합 시점).</li>
+<li><code>path_points[]</code>/<code>path_events[]</code>: 캐릭터 동선·이벤트 시스템 (sample.json <code>PathPoint</code>/<code>PathEvent</code> 부활).</li>
+</ul>
+<hr />
+<h2 id="actor-선택-표준-v011-2026-05-15">actor 선택 표준 (v0.1.1, 2026-05-15)</h2>
+<p>Unreal Editor Python script가 <code>EditorActorSubsystem.get_all_level_actors()</code> 결과 중 <code>anchors[]</code>로 export할 actor를 결정하는 표준.</p>
+<p><strong>선택 메커니즘</strong>: BP 클래스 상속 (<code>BP_Anchor_Base</code> BP-only 슈퍼클래스 + 파생 BP들).</p>
+<ul>
+<li><code>BP_Anchor_Base</code> (Actor 파생, BP-only): instance editable 변수 <code>Id</code>/<code>EditorName</code>/<code>Extra</code> (Map&lt;FString,FString&gt;) 노출.</li>
+<li><code>BP_Anchor_Model</code> (Base 파생): 추가 변수 <code>GlbPath</code>/<code>CollisionType</code> (User Enumeration <code>E_CollisionType</code> BBox/Mesh).</li>
+<li>v0.2 enum 확장 (<code>teleport</code>/<code>start_pos</code>/<code>farming</code>/<code>elevator</code> 등): <code>BP_Anchor_X</code> 파생 추가만으로 자동 포함, export 코드 변경 불필요.</li>
+<li>C++ 슈퍼클래스 승격은 anchor_type 2개째 추가 시점(= 풀 시스템 진입). v0.1은 BP-only.</li>
+</ul>
+<p><strong>필터 코드 패턴</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_anchor(actor):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    cls <span class="op">=</span> actor.get_class()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> cls:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cls.get_name() <span class="op">==</span> <span class="st">&quot;BP_Anchor_Base_C&quot;</span>:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        cls <span class="op">=</span> cls.get_super_class()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span></code></pre></div>
+<p><strong>anchor_type 결정</strong>: 파생 BP 클래스명 → 매핑. <code>BP_Anchor_Model_C</code> → <code>"model"</code>, <code>BP_Anchor_Teleport_C</code> → <code>"teleport"</code> 등 lowercase 변환.</p>
+<p><strong>extra 직렬화</strong>: 비어 있어도 <code>{}</code> 항상 출력 (diff 안정성). schema는 옵셔널이지만 export script는 always-emit.</p>
+<p>상세 구현 골격 + Open Questions: <code>Document/design-actor-selection-20260515-140853.html</code>.</p>
+<hr />
+<h2 id="변경-이력">변경 이력</h2>
+<table>
+<thead>
+<tr class="header">
+<th>버전</th>
+<th>일자</th>
+<th>변경</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.1</td>
+<td>2026-05-14</td>
+<td>초안 작성</td>
+<td>디자인 v3 액션 1 산출물. samples/sample.json 컨벤션 일부 흡수 (anchors[], anchor_type, editor_name, extra{}, Euler Pitch/Yaw/Roll, scalar scale)</td>
+</tr>
+<tr class="even">
+<td>0.1.1</td>
+<td>2026-05-15</td>
+<td>actor 선택 표준 단락 추가 + 합의 회의 체크리스트 폐기</td>
+<td>솔로 실행 모드 결정에 따라 합의 회의 → self-결정으로 압축. actor 선택 메커니즘 = BP 클래스 상속 (Approach B Pure BP)으로 락. 상세는 <code>Document/design-actor-selection-20260515-140853.html</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="합의-회의-체크리스트-폐기-2026-05-15">합의 회의 체크리스트 (폐기, 2026-05-15)</h2>
+<p>솔로 실행 모드 결정으로 별도 회의 폐기. 5건은 다음과 같이 self-결정으로 종결:</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+<code>coord_system="ue"</code> + <code>unit="cm"</code> — 검증값 그대로 채택.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<code>space.rotation_y_deg=-90</code> — Postshot chain 검증값 그대로 채택.</li>
+<li><input type="checkbox" disabled="" checked="" />
+anchor_type v0.1 = <code>"model"</code>만 — 사용자 P-Act2 동의로 확정.</li>
+<li><input type="checkbox" disabled="" checked="" />
+collision_type v0.1 = <code>"bbox"</code>만 — 사용자 동의로 확정.</li>
+<li><input type="checkbox" disabled="" checked="" />
+<code>extra</code> 객체 — v0.1은 항상 <code>{}</code> 출력 (always-emit). 회사 표준 키(GUID/TableID/ClassName) 명문화는 v0.2.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>spz-web-viewer-journey-20260513</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6a737d;
+    --border: #e5e5e5;
+    --code-bg: #f6f8fa;
+    --code-fg: #24292e;
+    --link: #0366d6;
+    --accent: #0969da;
+    --table-head: #f6f8fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --code-bg: #161b22;
+      --code-fg: #c9d1d9;
+      --link: #2f81f7;
+      --accent: #58a6ff;
+      --table-head: #161b22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body {
+    font-family: -apple-system, "Pretendard Variable", "Pretendard",
+      "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI",
+      system-ui, BlinkMacSystemFont, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 920px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin: 1.8em 0 0.5em;
+    font-weight: 700;
+  }
+  h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; }
+  p { margin: 0.75em 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "D2Coding", "Cascadia Code", "JetBrains Mono",
+      Consolas, "Liberation Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 0.12em 0.32em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 1em;
+    border-radius: 6px;
+    overflow: auto;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; font-size: 0.9em; color: var(--code-fg); }
+  blockquote {
+    border-left: 3px solid var(--border);
+    padding: 0 1em;
+    color: var(--muted);
+    margin: 1em 0;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+    overflow: auto;
+    display: block;
+  }
+  table thead { background: var(--table-head); }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5em 0.75em;
+    text-align: left;
+    vertical-align: top;
+  }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  img { max-width: 100%; height: auto; }
+  .task-list-item { list-style-type: none; margin-left: -1.4em; }
+  .task-list-item input[type=checkbox] { margin-right: 0.4em; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">spz-web-viewer-journey-20260513</h1>
+</header>
+<h1 id="spz-웹-뷰어-만들기--4개-세션의-의사결정-일지">SPZ 웹 뷰어 만들기 — 4개 세션의 의사결정 일지</h1>
+<blockquote>
+<p>3D Gaussian Splatting(이하 SPZ)을 활용한 웹 뷰어를 0부터 만든 4개의 office-hours 세션 기록. 변환 도구·plugin·좌표계 진단·실패한 시도까지 시간 순으로 정리.</p>
+<p>2026-05-08 ~ 2026-05-13</p>
+</blockquote>
+<hr />
+<h2 id="누구를-위한-글인가">누구를 위한 글인가</h2>
+<ul>
+<li><strong>3D 콘텐츠 웹 파이프라인을 처음 구축하는 개발자</strong>. 어떤 도구를 어떤 순서로 검증해야 하는지 막막한 상태에서 출발하는 사람.</li>
+<li><strong>Unreal·Unity에서 콘텐츠 만들고 웹에서 보여주려는 모델러·기획자</strong>. 좌표계·단위·포맷 변환의 함정이 어디에 있는지 알고 싶은 사람.</li>
+<li><strong>3D Gaussian Splatting을 처음 시도하는 사람</strong>. SPZ가 무엇인지, INRIA PLY와 어떻게 다른지, 변환 도구가 무엇인지 한 번에 알고 싶은 사람.</li>
+</ul>
+<p>이 글은 "정답을 알고 쓴 매뉴얼"이 아니라, 실패와 우회를 거친 후 굳어진 결정의 기록이다. 그래서 도구 이름 외에도 <em>왜 그 도구를 골랐는가</em> 가 함께 적혀있다.</p>
+<hr />
+<h2 id="들어가기-전--한-줄-요약">들어가기 전 — 한 줄 요약</h2>
+<pre><code>모델러 (Postshot) → INRIA PLY
+                      │
+                      ├─→ Unreal (NanoGS plugin) ─→ 시각 + collision proxy GLB export
+                      │                              ↓
+                      └─→ splat-transform           좌표·메타데이터 JSON export
+                            -H N --spz-version 3    ↓
+                            → SPZ v3 (gzip)         ↓
+                            → Spark (Three.js) ←────┘
+                            (rotation.y = -π/2 보정)</code></pre>
+<p>이 chain에 도달하기까지 7가지 PLY 변형 실패, 2개 plugin 폐기, SPZ 포맷 2개 버전(1.x / 2.0) 진단, 좌표계 4개 chain 정렬을 거쳤다.</p>
+<hr />
+<h1 id="챕터-1-시작점--왜-spz인가">챕터 1. 시작점 — 왜 SPZ인가</h1>
+<h2 id="배경">배경</h2>
+<p>회사는 Unity 기반 360도 파노라마 웹 서비스를 운영 중. 큰 카테고리 1건의 발주가 무산됐고 그 카테고리에서 자진 퇴장한 상황. 재진입의 차별화 요소가 필요했다.</p>
+<p>모델러의 가설: <strong>3D Gaussian Splatting(SPZ)이 폴리곤 모델의 퀄리티 일관성 문제를 우회한다</strong>. 폴리곤은 카메라 각도·조명에 따라 결과 편차가 크지만, GS는 캡처한 시점의 시각을 그대로 유지한다.</p>
+<p>이 가설이 맞는지 가장 빨리 확인하는 방법은? 답: <strong>웹 브라우저에서 SPZ가 정말 렌더링되는지 한 시간 안에 검증한다.</strong></p>
+<h2 id="spz가-뭔가">SPZ가 뭔가</h2>
+<ul>
+<li><strong>3D Gaussian Splatting</strong>: 각 점이 3D 가우시안 분포(중심점 + 공분산 + 색상 + 투명도 + 구면조화 SH)인 점군. NeRF의 후속 기법.</li>
+<li><strong>SPZ (Niantic Gaussian Splat Package)</strong>: Niantic이 제안한 GS 압축 포맷. gzip 압축된 binary. PLY 대비 ~10배 작음.</li>
+<li><strong>INRIA PLY</strong>: 원조 Gaussian Splatting 논문의 출력 포맷. property 자유, gzip 안 함, 크기 큼.</li>
+</ul>
+<h2 id="첫-스파이크-반나절">첫 스파이크 (반나절)</h2>
+<p>스택 결정:</p>
+<table>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>선택</th>
+<th>왜</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3D 라이브러리</td>
+<td>Three.js 0.180.0</td>
+<td>가장 흔하고 검증된 WebGL 라이브러리</td>
+</tr>
+<tr class="even">
+<td>SPZ 로더</td>
+<td><code>@sparkjsdev/spark</code></td>
+<td>SPZ 네이티브 지원하는 거의 유일한 npm 라이브러리</td>
+</tr>
+<tr class="odd">
+<td>빌드 도구</td>
+<td>없음 (esm.sh CDN)</td>
+<td>첫 스파이크는 단일 HTML이 가장 빠르다</td>
+</tr>
+<tr class="even">
+<td>카메라</td>
+<td>자체 1인칭 yaw/pitch</td>
+<td>OrbitControls는 타겟 점 주위 공전. 우리는 "자기 위치에서 회전" 필요</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- index.html importmap --&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;importmap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;imports&quot;</span><span class="op">:</span> {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;three&quot;</span><span class="op">:</span> <span class="st">&quot;https://esm.sh/three@0.180.0&quot;</span><span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;three/addons/&quot;</span><span class="op">:</span> <span class="st">&quot;https://esm.sh/three@0.180.0/examples/jsm/&quot;</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@sparkjsdev/spark&quot;</span><span class="op">:</span> <span class="st">&quot;https://esm.sh/@sparkjsdev/spark?deps=three@0.180.0&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> THREE <span class="im">from</span> <span class="st">&#39;three&#39;</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { SparkRenderer<span class="op">,</span> SplatMesh } <span class="im">from</span> <span class="st">&#39;@sparkjsdev/spark&#39;</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> spark <span class="op">=</span> <span class="kw">new</span> <span class="fu">SparkRenderer</span>({ renderer })<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(spark)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> splat <span class="op">=</span> <span class="kw">new</span> <span class="fu">SplatMesh</span>({ <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;samples/test.spz&#39;</span> })<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(splat)<span class="op">;</span></span></code></pre></div>
+<p><code>test.spz</code> (78MB)를 esm.sh CDN 임포트맵으로 로딩, X축 180° 회전 보정, 1인칭 카메라. 통과. <strong>가설 검증 끝.</strong></p>
+<h2 id="학습-포인트">학습 포인트</h2>
+<ul>
+<li><strong>시각 검증을 가장 빨리</strong>. 풀 시스템 설계를 그리기 전에 "정말 동작하는가"를 한 시간 안에 본다.</li>
+<li><strong><code>?deps=three@0.180.0</code></strong> 같은 esm.sh 쿼리로 Three.js 인스턴스 중복을 피했다. 같은 라이브러리가 두 번 로드되면 instanceof 체크가 깨진다.</li>
+<li><strong><code>e.code</code> (물리 키 코드) 사용</strong>. <code>e.key</code>는 한글 IME 영향 받는다. 키보드 이벤트 작성 시 무조건 <code>e.code</code>.</li>
+</ul>
+<hr />
+<h1 id="챕터-2-콘텐츠-도구--unity에서-unreal로">챕터 2. 콘텐츠 도구 — Unity에서 Unreal로</h1>
+<h2 id="두-가지-큰-결정">두 가지 큰 결정</h2>
+<p>세션 2 시작 시점에 사용자(웹 측 개발자)가 두 가지 결정을 들고 왔다.</p>
+<h3 id="결정-1-시간-압박-폐기">결정 1: 시간 압박 폐기</h3>
+<p>이전 세션은 "3주 안에 외부 클라이언트 데모를 만든다"는 narrowest wedge였다. 사용자는 "급하지 않게 완성도 우선"으로 옮겼다. <strong>3주 데드라인이 외부 제약이 아니라 자기 결정으로 옮겨졌다.</strong></p>
+<p>이게 왜 큰가? office-hours의 가장 큰 forcing question(데드라인 vs 완성도)을 우회하는 방식으로 풀었다. 사내 프로젝트에서 자주 보기 어려운 자세.</p>
+<h3 id="결정-2-콘텐츠-도구-unity--unreal">결정 2: 콘텐츠 도구 Unity → Unreal</h3>
+<p>이전 사전 조사에서 PlayCanvas 권고가 있었지만, 모델러·콘텐츠 팀이 Unreal로 가기로 정했다. 이 한 줄이 디자인 문서 v1을 통째로 무력화시켰다.</p>
+<h2 id="사전-조사로-막힐-미래-미리-발견">사전 조사로 막힐 미래 미리 발견</h2>
+<p>Unreal에서 SPZ를 어떻게 다룰지 미리 조사:</p>
+<ul>
+<li><strong>Niantic 공식 Unreal SDK 부재 확인</strong>. (Niantic은 Unity SDK만 제공.)</li>
+<li>모든 후보 plugin이 <strong>PLY 입력 중심</strong>. SPZ 직접 적재 plugin은 없음.</li>
+<li>실용 경로: <code>SPZ → PLY 변환 → PLY 입력 plugin 적재</code>.</li>
+</ul>
+<p>이 사전 조사가 챕터 3의 실패를 줄여주었다 (완전히 막지는 못했지만).</p>
+<h2 id="디자인-v2의-narrowest-wedge">디자인 v2의 narrowest wedge</h2>
+<blockquote>
+<p>"Unreal에서 SPZ 공간 + GLB 모델 1개를 배치, 그 배치 정보를 JSON으로 export, 웹이 그 JSON을 읽어 동일 위치에 모델을 띄운다."</p>
+</blockquote>
+<p>한 슬라이스에서 3개 미지수(Unreal SPZ 호환성, JSON 스키마 최소 필드, 웹 측 로더 설계)를 동시에 해소.</p>
+<h2 id="학습-포인트-1">학습 포인트</h2>
+<ul>
+<li><strong>시간 결정을 자기 자원으로 가져오기</strong>. 데드라인이 외부에서 주어진 것이 아니라 본인이 정한 것이라 보면 의사결정 폭이 달라진다.</li>
+<li><strong>사전 조사는 검색 30분이지만 막힐 미래 며칠을 절약</strong>. Niantic Unreal SDK 부재를 디자인 단계에서 알았다.</li>
+<li><strong>vertical slice</strong>의 의미: 한 슬라이스가 통과하면 그 뒤의 모든 작업은 슬라이스의 두꺼움을 늘리는 형태로 정의된다.</li>
+</ul>
+<hr />
+<h1 id="챕터-3-길-a-폐기--길-b-채택--다시-길-a-부활">챕터 3. 길 A 폐기 + 길 B 채택 + 다시 길 A 부활</h1>
+<p>이 챕터는 office-hours 두 세션(3, 4)에 걸친 우회의 기록.</p>
+<h2 id="길-a-시도-세션-3">길 A 시도 (세션 3)</h2>
+<p>목표: Unreal에서 SPZ 자체를 시각화. 그 위에 모델 배치, 좌표 export.</p>
+<h3 id="시도-1-luma-ai-unreal-plugin">시도 1: Luma AI Unreal Plugin</h3>
+<p>PLY를 import 받았으나 splat이 정상 외형으로 안 나오고 <strong>알록달록 줄무늬 + 검정 화면</strong>.</p>
+<p>원인 가설: PlayCanvas 생태계(SPZ + splat-transform + SuperSplat)가 모두 <strong>SPZ-친화 메모리 레이아웃</strong>으로 PLY를 출력. Luma는 <strong>INRIA 표준</strong> 기대.</p>
+<h3 id="시도-2-xv3dgs-plugin-xverse">시도 2: XV3dGS plugin (XVERSE)</h3>
+<p>PLY 파일 자체를 <code>ply properties header format invalid</code>로 거부. plugin source closed.</p>
+<h3 id="시도-3-7-7종-ply-변형-모두-거부">시도 3-7: 7종 PLY 변형 모두 거부</h3>
+<ul>
+<li><code>test.ply</code> (nianticlabs spz JS 변환): 거부</li>
+<li><code>test_inria.ply</code> (splat-transform 변환): 거부</li>
+<li><code>test_savedas.ply</code> (SuperSplat Save As): 거부</li>
+<li><code>test.compressed.ply</code> (SuperSplat 압축): 거부</li>
+<li><code>test_inria_ordered.ply</code> (수동 INRIA 순서 재정렬, 자작 Python 도구): 거부</li>
+<li><code>test_xv3dgs.ply</code> (INRIA + normal + RGB uchar 추가, plugin binary <code>strings</code>로 spec 추출): 거부</li>
+</ul>
+<p><code>tools/ply_for_xv3dgs.py</code>를 작성하면서 plugin binary의 <code>GSImporter.dll</code> 안의 PLY parser 기대 spec까지 추출했지만, plugin docs Google Docs 권한 차단 + 샘플 PLY 없음으로 외부 spec 역공학 한계 도달.</p>
+<h3 id="결정-길-a-폐기--길-b메쉬-프록시-채택">결정: 길 A 폐기 + 길 B(메쉬 프록시) 채택</h3>
+<p>신 워크플로: Unreal에서는 SPZ 안 본다. 저폴리 메쉬 프록시로 위치 잡고 좌표 export, 실제 SPZ 렌더링은 웹에서만.</p>
+<h2 id="길-a-부활-세션-4">길 A 부활 (세션 4)</h2>
+<p>사용자가 발견: <strong>NanoGS plugin</strong> (github TimChen1383/NanoGaussianSplatting).</p>
+<ul>
+<li>MIT 라이선스, <strong>source 전체 공개</strong>.</li>
+<li>UE 5.6, 5.7 지원.</li>
+<li>사용자가 5단계 검증 통과: 시각 정상 + 설치 + 이동 + 회전 + 스케일 + 실시간 fps.</li>
+</ul>
+<p>source 분석(<code>PLYFileReader.cpp</code>) 결과 결정적 차이:</p>
+<table>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>Luma / XV3dGS</th>
+<th>NanoGS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PLY property 순서</td>
+<td>엄격</td>
+<td><strong>자유 (이름 기반 조회)</strong></td>
+</tr>
+<tr class="even">
+<td>INRIA spec</td>
+<td>부분</td>
+<td>완전 준수</td>
+</tr>
+<tr class="odd">
+<td>SH bands</td>
+<td>고정</td>
+<td><strong>자동 감지</strong> (1/2/3 bands)</td>
+</tr>
+<tr class="even">
+<td>normal/RGB uchar</td>
+<td>요구</td>
+<td>불요</td>
+</tr>
+<tr class="odd">
+<td>좌표계 자동 변환</td>
+<td>없음</td>
+<td>COLMAP/Y-down → UE Z-up + 100x scale</td>
+</tr>
+<tr class="even">
+<td>Source</td>
+<td>closed</td>
+<td><strong>open, MIT</strong></td>
+</tr>
+</tbody>
+</table>
+<p>PlayCanvas 변형 PLY도 그대로 받는다. 7종 PLY 변형 실패의 원인이었던 property 순서 제약이 NanoGS에선 무관.</p>
+<h2 id="학습-포인트-2">학습 포인트</h2>
+<ul>
+<li><strong>Closed-source plugin spec 역공학은 한계 있음</strong>. binary <code>strings</code> 추출까지 가지만 sample PLY 없으면 검증 불가.</li>
+<li><strong>Open source plugin의 가치</strong>. NanoGS는 MIT + source 공개라 spec 외에 좌표계 변환·SH 처리까지 코드로 확인 가능.</li>
+<li><strong>fallback을 두지 않는 결정</strong>. 길 B(메쉬 프록시) 폐기 후 NanoGS 단독 채택. 실패 시 본 디자인 전체 재검토라는 비용을 짊어진다는 의미. 단순화 우선.</li>
+<li><strong>3개월 안에 같은 도구가 다시 나타날 수 있다</strong>. closed-source plugin이 막히면 영구 폐기보다 "현재 spec 명세 없어서 폐기, spec 공개 시 재시도"로 기록 남겨둔다.</li>
+</ul>
+<hr />
+<h1 id="챕터-4-표준-변환-chain-구축">챕터 4. 표준 변환 chain 구축</h1>
+<p>NanoGS plugin이 들어오면서 Unreal 측 검증은 통과. 다음 미지수: <strong>웹 측에 SPZ 어떻게 적재하는가</strong>.</p>
+<h2 id="모델러-도구-정체-확인">모델러 도구 정체 확인</h2>
+<p>모델러가 보내준 SPZ 파일(<code>Matic01.spz</code>)을 웹에서 적재하려는데 첫 시도부터 에러:</p>
+<pre><code>Worker error: Invalid gzip header</code></pre>
+<p>매직 byte 비교:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>test.spz:    <span class="dv">1</span>f <span class="dv">8</span>b <span class="dv">08</span> <span class="dv">00</span> ...     ← gzip magic (Niantic SPZ <span class="fl">1.</span>x)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Matic01.spz: <span class="dv">4</span>e <span class="dv">47</span> <span class="dv">53</span> <span class="dv">50</span> <span class="dv">04</span> ...  ← <span class="st">&quot;NGSP</span><span class="ch">\x04</span><span class="st">&quot;</span> (Niantic SPZ <span class="fl">2.0</span> <span class="op">=</span> NGSP)</span></code></pre></div>
+<p><strong>SPZ 1.x vs SPZ 2.0</strong>:</p>
+<ul>
+<li><strong>SPZ 1.x</strong>: gzip 압축. Niantic 초기 포맷. <code>@sparkjsdev/spark</code>가 받음.</li>
+<li><strong>SPZ 2.0 (NGSP)</strong>: Niantic 2024~2025 발표 새 포맷. 비압축, 다른 구조. Spark는 못 받음.</li>
+</ul>
+<p>모델러 도구가 NGSP를 출력하고 있다는 의미. 변환 chain이 필요.</p>
+<p>다행히 모델러가 같은 capture session으로 PLY도 만들어줬다 (<code>Matic01.ply</code>, 958.9MB). PLY 헤더 분석:</p>
+<pre><code>generator: Postshot v1.0.110
+vertices:  4,260,709 (4.26M)
+properties: x,y,z | f_dc_0..2 | f_rest_0..44 | opacity | scale_0..2 | rot_0..3
+total: 59 properties (표준 INRIA full SH bands 3개)</code></pre>
+<p><strong>Postshot</strong> 확인. 데스크탑 GS training 앱(Windows). INRIA 표준 PLY 직접 출력. NanoGS가 받는 spec과 100% 일치.</p>
+<h2 id="splat-transform-발견">splat-transform 발견</h2>
+<p>PlayCanvas의 <code>splat-transform</code> (npm CLI). 멀티포맷 변환 도구:</p>
+<pre><code>SUPPORTED INPUTS:
+  .ply  .compressed.ply  .sog  .spz  meta.json  .ksplat  .splat  .mjs  .lcc
+
+SUPPORTED OUTPUTS:
+  .ply  .compressed.ply  .sog  .spz  meta.json  lod-meta.json  .glb  .csv  .html
+
+SPZ OUTPUT:
+  --spz-version &lt;3|4&gt;  Default: 4</code></pre>
+<p><code>--spz-version 3</code>이 핵심. SPZ 1.x = version 3, SPZ 2.0 = version 4. <strong>양방향 변환 가능.</strong></p>
+<h2 id="변환-시도--실패--sh-다운그레이드">변환 시도 + 실패 + SH 다운그레이드</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> splat-transform Matic01.ply Matic01_v3.spz <span class="at">--spz-version</span> 3 <span class="at">-w</span></span></code></pre></div>
+<p>결과: <strong>WASM RuntimeError: Aborted()</strong>. 4.26M gaussians + SH 3 bands 출력에서 splat-transform WASM이 abort.</p>
+<p>해결: SH bands를 줄임.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> splat-transform Matic01.ply <span class="at">-H</span> 1 Matic01_v3.spz <span class="at">--spz-version</span> 3 <span class="at">-w</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># → SH 3 bands → 1 band 다운그레이드. 958MB → 81.8MB. 성공.</span></span></code></pre></div>
+<p><code>-H 0</code>도 가능 (71MB, 색만, view-dependent 효과 0). 풀 시스템에서 SH 3 full quality가 필요하면 NGSP 지원 라이브러리 검토 (별도 트랙).</p>
+<h2 id="변환-chain-1차-확정">변환 chain 1차 확정</h2>
+<pre><code>모델러 Postshot → INRIA PLY (958MB, SH 3)
+                    │
+                    ├─→ NanoGS plugin (Unreal): 그대로 import
+                    │
+                    └─→ splat-transform -H 1 --spz-version 3
+                          → SPZ v3 (gzip, 82MB, SH 1)
+                          → Spark
+                          → Three.js</code></pre>
+<h2 id="학습-포인트-3">학습 포인트</h2>
+<ul>
+<li><strong>포맷 진단은 매직 byte로</strong>. <code>1f 8b</code> = gzip, <code>NGSP</code> = SPZ 2.0, <code>ply\n</code> = PLY ASCII. 첫 8 byte로 90% 진단.</li>
+<li><strong>버전 차이를 모르고 라이브러리를 의심하지 말기</strong>. test.spz는 잘 되는데 Matic01.spz는 안 됨 → "라이브러리가 큰 파일을 못 받나?" 가설은 틀린 방향. 매직 byte로 격리.</li>
+<li><strong>WASM 도구 한계 인지</strong>. splat-transform이 SH 3 + 4M gaussian + SPZ v3 조합에서 silent abort. <code>-H 1</code> 또는 <code>-H 0</code>으로 회피.</li>
+<li><strong>다운그레이드의 시각 영향</strong>. SH 3 → 1: 반짝이는 표면(금속·유리·물)에서 view-dependent specular 감소. 무광택 실내라면 거의 차이 없음. 1차 데모엔 SH 1로 충분.</li>
+</ul>
+<hr />
+<h1 id="챕터-5-좌표계-정렬--4개-변환-chain의-누락-회전">챕터 5. 좌표계 정렬 — 4개 변환 chain의 누락 회전</h1>
+<p>가장 까다로운 단계. <strong>시각으로만 발견되는 종류의 문제.</strong></p>
+<h2 id="좌표계가-만나는-4개-지점">좌표계가 만나는 4개 지점</h2>
+<pre><code>Postshot 출력 PLY     ── COLMAP/OpenCV: Y-down, right-handed
+       ↓
+splat-transform       ── 변환 규칙 불명 (source 비공개 부분 존재)
+       ↓
+SPZ v3 (Spark 입력)   ── Niantic SPZ: Y-down 가정 (X축 180° 회전 관례)
+       ↓
+Three.js (웹 렌더)    ── glTF 표준: Y-up, right-handed
+
+평행 trunk:
+Unreal NanoGS plugin ── PLY 적재 시 COLMAP → UE 자동 변환 (Z-up, left-handed) + 100x scale
+       ↓
+Unreal glTF Exporter ── UE → glTF 자동 변환 (Y-up, right-handed) + 자동 cm → m
+       ↓
+collision GLB</code></pre>
+<p>5개 좌표계 변환이 chain. 어디 하나라도 가정이 다르면 어긋난다.</p>
+<h2 id="1차-보정-x축-180--0-옵션-a">1차 보정: X축 180° → 0° (옵션 A)</h2>
+<p>처음 Matic01_v3.spz를 적재하니 위아래 뒤집힘. test.spz는 X축 180° 회전이 기본이었는데, Matic01_v3.spz는 회전 없음이 정상.</p>
+<p><strong>왜?</strong> Niantic 원본 SPZ(test.spz)는 Y-down 저장 관례 → X축 180°로 Three.js Y-up에 맞춤. Postshot → splat-transform chain은 Three.js Y-up으로 이미 정렬된 채로 출력. 그래서 추가 회전 불요.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>splat<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>          <span class="co">// 기본: 회전 없음</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">// F 키 토글: Niantic 원본 SPZ 적재 시 X축 180° 회전 (디버그용)</span></span></code></pre></div>
+<h2 id="2차-보정-yaw--90-추가">2차 보정: Yaw -90° 추가</h2>
+<p>Unreal에서 SPZ + 박스를 같은 레벨에 두고 박스를 의도된 위치에 배치, GLB export. 웹에서 SPZ + collision GLB를 같이 적재. 결과: <strong>박스가 SPZ에 비해 yaw 축 시계방향 90° 회전된 위치</strong>.</p>
+<p>시각 진단을 위해 G 키 cycle 토글 추가:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// G: SPZ Y축 회전 cycle (0 → +90 → 180 → -90 → 0)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> yawSteps <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span> <span class="op">/</span> <span class="dv">2</span><span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span><span class="op">,</span> <span class="op">-</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span> <span class="op">/</span> <span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> yawIdx <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">window</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;keydown&#39;</span><span class="op">,</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (e<span class="op">.</span><span class="at">code</span> <span class="op">===</span> <span class="st">&#39;KeyG&#39;</span>) {</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    yawIdx <span class="op">=</span> (yawIdx <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> yawSteps<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    splat<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">y</span> <span class="op">=</span> yawSteps[yawIdx]<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>4 케이스 시각 비교. <strong>-90° (시계방향 90°)</strong> 가 정렬 통과.</p>
+<h2 id="최종-보정">최종 보정</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>splat<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>            <span class="co">// X축: Postshot chain 기본 0</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>splat<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">y</span> <span class="op">=</span> <span class="op">-</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// Y축: yaw -90° 보정</span></span></code></pre></div>
+<h2 id="학습-포인트-4">학습 포인트</h2>
+<ul>
+<li><strong>좌표계 변환은 시각으로 가장 빨리 진단</strong>. 4개 chain의 변환 규칙을 수학적으로 정확히 파악하기보다, 가능한 90°/180° 회전 조합을 cycle 토글로 시각 비교가 빠르다.</li>
+<li><strong>풀 시스템 정식 해결은 JSON 메타데이터</strong>. 한 SPZ 파일에 대한 보정 값을 코드에 박지 말고 데이터(JSON 스키마 v0.1의 <code>space.rotation_y_deg: -90</code>)에 둔다. 모델러 도구가 바뀌면 메타데이터만 갱신.</li>
+<li><strong>단위·X·Y는 우연히 일치</strong>. Unreal glTF Exporter의 cm → m 자동 변환과 Postshot → splat-transform chain의 m 단위 보존이 같은 단위로 만났다. 운이 좋은 케이스. 다른 도구 조합에서는 단위 mismatch도 필요한 보정에 추가.</li>
+<li><strong>collision proxy를 별도 GLB로 두기 잘했다</strong>. SPZ는 raycast 대상이 아니라 (Three.js Gaussian Splat 렌더는 mesh가 아님), collision GLB를 따로 export·적재해서 raycast/movement에 사용.</li>
+</ul>
+<hr />
+<h1 id="챕터-6-충돌-처리--threejs는-자동-collision이-없다">챕터 6. 충돌 처리 — Three.js는 자동 collision이 없다</h1>
+<p>Unreal에서 액터에 collision 옵션을 켜면 엔진이 자동으로 처리한다. Three.js는 그렇게 안 된다.</p>
+<table>
+<thead>
+<tr class="header">
+<th>도구</th>
+<th>본질</th>
+<th>collision 처리</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unreal</td>
+<td>게임 엔진</td>
+<td>PhysX/Chaos 내장. 자동 처리.</td>
+</tr>
+<tr class="even">
+<td>Three.js</td>
+<td>렌더링 라이브러리</td>
+<td>0 내장. 직접 구현 또는 별도 physics 라이브러리.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="옵션-3가지">옵션 3가지</h2>
+<h3 id="옵션-1-raycaster-수동-충돌-선택">옵션 1: Raycaster 수동 충돌 (선택)</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ray <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Raycaster</span>(camera<span class="op">.</span><span class="at">position</span><span class="op">,</span> moveDir)<span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> hits <span class="op">=</span> ray<span class="op">.</span><span class="fu">intersectObject</span>(collisionMesh<span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (hits<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> hits[<span class="dv">0</span>]<span class="op">.</span><span class="at">distance</span> <span class="op">&lt;</span> <span class="dv">50</span>) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 50cm 이내에 벽 있음. 이동 막기</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>0 dependency, 한 줄 수준 코드. 1인칭 이동 + 클릭 raycast에 충분.</p>
+<h3 id="옵션-2-physics-엔진-cannon-es-rapier3d-ammojs">옵션 2: Physics 엔진 (cannon-es, rapier3d, ammo.js)</h3>
+<p>캐릭터 컨트롤러, 중력, rigid body 자동. bundle ~수백 KB. 1차 데모엔 과잉. 풀 시스템에 점프·중력 필요할 때 검토.</p>
+<h3 id="옵션-3-three-mesh-bvh-가속-raycast">옵션 3: three-mesh-bvh 가속 raycast</h3>
+<p>1과 2의 중간. 대용량 mesh에서도 빠른 raycast.</p>
+<h2 id="unreal-collision-옵션-살리기">Unreal collision 옵션 살리기</h2>
+<p>Unreal에서 액터별 collision 옵션을 JSON 메타데이터로 export → 웹이 그걸 읽어 자동 등록:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;models&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;chair_01&quot;</span><span class="fu">,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;glb_path&quot;</span><span class="fu">:</span> <span class="st">&quot;model_chair.glb&quot;</span><span class="fu">,</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;collision_enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;collision_type&quot;</span><span class="fu">:</span> <span class="st">&quot;bbox&quot;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;decoration_01&quot;</span><span class="fu">,</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;glb_path&quot;</span><span class="fu">:</span> <span class="st">&quot;deco.glb&quot;</span><span class="fu">,</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;collision_enabled&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>웹 코드는 JSON 순회 시 <code>collision_enabled: true</code>인 객체만 collision 시스템에 등록. <strong>자동은 아니지만 "Unreal에서 켠 옵션을 1:1로 따라옴"</strong> 까지는 가능. 새 모델 추가 시 콘텐츠 제작자가 Unreal에서 옵션만 만지면 웹 코드 손 안 댐.</p>
+<h2 id="학습-포인트-5">학습 포인트</h2>
+<ul>
+<li><strong>렌더링 라이브러리와 게임 엔진의 본질 차이</strong>. Three.js는 "그리는 일"만, Unreal은 "그리고 + 시뮬레이션 + 입력 + 사운드". 게임 엔진에서 자동인 것이 라이브러리에서는 직접 구현.</li>
+<li><strong>1차 데모와 풀 시스템의 합격선 분리</strong>. raycaster로 1차 데모 합격선 충분, physics 엔진은 풀 시스템 단계에서 트리거.</li>
+<li><strong>메타데이터를 통한 자동화 흉내</strong>. 진짜 자동(엔진 통합)은 아니지만, "옵션 켜고 export → 웹에서 자동 등록"으로 사용자 인식상 자동에 가깝게.</li>
+</ul>
+<hr />
+<h1 id="챕터-7-검증의-순서-메타-학습">챕터 7. 검증의 순서 (메타 학습)</h1>
+<p>4개 세션을 돌아보며 정리한 검증 흐름.</p>
+<h2 id="spike--검증--확장의-흐름">Spike → 검증 → 확장의 흐름</h2>
+<pre><code>세션 1: 작은 spike    — Three.js에 SPZ 한 개 띄우기. 가설 검증.
+세션 2: 풀 시스템 윤곽 — 12개 요구사항 통합 설계. 합격 기준 다층화.
+세션 3: 막힌 길 폐기   — Luma·XV3dGS plugin 시도 + 폐기. 길 B 채택.
+세션 4 전반: 부활     — NanoGS 발견 + 5단계 검증. 길 A 부활.
+세션 4 후반: 정렬     — 변환 chain + 좌표계 yaw -90° 보정. Step 1 spike 통과.</code></pre>
+<h2 id="작은-단계의-가치">작은 단계의 가치</h2>
+<p>오늘 세션을 자세히 보면:</p>
+<pre><code>박스 1개 (test_collision.glb, 4.5KB)
+  └─ Unreal Modeling Mode + glTF Exporter 학습 곡선 검증
+  └─ Three.js GLTFLoader 적재 검증
+  └─ 좌표계 단위 첫 진단
+
+SPZ + 박스 동시 (index.html 확장)
+  └─ Spark + GLTFLoader 동시 동작 검증
+  └─ 좌표계 어긋남 가시화
+
+박스 새 위치 (scene00_collision.glb)
+  └─ SPZ 안 의도 위치에 박스 배치 검증
+  └─ Yaw -90° 보정 확정</code></pre>
+<p>각 단계가 30분 ~ 1시간. 한 단계가 실패해도 다음 단계의 조건은 명확히 좁아짐.</p>
+<h2 id="실패-비용-관리">실패 비용 관리</h2>
+<p>세션 3에서 PLY 7종 변형을 모두 시도한 것은 시간 손실로 보일 수 있다. 하지만 그 시도가 남긴 것:</p>
+<ul>
+<li>PLY property 자유도가 필요한 도구 vs 엄격 spec 도구의 차이 학습.</li>
+<li>plugin binary <code>strings</code>로 PLY spec 부분 역공학 경험.</li>
+<li>우회 도구(<code>tools/ply_for_xv3dgs.py</code>) 자산 보존 (NanoGS plugin 안정성 깨지면 fallback 카드).</li>
+<li>길 B(메쉬 프록시) 채택 결정의 정당화.</li>
+</ul>
+<p>NanoGS 발견 후로는 7종 PLY 시도가 무의미해졌지만, <strong>그 시도가 없었으면 NanoGS 발견 후에도 "왜 이게 받는지" 정확히 진단 못 했을 것</strong>. plugin source의 "이름 기반 조회"가 결정적 차이라는 것을 알아내기까지의 비교 기준이 7종 실패였다.</p>
+<h2 id="학습-포인트-6">학습 포인트</h2>
+<ul>
+<li><strong>작은 단계로 쪼개기</strong>. 30분~1시간 단위로 검증 결과가 나오면 막힘이 명확해진다.</li>
+<li><strong>실패도 자산</strong>. 사라진 것은 시간이지만 남은 것은 "왜 안 됐는가의 비교 기준". 다음 도구 평가 속도가 빨라진다.</li>
+<li><strong>office-hours 같은 메타 세션의 가치</strong>. 코드 작업과 결정 사이를 분리. 결정이 굳어지면 코드는 빨라진다.</li>
+</ul>
+<hr />
+<h1 id="부록-a-변환-chain-다이어그램-상세">부록 A. 변환 chain 다이어그램 (상세)</h1>
+<pre><code>                            ┌─────────────────────────────┐
+                            │ 모델러 측: Postshot v1.0.110 │
+                            │ Windows 데스크탑 앱          │
+                            │ GS training + export        │
+                            └─────────────┬───────────────┘
+                                          │
+                            INRIA 표준 PLY (binary little endian)
+                            x,y,z + f_dc_0..2 + f_rest_0..44 +
+                            opacity + scale_0..2 + rot_0..3
+                            (59 properties, ~4M vertex, ~1GB)
+                                          │
+                ┌─────────────────────────┴────────────────────────┐
+                │                                                  │
+        ┌───────▼─────────┐                                  ┌─────▼──────────────┐
+        │ Unreal NanoGS   │                                  │ splat-transform    │
+        │ plugin (MIT)    │                                  │ v2.1.1 (CLI)       │
+        │ UE 5.6, 5.7     │                                  │ npm                │
+        └───────┬─────────┘                                  └─────┬──────────────┘
+                │                                                  │
+        시각화 + 배치 + collision proxy                            │
+        + (선택) 좌표 JSON export                                  │
+                │                                  -H 1 (SH 1) --spz-version 3
+                │                                                  │
+        ┌───────▼─────────┐                                  ┌─────▼──────────────┐
+        │ collision GLB   │                                  │ SPZ v3 (gzip)      │
+        │ (Unreal glTF    │                                  │ ~82MB (SH 1)       │
+        │ Exporter,       │                                  │ ~71MB (SH 0)       │
+        │ cm → m 자동)    │                                  └─────┬──────────────┘
+        └───────┬─────────┘                                        │
+                │                                                  │
+                └────────────────────┬─────────────────────────────┘
+                                     │
+                              ┌──────▼───────┐
+                              │ scene00.json │
+                              │ (계약서)     │
+                              └──────┬───────┘
+                                     │
+                            ┌────────▼──────────────┐
+                            │ Web (Three.js + Spark)│
+                            │ rotation.y = -π/2 보정│
+                            │ Raycaster 수동 충돌   │
+                            └───────────────────────┘</code></pre>
+<h1 id="부록-b-도구-목록">부록 B. 도구 목록</h1>
+<table>
+<thead>
+<tr class="header">
+<th>도구</th>
+<th>버전</th>
+<th>라이선스</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unreal Engine</td>
+<td>5.7</td>
+<td>EULA</td>
+<td>콘텐츠 작업 (배치, collision 그리기)</td>
+</tr>
+<tr class="even">
+<td>NanoGS plugin</td>
+<td>latest</td>
+<td>MIT, source open</td>
+<td>Unreal에서 SPZ 시각화</td>
+</tr>
+<tr class="odd">
+<td>Postshot</td>
+<td>v1.0.110</td>
+<td>상용 (Windows)</td>
+<td>SPZ training + PLY/SPZ 출력</td>
+</tr>
+<tr class="even">
+<td>splat-transform</td>
+<td>v2.1.1</td>
+<td>MIT</td>
+<td>PLY ↔︎ SPZ ↔︎ GLB 등 변환</td>
+</tr>
+<tr class="odd">
+<td>Three.js</td>
+<td>0.180.0</td>
+<td>MIT</td>
+<td>웹 3D 렌더링</td>
+</tr>
+<tr class="even">
+<td>@sparkjsdev/spark</td>
+<td>latest</td>
+<td>MIT</td>
+<td>SPZ 1.x 적재</td>
+</tr>
+<tr class="odd">
+<td>Python</td>
+<td>3.13</td>
+<td>PSF</td>
+<td>PLY/GLB 분석 스크립트</td>
+</tr>
+<tr class="even">
+<td>Node.js</td>
+<td>v24</td>
+<td>MIT</td>
+<td>splat-transform 실행</td>
+</tr>
+</tbody>
+</table>
+<h1 id="부록-c-코드-스니펫-재사용-가능">부록 C. 코드 스니펫 (재사용 가능)</h1>
+<h2 id="glb-매직--메타데이터-파싱-python">GLB 매직 + 메타데이터 파싱 (Python)</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> struct, json</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;file.glb&#39;</span>, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> f.read()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>magic, ver, total <span class="op">=</span> struct.unpack(<span class="st">&#39;&lt;4sII&#39;</span>, data[:<span class="dv">12</span>])</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>chunk_len, _ <span class="op">=</span> struct.unpack(<span class="st">&#39;&lt;I4s&#39;</span>, data[<span class="dv">12</span>:<span class="dv">20</span>])</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>gltf <span class="op">=</span> json.loads(data[<span class="dv">20</span>:<span class="dv">20</span><span class="op">+</span>chunk_len])</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;generator:&#39;</span>, gltf[<span class="st">&#39;asset&#39;</span>].get(<span class="st">&#39;generator&#39;</span>))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> gltf.get(<span class="st">&#39;nodes&#39;</span>, []):</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;node:&#39;</span>, n.get(<span class="st">&#39;name&#39;</span>), n.get(<span class="st">&#39;translation&#39;</span>), n.get(<span class="st">&#39;scale&#39;</span>))</span></code></pre></div>
+<h2 id="spz-매직-byte-판별-python">SPZ 매직 byte 판별 (Python)</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;file.spz&#39;</span>, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> f.read(<span class="dv">8</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> head[:<span class="dv">2</span>] <span class="op">==</span> b<span class="st">&#39;</span><span class="ch">\x1f\x8b</span><span class="st">&#39;</span>:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;SPZ 1.x (gzip)&#39;</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> head[:<span class="dv">4</span>] <span class="op">==</span> b<span class="st">&#39;NGSP&#39;</span>:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;SPZ 2.0 (NGSP)&#39;</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;unknown&#39;</span>)</span></code></pre></div>
+<h2 id="splat-transform-표준-명령">splat-transform 표준 명령</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Postshot PLY → SPZ v3 (Spark 적재용)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> splat-transform input.ply <span class="at">-H</span> 1 output.spz <span class="at">--spz-version</span> 3 <span class="at">-w</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># SH 0 (더 작음, 색만)</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> splat-transform input.ply <span class="at">-H</span> 0 output.spz <span class="at">--spz-version</span> 3 <span class="at">-w</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># NGSP(SPZ 2.0) → SPZ 1.x 다운컨버트</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> splat-transform input_ngsp.spz <span class="at">-H</span> 1 output_v3.spz <span class="at">--spz-version</span> 3 <span class="at">-w</span></span></code></pre></div>
+<h2 id="threejs-spz--glb-동시-적재--좌표-보정">Three.js SPZ + GLB 동시 적재 + 좌표 보정</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> THREE <span class="im">from</span> <span class="st">&#39;three&#39;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { SparkRenderer<span class="op">,</span> SplatMesh } <span class="im">from</span> <span class="st">&#39;@sparkjsdev/spark&#39;</span><span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { GLTFLoader } <span class="im">from</span> <span class="st">&#39;three/addons/loaders/GLTFLoader.js&#39;</span><span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> spark <span class="op">=</span> <span class="kw">new</span> <span class="fu">SparkRenderer</span>({ renderer })<span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(spark)<span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> splat <span class="op">=</span> <span class="kw">new</span> <span class="fu">SplatMesh</span>({ <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;samples/scene00.spz&#39;</span> })<span class="op">;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>splat<span class="op">.</span><span class="at">rotation</span><span class="op">.</span><span class="at">y</span> <span class="op">=</span> <span class="op">-</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span>  <span class="co">// Postshot chain 보정</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>scene<span class="op">.</span><span class="fu">add</span>(splat)<span class="op">;</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> gltfLoader <span class="op">=</span> <span class="kw">new</span> <span class="fu">GLTFLoader</span>()<span class="op">;</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>gltfLoader<span class="op">.</span><span class="fu">load</span>(<span class="st">&#39;samples/scene00_collision.glb&#39;</span><span class="op">,</span> (gltf) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  gltf<span class="op">.</span><span class="at">scene</span><span class="op">.</span><span class="fu">traverse</span>(obj <span class="kw">=&gt;</span> {</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (obj<span class="op">.</span><span class="at">isMesh</span>) {</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>      obj<span class="op">.</span><span class="at">material</span><span class="op">.</span><span class="at">transparent</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>      obj<span class="op">.</span><span class="at">material</span><span class="op">.</span><span class="at">opacity</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span>  <span class="co">// invisible (디버그용은 0.4)</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  scene<span class="op">.</span><span class="fu">add</span>(gltf<span class="op">.</span><span class="at">scene</span>)<span class="op">;</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<h2 id="threejs-raycaster-수동-충돌-1인칭">Three.js Raycaster 수동 충돌 (1인칭)</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ray <span class="op">=</span> <span class="kw">new</span> THREE<span class="op">.</span><span class="fu">Raycaster</span>()<span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">tryMove</span>(camera<span class="op">,</span> moveDir<span class="op">,</span> collisionMesh) {</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  ray<span class="op">.</span><span class="fu">set</span>(camera<span class="op">.</span><span class="at">position</span><span class="op">,</span> moveDir<span class="op">.</span><span class="fu">clone</span>()<span class="op">.</span><span class="fu">normalize</span>())<span class="op">;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> hits <span class="op">=</span> ray<span class="op">.</span><span class="fu">intersectObject</span>(collisionMesh<span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> STOP_DISTANCE <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span>  <span class="co">// m. 50cm 이내는 막기</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (hits<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> hits[<span class="dv">0</span>]<span class="op">.</span><span class="at">distance</span> <span class="op">&lt;</span> STOP_DISTANCE) {</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  camera<span class="op">.</span><span class="at">position</span><span class="op">.</span><span class="fu">add</span>(moveDir)<span class="op">;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h1 id="부록-d-실패한-시도와-배운-것">부록 D. 실패한 시도와 배운 것</h1>
+<table>
+<thead>
+<tr class="header">
+<th>시도</th>
+<th>결과</th>
+<th>배운 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Luma AI Unreal Plugin + 원본 PLY</td>
+<td>알록달록 줄무늬</td>
+<td>plugin 출력의 시각 fail은 spec mismatch의 신호</td>
+</tr>
+<tr class="even">
+<td>XV3dGS plugin + 7종 PLY 변형</td>
+<td>header invalid</td>
+<td>property 순서·normal·RGB 추가도 안 통하면 plugin 자체 spec 비공개</td>
+</tr>
+<tr class="odd">
+<td>자작 <code>ply_reorder_to_inria.py</code></td>
+<td>plugin 거부</td>
+<td>INRIA 표준 순서로도 안 받음 → plugin이 별도 spec</td>
+</tr>
+<tr class="even">
+<td><code>splat-transform --spz-version 3 -H 3</code></td>
+<td>WASM Aborted</td>
+<td>SH 3 + 4M gaussian 조합에서 WASM 한계, SH 다운그레이드로 회피</td>
+</tr>
+<tr class="odd">
+<td>Spark에 NGSP(SPZ 2.0) 적재</td>
+<td>Invalid gzip header</td>
+<td>라이브러리가 받는 SPZ 버전 확인이 먼저</td>
+</tr>
+<tr class="even">
+<td>index.html 첫 SPZ 회전 X축 180° 기본</td>
+<td>Postshot SPZ는 위아래 뒤집힘</td>
+<td>SPZ 출처마다 좌표계 다름, F 키 토글로 분기</td>
+</tr>
+<tr class="odd">
+<td>빈 Unreal 레벨에서 박스만 export</td>
+<td>박스 위치 SPZ와 무관</td>
+<td>좌표계 검증은 SPZ + 박스 같은 레벨에서 함께 export 해야 의미 있음</td>
+</tr>
+</tbody>
+</table>
+<h1 id="faq">FAQ</h1>
+<p><strong>Q. 왜 PlayCanvas를 안 썼나?</strong> A. PlayCanvas의 GS 베타가 SPZ 직접 지원이 아직 약하다. Three.js + Spark가 SPZ 네이티브라 검증 속도가 빨랐다. 풀 시스템 단계에 PlayCanvas 재검증 여지는 열어둠.</p>
+<p><strong>Q. 왜 Vite/빌드 도구 안 썼나?</strong> A. 스파이크 단계는 단일 HTML이 가장 빠르다. esm.sh CDN으로 import map만 쓰면 빌드 단계 0. 1500줄 초과하면 Vite 도입 검토.</p>
+<p><strong>Q. 왜 physics 엔진 안 썼나?</strong> A. 1차 데모 합격 기준에 점프·중력·rigid body가 없다. 1인칭 이동 + 클릭만 필요. Raycaster 수동 충돌이 충분 + 0 dependency.</p>
+<p><strong>Q. SPZ 2.0 (NGSP)을 직접 받는 웹 라이브러리는 없나?</strong> A. 2026-05 시점 확인 안 함. Spark의 latest 버전 changelog 확인 필요. 받게 되면 SH 3 full quality 보존 가능 + SH 다운그레이드 불요.</p>
+<p><strong>Q. 모델러 도구가 Postshot이 아닌 다른 것이면?</strong> A. 변환 chain의 좌표계 yaw 보정 값(<code>space.rotation_y_deg</code>)이 도구별로 다를 수 있다. JSON 메타데이터로 도구별 보정 값을 저장하면 코드 변경 없이 도구 교체 가능.</p>
+<p><strong>Q. 다른 SPZ 적재 라이브러리 후보는?</strong> A. 2026-05 시점에 자세히 비교 안 함. Spark가 유일하게 native SPZ 지원이라 첫 검증에 채택. 풀 시스템 단계에 SH 3 / NGSP 요구사항 생기면 라이브러리 재평가.</p>
+<hr />
+<h1 id="닫는-글">닫는 글</h1>
+<p>4개 세션 동안의 흐름을 적었지만, 진짜 학습은 <strong>"이 도구를 쓰면 된다"가 아니라 "어떻게 진단하고 어떻게 격리할까"</strong> 였다.</p>
+<ul>
+<li>매직 byte로 포맷 진단</li>
+<li>plugin source 공개 여부가 도구 선택의 큰 기준</li>
+<li>시각 검증을 가장 빠른 진단 도구로 사용</li>
+<li>작은 단계로 쪼개기, 각 단계 30분~1시간</li>
+<li>실패한 시도도 자산으로 보존</li>
+</ul>
+<p>기술 스택은 1년 안에 바뀐다. NanoGS도 splat-transform도 다른 도구로 갈릴 수 있다. 하지만 <strong>변환 chain을 메타데이터로 분리 + 시각 검증 우선 + 작은 단계로 쪼개기</strong> 같은 메타 패턴은 그대로 남는다.</p>
+<p>이 글이 비슷한 길을 가는 다음 빌더의 시간을 며칠 줄여주기 바라며.</p>
+<hr />
+<p><em>2026-05-13 작성. 본 프로젝트의 운영 규칙·결정 이력은 같은 디렉토리의 <code>todo.html</code>, 설계는 <code>design-20260513-104744.html</code>를 참고.</em></p>
+</body>
+</html>

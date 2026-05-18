@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Step 1 spike — collision GLB import 검증</title>
+<style>
+  html, body { margin: 0; padding: 0; overflow: hidden; background: #1a1a20; font-family: system-ui, sans-serif; }
+  #info {
+    position: fixed; top: 12px; left: 12px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.7);
+    color: #eee; border-radius: 6px; font-size: 13px;
+    line-height: 1.5; max-width: 480px; z-index: 10;
+  }
+  #info b { color: #6cf; }
+  #info pre { color: #afa; font-size: 11px; margin: 4px 0; }
+  #err { color: #f88; }
+</style>
+</head>
+<body>
+
+<div id="info">
+  <b>Step 1 spike — collision GLB import 검증</b><br>
+  파일: <code>samples/test_collision.glb</code><br>
+  상태: <span id="status">로딩 중...</span><br>
+  <pre id="meta"></pre>
+  <small style="opacity:0.6">마우스 드래그로 회전, 휠로 줌. 박스가 보이면 합격.</small>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.sh/three@0.180.0",
+    "three/addons/": "https://esm.sh/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const statusEl = document.getElementById('status');
+const metaEl = document.getElementById('meta');
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1a1a20);
+
+// 축 helper, grid: 좌표계·스케일 시각 판정
+scene.add(new THREE.AxesHelper(5));
+scene.add(new THREE.GridHelper(20, 20, 0x444466, 0x333344));
+
+const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.01, 5000);
+camera.position.set(15, 10, 15);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+const dir = new THREE.DirectionalLight(0xffffff, 1.5);
+dir.position.set(10, 20, 10);
+scene.add(dir);
+const dir2 = new THREE.DirectionalLight(0xffffff, 0.6);
+dir2.position.set(-10, 5, -10);
+scene.add(dir2);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0, 0);
+
+// 디버그: GLB와 무관한 빨강 박스를 origin에 둠. 이게 안 보이면 렌더링 자체 문제.
+const debugBox = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0xff3333, wireframe: false })
+);
+debugBox.position.set(0, 0, 0);
+scene.add(debugBox);
+const debugBoxEdge = new THREE.Mesh(
+  new THREE.BoxGeometry(1.05, 1.05, 1.05),
+  new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true })
+);
+scene.add(debugBoxEdge);
+
+statusEl.textContent = 'GLTFLoader 초기화...';
+const loader = new GLTFLoader();
+statusEl.textContent = 'fetch 시작...';
+loader.load('samples/test_collision.glb', (gltf) => {
+  statusEl.textContent = '✓ GLB 파싱 완료. scene 분석 중...';
+  scene.add(gltf.scene);
+
+  // scene 내 모든 객체 카운트 (mesh 외 타입도)
+  let totalObjs = 0, meshCount = 0, otherTypes = {};
+  gltf.scene.traverse((obj) => {
+    totalObjs++;
+    if (obj.isMesh) meshCount++;
+    else {
+      const t = obj.type || 'unknown';
+      otherTypes[t] = (otherTypes[t] || 0) + 1;
+    }
+  });
+
+  // 받은 mesh 정보 추출 + 자동 fit
+  const lines = [];
+  lines.push(`scene 총 objects = ${totalObjs}, isMesh = ${meshCount}`);
+  if (Object.keys(otherTypes).length) {
+    lines.push(`기타 타입: ${JSON.stringify(otherTypes)}`);
+  }
+  let firstMesh = null;
+  gltf.scene.traverse((obj) => {
+    if (obj.isMesh) {
+      if (!firstMesh) firstMesh = obj;
+      obj.geometry.computeBoundingBox();
+      const bb = obj.geometry.boundingBox;
+      const pos = obj.position;
+      const scl = obj.scale;
+      lines.push(`mesh.name = ${obj.name}`);
+      lines.push(`local AABB = [${bb.min.x.toFixed(2)},${bb.min.y.toFixed(2)},${bb.min.z.toFixed(2)}] ~ [${bb.max.x.toFixed(2)},${bb.max.y.toFixed(2)},${bb.max.z.toFixed(2)}]`);
+      lines.push(`node.position = [${pos.x.toFixed(2)}, ${pos.y.toFixed(2)}, ${pos.z.toFixed(2)}]`);
+      lines.push(`node.scale    = [${scl.x.toFixed(2)}, ${scl.y.toFixed(2)}, ${scl.z.toFixed(2)}]`);
+
+      // 월드 AABB (회전·스케일 반영)
+      const worldBB = new THREE.Box3().setFromObject(obj);
+      const ctr = worldBB.getCenter(new THREE.Vector3());
+      const sz = worldBB.getSize(new THREE.Vector3());
+      const diag = sz.length();
+      lines.push(`world AABB   = [${worldBB.min.x.toFixed(2)},${worldBB.min.y.toFixed(2)},${worldBB.min.z.toFixed(2)}] ~ [${worldBB.max.x.toFixed(2)},${worldBB.max.y.toFixed(2)},${worldBB.max.z.toFixed(2)}]`);
+      lines.push(`world center = [${ctr.x.toFixed(2)}, ${ctr.y.toFixed(2)}, ${ctr.z.toFixed(2)}]`);
+      lines.push(`world size   = [${sz.x.toFixed(2)}, ${sz.y.toFixed(2)}, ${sz.z.toFixed(2)}] · diag=${diag.toFixed(2)}`);
+
+      // 박스 위치 강조: world AABB wireframe helper
+      const helper = new THREE.Box3Helper(worldBB, 0xff00aa);
+      scene.add(helper);
+
+      // 카메라 자동 fit: 박스 중심 + 대각선 × 2.5 거리
+      const camDist = Math.max(diag * 2.5, 5);
+      camera.position.set(ctr.x + camDist * 0.7, ctr.y + camDist * 0.5, ctr.z + camDist * 0.7);
+      controls.target.copy(ctr);
+      controls.update();
+    }
+  });
+  metaEl.textContent = lines.join('\n');
+  statusEl.textContent = firstMesh ? '✓ 적재 성공 · 카메라 박스로 fit됨' : '✗ mesh 없음 (GLB 구조 이상)';
+}, (progress) => {
+  if (progress.lengthComputable) {
+    statusEl.textContent = `로딩 중 ${Math.round(progress.loaded / progress.total * 100)}%`;
+  }
+}, (err) => {
+  statusEl.innerHTML = '<span id="err">✗ 적재 실패: ' + (err.message || err) + '</span>';
+  console.error('GLTF load error:', err);
+});
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+renderer.setAnimationLoop(() => {
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+
+</body>
+</html>
